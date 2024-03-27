@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/KAIKAKU-AI/perrito-ws/assets/46272051/cf9aa88f-55d5-48a2-bfa4-e8dcdd4000a1">
+  <img src="https://github.com/KAIKAKU-AI/perrito-ws/assets/46272051/ddb5f7e1-0554-4636-bc66-9ea3e2b49b3f">
   <br>
   <a href="https://github.com/KAIKAKU-AI/perrito-ws/issues"><img src="https://img.shields.io/github/issues/kaikaku-ai/perrito-ws"/></a>
   <a href="https://www.linkedin.com/company/kaikaku-ai/"><img src="https://img.shields.io/badge/We're%20hiring!-blue.svg"/></a>
