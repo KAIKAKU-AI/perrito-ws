@@ -1,5 +1,3 @@
-
-
 <div align="center">
   <img src="https://github.com/KAIKAKU-AI/perrito-ws/assets/46272051/cf9aa88f-55d5-48a2-bfa4-e8dcdd4000a1">
   <br>
