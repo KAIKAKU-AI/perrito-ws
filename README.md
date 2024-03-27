@@ -16,12 +16,14 @@ Perrito WS is a WebSocket server and GUI combo enabling devs to streamline WebSo
 - [Getting started](#getting-started)
 - [Contributing](#contributing)
 
-
 ## Features
+
 - W.I.P
 
 ## Getting started
+
 - W.I.P
 
 ## Contributing
+
 - W.I.P
