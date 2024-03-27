@@ -26,5 +26,4 @@ Perrito WS is a WebSocket server and GUI combo enabling devs to streamline WebSo
 - W.I.P
 
 ## Contributing
-Beta tested by @IvanKAIKAKU (follow up his personal too, @ITregear)
 - W.I.P
