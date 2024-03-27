@@ -11,10 +11,7 @@
     "publish": "electron-forge publish",
     "lint": "eslint ./src",
     "format": "prettier --write '**/*.{ts,tsx,js,jsx,css,json,md}'",
-    "test": "npm run lint && wdio run ./wdio.conf.ts",
-    "test:unit": "jest",
-    "prepare": "husky install",
-    "postinstall": "electron-forge install"
+    "test": "npm run lint && wdio run ./wdio.conf.ts"
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.3.1",
