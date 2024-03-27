@@ -4,7 +4,7 @@ First off, thank you for considering contributing to Perrito WS! It's people lik
 
 ## Code of Conduct
 
-This project and everyone participating in it are governed by the [Perrito WS Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [hello@kaikaku.ai].
+This project and everyone participating in it are governed by the [Perrito WS Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [tech@kaikaku.ai].
 
 ## How Can I Contribute?
 
