@@ -1,4 +1,5 @@
-import { app, BrowserWindow } from 'electron'
+import { BrowserWindow, app, ipcMain, nativeTheme, shell } from 'electron'
+import fs from 'fs'
 import path from 'path'
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -6,15 +7,33 @@ if (require('electron-squirrel-startup')) {
   app.quit()
 }
 
+const appDataPath = app.getPath('userData')
+const themeConfigPath = path.join(appDataPath, 'theme-config.json')
+
+const saveThemeSetting = (theme: string) => {
+  fs.writeFileSync(themeConfigPath, JSON.stringify({ theme }))
+}
+
 const createWindow = () => {
+  try {
+    const data = fs.readFileSync(themeConfigPath, 'utf8')
+    const config = JSON.parse(data)
+    nativeTheme.themeSource = config.theme
+  } catch (error) {
+    console.warn('No previous theme setting found; using system default.')
+  }
+
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 1000,
     height: 720,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true,
     },
   })
+
+  mainWindow.setMenu(null)
 
   // and load the index.html of the app.
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
@@ -22,6 +41,26 @@ const createWindow = () => {
   } else {
     mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`))
   }
+
+  ipcMain.on('external-url', (event, url) => {
+    shell.openExternal(url)
+  })
+
+  ipcMain.on('is-dark-mode', event => {
+    event.returnValue = nativeTheme.shouldUseDarkColors
+  })
+
+  ipcMain.on('dark-mode:toggle', () => {
+    const theme = nativeTheme.shouldUseDarkColors ? 'light' : 'dark'
+    nativeTheme.themeSource = theme
+    saveThemeSetting(theme)
+
+    return nativeTheme.shouldUseDarkColors
+  })
+
+  ipcMain.on('dark-mode:system', () => {
+    nativeTheme.themeSource = 'system'
+  })
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools()

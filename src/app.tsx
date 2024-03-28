@@ -1,11 +1,12 @@
+import DashboardPage from '@screens/DashboardPage'
+import ServersPage from '@screens/ServersPage'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { ThemeProvider } from './contexts/ThemeContext'
 import './normalize.css'
-import DashboardPage from './screens/DashboardPage'
 import ErrorPage from './screens/ErrorPage'
-import ServersPage from './screens/ServersPage'
+import './styles.css'
 
 const router = createBrowserRouter([
   {

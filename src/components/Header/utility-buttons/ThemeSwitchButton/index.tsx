@@ -1,16 +1,21 @@
 import MoonIcon from '@assets/images/icons/moon.svg?react'
 import SunIcon from '@assets/images/icons/sun.svg?react'
 import HeaderUtilityButton from '@components/Header/HeaderUtilityButton'
-import { useTheme } from '@contexts/ThemeContext'
+import { useState } from 'react'
 
 interface indexProps {}
 
 const index = (props: indexProps) => {
-  const { isDarkMode, toggleTheme } = useTheme()
+  const [isDarkMode, setIsDarkMode] = useState(window.darkMode.isDarkMode())
 
   let icon = isDarkMode ? <SunIcon /> : <MoonIcon />
 
-  return <HeaderUtilityButton icon={icon} onClick={toggleTheme} tooltip="Switch theme" />
+  const handleThemeSwitch = async () => {
+    await window.darkMode.toggle()
+    setIsDarkMode(window.darkMode.isDarkMode())
+  }
+
+  return <HeaderUtilityButton icon={icon} onClick={handleThemeSwitch} tooltip="Switch theme" />
 }
 
 export default index
