@@ -13,7 +13,9 @@
     "resolveJsonModule": true,
     "jsx": "react-jsx",
     "paths": {
+      "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"]
-    }
+    },
+    "types": ["vite-plugin-svgr/client"]
   }
 }
