@@ -11,5 +11,11 @@
     cursor: pointer;
     justify-content: center;
     align-items: center;
+
+    &:focus-visible {
+      outline-color: $color-primary;
+      outline-style: dashed;
+      outline-width: 2px;
+    }
   }
 }

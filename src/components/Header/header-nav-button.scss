@@ -27,6 +27,12 @@
       background-color: lighten($color-secondary, 12%);
     }
 
+    &:focus-visible {
+      outline-color: $color-primary;
+      outline-style: dashed;
+      outline-width: 2px;
+    }
+
     // Header nav button active state
     &.active {
       background-color: $color-secondary;
