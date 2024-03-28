@@ -7,7 +7,7 @@ interface DashboardPageProps {}
 const DashboardPage = (props: DashboardPageProps) => {
   return (
     <>
-      <Header />
+      <Header activePage="dashboard" />
       <h1>💖 Dashboard page!</h1>
       <p>Welcome to Perrito</p>
       <Link to={'/servers'}>Servers</Link>

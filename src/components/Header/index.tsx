@@ -6,17 +6,16 @@ import SettingsIcon from '@assets/images/icons/settings.svg?react'
 
 import PerritoIcon from '@assets/images/logos/perrito-logo.svg?react'
 
-import { useState } from 'react'
 import { useTheme } from 'src/contexts/ThemeContext'
 import HeaderNavButton from './HeaderNavButton'
 import './styles.scss'
 
-interface indexProps {}
+interface indexProps {
+  activePage?: string
+}
 
 const index = (props: indexProps) => {
-  const [activePage, setActivePage] = useState('dashboard')
-
-  const { isDarkMode, toggleTheme } = useTheme()
+  const { isDarkMode } = useTheme()
 
   return (
     <header className={`${isDarkMode ? 'theme-dark' : 'theme-light'} header`}>
@@ -26,29 +25,26 @@ const index = (props: indexProps) => {
         <HeaderNavButton
           icon={<DashboardIcon />}
           title="Dashboard"
-          active={activePage === 'dashboard'}
-          onClick={() => setActivePage('dashboard')}
+          active={props.activePage === 'dashboard'}
+          redirect="/"
         />
 
         <HeaderNavButton
           icon={<ServersIcon />}
           title="Servers"
-          active={activePage === 'servers'}
-          onClick={() => setActivePage('servers')}
+          active={props.activePage === 'servers'}
+          redirect="/servers"
         />
 
         <HeaderNavButton
           icon={<SettingsIcon />}
           title="Settings"
-          active={activePage === 'settings'}
-          onClick={() => setActivePage('settings')}
+          active={props.activePage === 'settings'}
+          redirect="/settings"
         />
       </div>
 
       <div className="header-utility__container"></div>
-      {/* <button onClick={toggleTheme} className="header__theme-toggle">
-        {isDarkMode ? '🌞' : '🌙'}
-      </button> */}
     </header>
   )
 }
