@@ -1,7 +1,7 @@
 interface indexProps {}
 
 const index = (props: indexProps) => {
-  return <div></div>
+  return <header></header>
 }
 
 export default index

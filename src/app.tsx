@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import './root.css'
+import './normalize.css'
 import DashboardPage from './screens/DashboardPage'
 import ErrorPage from './screens/ErrorPage'
 import ServersPage from './screens/ServersPage'
