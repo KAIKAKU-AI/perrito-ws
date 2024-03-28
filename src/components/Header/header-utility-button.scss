@@ -1,0 +1,15 @@
+@import "../../styles/colors.scss";
+@import "../../styles/fonts.scss";
+
+.header-utility {
+  &__button {
+    display: flex;
+    border: none;
+    background-color: transparent;
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+  }
+}
