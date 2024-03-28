@@ -1,5 +1,14 @@
+@import '../../styles/colors.scss';
+
 .header {
+  display: flex;
+  height: 96px;
+  background-color: $color-tertiary;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+
   &__logo {
-    background-color: red;
+    width: 60px;
   }
 }
