@@ -9,6 +9,11 @@
   align-items: center;
   justify-content: space-between;
 
+  // TODO: Implement dark mode
+  // @media (prefers-color-scheme: dark) {
+  //   background-color: $color-secondary;
+  // }
+
   &__logo {
     width: 60px;
   }
