@@ -6,12 +6,18 @@ interface GeneralSettingsPageProps {}
 
 const GeneralSettingsPage = (props: GeneralSettingsPageProps) => {
   const [activeLanguage, setActiveLanguage] = useState('en')
+  const [runOnStartup, setRunOnStartup] = useState(true)
 
   return (
     <div className="settings__main">
       <h1>General</h1>
 
-      <Setting type={SettingType.SWITCH} title="Run Perrito on startup" />
+      <Setting
+        type={SettingType.SWITCH}
+        title="Run Perrito on startup"
+        switchChecked={runOnStartup}
+        onChange={() => setRunOnStartup(!runOnStartup)}
+      />
 
       <Setting
         type={SettingType.DROPDOWN}

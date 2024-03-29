@@ -1,11 +1,13 @@
-import Switch from 'react-switch'
+import DropdownSetting from './DropdownSetting'
+import SwitchSetting from './SwitchSetting'
 import './styles.scss'
 
 interface SettingProps {
   type: SettingType
   title: string
   description?: string
-  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void
+  onChange?: () => void
+  switchChecked?: boolean
   dropdownOptions?: { value: string; label: string }[]
   activeDropdownValue?: string
 }
@@ -13,42 +15,30 @@ interface SettingProps {
 export enum SettingType {
   SWITCH,
   DROPDOWN,
+  TEXT,
 }
 
 const index = (props: SettingProps) => {
   switch (props.type) {
     case SettingType.SWITCH:
       return (
-        <div className="setting">
-          <p>{props.title}</p>
-          <Switch
-            checked={true}
-            onChange={() => {}}
-            onColor="#2693e6"
-            height={14}
-            width={28}
-            checkedIcon={false}
-            uncheckedIcon={false}
-            draggable={false}
-          />
-        </div>
+        <SwitchSetting
+          title={props.title}
+          description={props.description}
+          onChange={props.onChange}
+          checked={props.switchChecked}
+        />
       )
 
     case SettingType.DROPDOWN:
       return (
-        <div className="setting">
-          <div className="setting-info">
-            <p className="setting-info__title">{props.title}</p>
-            <p className="setting-info__description">{props.description}</p>
-          </div>
-          <select className="dropdown" value={props.activeDropdownValue ?? ''} onChange={props.onChange}>
-            {props.dropdownOptions?.map(option => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
+        <DropdownSetting
+          title={props.title}
+          description={props.description}
+          dropdownOptions={props.dropdownOptions}
+          activeDropdownValue={props.activeDropdownValue}
+          onChange={props.onChange}
+        />
       )
   }
 }
