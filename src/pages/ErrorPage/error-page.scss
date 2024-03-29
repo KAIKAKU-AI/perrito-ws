@@ -2,11 +2,12 @@
 
 .error-container {
   display: flex;
+  width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #f8f9fa;
-  padding: 5rem;
+  padding: 0rem 10rem;
   box-sizing: border-box;
 
   h1 {
@@ -18,7 +19,7 @@
 
   p {
     font-size: 1rem;
-    color: #555;
-    ;
+    color: #333;
+    text-align: center;
   }
 }

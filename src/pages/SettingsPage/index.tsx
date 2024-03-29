@@ -8,6 +8,7 @@ import SideBar from '@components/SideBar'
 import SideBarNavigationButton from '@components/SideBar/buttons/SideBarNavigationButton'
 import { useParams } from 'react-router-dom'
 import '../styles.scss'
+import GeneralSettingsPage from './GeneralSettingsPage'
 
 const index = () => {
   const params = useParams()
@@ -27,10 +28,10 @@ const index = () => {
               icon={<CogIcon />}
             />
             <SideBarNavigationButton
-              id="themes"
-              title="Themes"
-              redirect="/settings/themes"
-              active={selectedSection === 'themes'}
+              id="appearance"
+              title="Appearance"
+              redirect="/settings/appearance"
+              active={selectedSection === 'appearance'}
               icon={<PaletteIcon />}
             />
             <SideBarNavigationButton
@@ -55,6 +56,13 @@ const index = () => {
               icon={<InfoIcon />}
             />
           </SideBar>
+        </div>
+        <div className="page-content__container">
+          {selectedSection === 'general' && <GeneralSettingsPage />}
+          {selectedSection === 'appearance' && <div>appearance Settings</div>}
+          {selectedSection === 'keybinds' && <div>Keybinds Settings</div>}
+          {selectedSection === 'templates' && <div>Templates Settings</div>}
+          {selectedSection === 'about' && <div>About Settings</div>}
         </div>
       </div>
     </>

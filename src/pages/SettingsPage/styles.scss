@@ -1,0 +1,17 @@
+@import '../../styles/colors.scss';
+
+.settings__main {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  padding: 1.5rem 2rem;
+  border-radius: 1rem 1rem 0 0;
+  box-sizing: border-box;
+
+  h1 {
+    font-size: 1.25rem;
+    margin: 0;
+    margin-bottom: 1rem;
+    color: $color-primary;
+  }
+}

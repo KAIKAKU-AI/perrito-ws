@@ -16,8 +16,11 @@ const index = () => {
         <div className="error-container">
           <PerritoSad />
           <h1>
-            {error.status}&nbsp;&nbsp;{error.statusText || error.message}
+            {error.status}
+            {error.status && <>&nbsp;&nbsp;</>}
+            {error.statusText ?? 'An error occurred!'}
           </h1>
+          <p>{error.message}</p>
           <code>Location: {location.pathname}</code>
           {error.data && <code>{error.data}</code>}
 

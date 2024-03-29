@@ -4,11 +4,23 @@
   width: 100%;
   height: 100%;
   background-color: $color-tertiary;
+  display: flex;
+  flex-direction: row;
+
 }
 
 .sidebar-container {
+  height: 100%;
+  width: max-content;
+  display: flex;
+  flex-direction: row;
+}
+
+.page-content__container {
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: row;
+  padding: 0 2rem;
+  box-sizing: border-box;
+
 }
