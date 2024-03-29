@@ -22,7 +22,9 @@ const index = (props: indexProps) => {
         </div>
       </div>
       <div className={`sidebar-content`}>
-        <div className="sidebar-content__title">{props.title}</div>
+        <div className="sidebar-content__title">
+          <h3>{props.title}</h3>
+        </div>
         <div className="sidebar-content__content">
           <div className="sidebar-content__content-inner">{props.children}</div>
         </div>

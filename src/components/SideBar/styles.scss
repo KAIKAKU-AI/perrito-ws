@@ -1,20 +1,22 @@
 @import '../../styles/colors.scss';
 @import '../../styles/fonts.scss';
 
+$sidebar-width: 16rem;
+
 .sidebar {
   position: relative;
   height: 100%;
   background-color: white;
   border-radius: 0 1rem 1rem 0;
   transition: 0.3s;
-  width: 14rem;
+  width: $sidebar-width;
 
   &--open {
     right: 0;
   }
 
   &--closed {
-    right: 12rem;
+    right: calc($sidebar-width - 2rem);
     border-radius: 0 2rem 2rem 0;
   }
 
@@ -26,10 +28,13 @@
     padding: 1rem;
 
     &__title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: $color-primary;
-      text-align: center;
+      h3 {
+        color: $color-primary;
+        text-align: center;
+        font-size: 1rem;
+        font-weight: 700;
+        margin: 0;
+      }
     }
   }
 
