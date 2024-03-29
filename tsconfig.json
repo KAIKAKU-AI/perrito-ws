@@ -16,7 +16,7 @@
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
       "@styles/*": ["src/styles/*"],
-      "@screens/*": ["src/screens/*"],
+      "@pages/*": ["src/pages/*"],
       "@contexts/*": ["src/contexts/*"]
     },
     "types": ["vite-plugin-svgr/client"]
