@@ -1,13 +1,14 @@
 import Header from '@components/Header'
 import SideBar from '@components/SideBar'
 import SideBarConnectionButton from '@components/SideBar/buttons/SideBarConnectionButton'
-import { useState } from 'react'
+import { useParams } from 'react-router-dom'
 import './styles.scss'
 
 interface DashboardPageProps {}
 
 const DashboardPage = (props: DashboardPageProps) => {
-  const [activeConnection, setActiveConnection] = useState<string | undefined>()
+  const params = useParams()
+  const selectedConnection = params.connectionId
 
   const connections = [
     {
@@ -31,8 +32,8 @@ const DashboardPage = (props: DashboardPageProps) => {
                 key={index}
                 title={connection.title}
                 id={connection.id}
-                active={activeConnection === connection.id}
-                onClick={() => setActiveConnection(connection.id)}
+                active={selectedConnection === connection.id}
+                redirect={`/dashboard/${connection.id}`}
               />
             ))}
           </SideBar>
