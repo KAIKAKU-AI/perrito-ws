@@ -11,7 +11,6 @@ interface SideBarConnectionButtonProps {
 }
 
 const SideBarConnectionButton = (props: SideBarConnectionButtonProps) => {
-  console.log('968063', truncate(props.title, 24))
   return (
     <Link to={props.redirect} className={`sidebar__connection-button ${props.active ? 'active' : ''}`}>
       <div className="sidebar__connection-button__title">
