@@ -1,45 +1,51 @@
 @import '../../styles/colors.scss';
+@import '../../styles/fonts.scss';
 
 .sidebar {
-  display: flex;
-  flex-direction: row;
+  position: relative;
   height: 100%;
   background-color: white;
   border-radius: 0 1rem 1rem 0;
   transition: 0.3s;
+  width: 14rem;
 
   &--open {
-    width: 14rem;
+    right: 0;
   }
 
   &--closed {
-    width: 2rem;
+    right: 12rem;
     border-radius: 0 2rem 2rem 0;
   }
 
+  // SIDEBAR CONTENT
   &-content {
     height: 100%;
     transition: 0.3s;
+    box-sizing: border-box;
+    padding: 1rem;
 
-    &--open {
-      width: 100%;
-    }
-
-    &--closed {
-      width: 0;
-      overflow: hidden;
+    &__title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: $color-primary;
+      text-align: center;
     }
   }
 
+  // SIDEBAR CONTROLLER
   &-controller {
     &__container {
+      position: absolute;
+      display: flex;
       height: 100%;
       width: 2rem;
-      display: flex;
+      background-color: transparent;
+      z-index: 10;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      align-self: flex-end;
-
+      left: 100%;
     }
   }
 }

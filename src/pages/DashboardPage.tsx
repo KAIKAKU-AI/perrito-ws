@@ -10,7 +10,7 @@ const DashboardPage = (props: DashboardPageProps) => {
       <Header activePage="dashboard" />
       <div id="page-content">
         <div className="sidebar-container">
-          <SideBar />
+          <SideBar title="Connections" />
         </div>
       </div>
     </>
