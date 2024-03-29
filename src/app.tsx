@@ -1,6 +1,7 @@
 import DashboardPage from '@pages/DashboardPage'
 import ErrorPage from '@pages/ErrorPage'
 import ServersPage from '@pages/ServersPage'
+import SettingsPage from '@pages/SettingsPage'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom/client'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
@@ -27,6 +28,15 @@ const router = createBrowserRouter([
   {
     path: '/servers',
     element: <ServersPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/settings',
+    element: <Navigate to="/settings/general" replace />,
+  },
+  {
+    path: '/settings/:section',
+    element: <SettingsPage />,
     errorElement: <ErrorPage />,
   },
 ])
