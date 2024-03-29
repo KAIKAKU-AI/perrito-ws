@@ -29,11 +29,11 @@ $rotate-amount: 15deg;
 
   &-top,
   &-bottom {
-    width: 6px;
+    width: 4px;
     height: 16px;
     transition: 0.3s;
     border-radius: 999px;
-    background-color: lighten($color-secondary, 5%);
+    background-color: $color-secondary;
   }
 
   // REMEMBER: The rotation is inverted for the top (rotate-left needs a value of right and vice versa)
