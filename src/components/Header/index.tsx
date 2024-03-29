@@ -9,7 +9,6 @@ import PerritoIcon from '@assets/images/logos/perrito-logo.svg?react'
 import { useTheme } from 'src/contexts/ThemeContext'
 import HeaderNavButton from './HeaderNavButton'
 import HeaderUtilities from './HeaderUtilities'
-import HeaderUtilityButton from './HeaderUtilityButton'
 import './styles.scss'
 
 interface indexProps {

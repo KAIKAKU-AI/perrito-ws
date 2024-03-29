@@ -13,4 +13,6 @@ body,
   display: flex;
   flex-direction: column;
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased; /* for Chrome, Safari */
+  -moz-osx-font-smoothing: grayscale; /* for Firefox */
 }

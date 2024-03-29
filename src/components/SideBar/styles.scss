@@ -34,7 +34,14 @@ $sidebar-width: 16rem;
         font-size: 1rem;
         font-weight: 700;
         margin: 0;
+        margin-bottom: 1rem;
       }
+    }
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+
     }
   }
 
