@@ -2,11 +2,9 @@ import Header from '@components/Header'
 import SideBar from '@components/SideBar'
 import SideBarConnectionButton from '@components/SideBar/buttons/SideBarConnectionButton'
 import { useParams } from 'react-router-dom'
-import './styles.scss'
+import '../styles.scss'
 
-interface DashboardPageProps {}
-
-const DashboardPage = (props: DashboardPageProps) => {
+const index = () => {
   const params = useParams()
   const selectedConnection = params.connectionId
 
@@ -43,4 +41,4 @@ const DashboardPage = (props: DashboardPageProps) => {
   )
 }
 
-export default DashboardPage
+export default index

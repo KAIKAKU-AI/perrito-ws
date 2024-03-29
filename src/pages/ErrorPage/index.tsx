@@ -1,9 +1,10 @@
 import PerritoSad from '@assets/images/perrito/perrito-sad.svg?react'
 import Header from '@components/Header'
 import { useLocation, useRouteError } from 'react-router-dom'
+import '../styles.scss'
 import './error-page.scss'
 
-export default function ErrorPage() {
+const index = () => {
   const error = useRouteError() as any
   const location = useLocation()
 
@@ -27,3 +28,5 @@ export default function ErrorPage() {
     </>
   )
 }
+
+export default index

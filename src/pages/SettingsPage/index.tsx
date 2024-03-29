@@ -7,11 +7,9 @@ import Header from '@components/Header'
 import SideBar from '@components/SideBar'
 import SideBarNavigationButton from '@components/SideBar/buttons/SideBarNavigationButton'
 import { useParams } from 'react-router-dom'
-import './styles.scss'
+import '../styles.scss'
 
-interface SettingsPageProps {}
-
-const SettingsPage = (props: SettingsPageProps) => {
+const index = () => {
   const params = useParams()
   const selectedSection = params.section
 
@@ -63,4 +61,4 @@ const SettingsPage = (props: SettingsPageProps) => {
   )
 }
 
-export default SettingsPage
+export default index
