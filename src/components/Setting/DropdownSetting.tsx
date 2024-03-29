@@ -11,7 +11,7 @@ const DropdownSetting = (props: DropdownSettingProps) => {
     <div className="setting">
       <div className="setting-info">
         <p className="setting-info__title">{props.title}</p>
-        <p className="setting-info__description">{props.description}</p>
+        {props.description && <p className="setting-info__description">{props.description}</p>}
       </div>
       <select className="dropdown" value={props.activeDropdownValue ?? ''} onChange={props.onChange}>
         {props.dropdownOptions?.map(option => (

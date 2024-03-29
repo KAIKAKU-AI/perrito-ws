@@ -12,7 +12,7 @@ const SwitchSetting = (props: SwitchSettingProps) => {
     <div className="setting">
       <div className="setting-info">
         <p className="setting-info__title">{props.title}</p>
-        <p className="setting-info__description">{props.description}</p>
+        {props.description && <p className="setting-info__description">{props.description}</p>}
       </div>
       <Switch
         checked={props.checked}
