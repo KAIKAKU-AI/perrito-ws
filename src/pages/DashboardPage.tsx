@@ -26,7 +26,7 @@ const DashboardPage = (props: DashboardPageProps) => {
       <Header activePage="dashboard" />
       <div id="page-content">
         <div className="sidebar-container">
-          <SideBar title="Connections">
+          <SideBar title="Connections" showController>
             {connections.map((connection, index) => (
               <SideBarConnectionButton
                 key={index}
