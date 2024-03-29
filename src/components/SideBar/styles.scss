@@ -1,0 +1,45 @@
+@import '../../styles/colors.scss';
+
+.sidebar {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  background-color: white;
+  border-radius: 0 1rem 1rem 0;
+  transition: 0.3s;
+
+  &--open {
+    width: 14rem;
+  }
+
+  &--closed {
+    width: 2rem;
+    border-radius: 0 2rem 2rem 0;
+  }
+
+  &-content {
+    height: 100%;
+    transition: 0.3s;
+
+    &--open {
+      width: 100%;
+    }
+
+    &--closed {
+      width: 0;
+      overflow: hidden;
+    }
+  }
+
+  &-controller {
+    &__container {
+      height: 100%;
+      width: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-self: flex-end;
+
+    }
+  }
+}
