@@ -20,8 +20,6 @@
       "@contexts/*": ["src/contexts/*"],
       "@utils/*": ["src/utils/*"]
     },
-    "types": ["vite-plugin-svgr/client",
-    "jest",
-  ]
+    "types": ["vite-plugin-svgr/client", "jest"]
   }
 }
