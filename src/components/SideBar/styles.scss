@@ -13,11 +13,20 @@ $sidebar-width: 16rem;
 
   &--open {
     right: 0;
+
+    .sidebar-content__content {
+      padding-right: 0rem;
+    }
+
   }
 
   &--closed {
     right: calc($sidebar-width - 2rem);
     border-radius: 0 2rem 2rem 0;
+
+    .sidebar-content__content {
+      padding-right: 2rem;
+    }
   }
 
   // SIDEBAR CONTENT
@@ -41,6 +50,7 @@ $sidebar-width: 16rem;
     &__content {
       display: flex;
       flex-direction: column;
+      transition: 0.3s;
 
     }
   }
