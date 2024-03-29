@@ -16,7 +16,7 @@ const GeneralSettingsPage = (props: GeneralSettingsPageProps) => {
         type={SettingType.SWITCH}
         title="Run Perrito on startup"
         switchChecked={runOnStartup}
-        onChange={() => setRunOnStartup(!runOnStartup)}
+        onSwitchChange={() => setRunOnStartup(!runOnStartup)}
       />
 
       <Setting
@@ -25,7 +25,7 @@ const GeneralSettingsPage = (props: GeneralSettingsPageProps) => {
         description="Work in progress - more languages coming soon!"
         activeDropdownValue={activeLanguage}
         dropdownOptions={[{ value: 'en', label: 'English' }]}
-        onChange={e => setActiveLanguage(e.target.value)}
+        onDropdownChange={e => setActiveLanguage(e.target.value)}
       />
     </div>
   )

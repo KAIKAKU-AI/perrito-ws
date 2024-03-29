@@ -6,7 +6,8 @@ interface SettingProps {
   type: SettingType
   title: string
   description?: string
-  onChange?: () => void
+  onSwitchChange?: () => void
+  onDropdownChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void
   switchChecked?: boolean
   dropdownOptions?: { value: string; label: string }[]
   activeDropdownValue?: string
@@ -25,7 +26,7 @@ const index = (props: SettingProps) => {
         <SwitchSetting
           title={props.title}
           description={props.description}
-          onChange={props.onChange}
+          onChange={props.onSwitchChange}
           checked={props.switchChecked}
         />
       )
@@ -37,7 +38,7 @@ const index = (props: SettingProps) => {
           description={props.description}
           dropdownOptions={props.dropdownOptions}
           activeDropdownValue={props.activeDropdownValue}
-          onChange={props.onChange}
+          onChange={props.onDropdownChange}
         />
       )
   }
