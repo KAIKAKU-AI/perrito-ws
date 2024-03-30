@@ -26,7 +26,11 @@ const ThemeSetting = (props: ThemeSettingProps) => {
               input?.click()
             }}>
             <div className="theme-select__item-preview-container">
-              <img className="theme-select__item-preview-image" src={theme.preview} alt={`${theme.name} theme preview`} />
+              <img
+                className="theme-select__item-preview-image"
+                src={theme.preview}
+                alt={`${theme.name} theme preview`}
+              />
             </div>
             <div className="theme-select__item-info">
               <input
