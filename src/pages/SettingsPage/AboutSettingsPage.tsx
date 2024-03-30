@@ -17,6 +17,8 @@ const AboutSettingsPage = () => {
       <Setting type={SettingType.INFO} title="System architecture" infoValue={window.app.getArch()} />
       <Setting type={SettingType.INFO} title="Chrome version" infoValue={window.app.getChromeVersion()} />
       <Setting type={SettingType.INFO} title="Electron version" infoValue={window.app.getElectronVersion()} />
+
+      {/* TODO: Add link to GitHub page here */}
     </div>
   )
 }
