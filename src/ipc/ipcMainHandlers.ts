@@ -1,4 +1,4 @@
-import { ipcMain, nativeTheme, shell } from 'electron'
+import { app, ipcMain, nativeTheme, shell } from 'electron'
 import fs from 'fs'
 import { themeConfigPath } from '../main'
 
@@ -28,5 +28,25 @@ export function setupIpcMainHandlers() {
 
   ipcMain.on('open-external-url', (event, url: string) => {
     shell.openExternal(url)
+  })
+
+  ipcMain.on('get-app-version', event => {
+    event.returnValue = app.getVersion()
+  })
+
+  ipcMain.on('get-app-arch', event => {
+    event.returnValue = process.arch
+  })
+
+  ipcMain.on('get-app-platform', event => {
+    event.returnValue = process.platform
+  })
+
+  ipcMain.on('get-chrome-version', event => {
+    event.returnValue = process.versions.chrome
+  })
+
+  ipcMain.on('get-electron-version', event => {
+    event.returnValue = process.versions.electron
   })
 }

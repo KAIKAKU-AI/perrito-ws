@@ -18,6 +18,7 @@ interface SettingProps {
   textValue?: string
   themeOptions?: { name: string; value: string; preview: string }[]
   activeTheme?: string
+  infoValue?: string
 }
 
 export enum SettingType {
@@ -25,6 +26,7 @@ export enum SettingType {
   DROPDOWN,
   TEXT,
   THEME,
+  INFO,
 }
 
 const index = (props: SettingProps) => {
@@ -69,6 +71,18 @@ const index = (props: SettingProps) => {
           activeTheme={props.activeTheme}
           themeOptions={props.themeOptions}
         />
+      )
+
+    case SettingType.INFO:
+      return (
+        <div className="setting">
+          <div className="setting-info">
+            <p className="setting-info__title">{props.title}</p>
+            {props.description && <p className="setting-info__description">{props.description}</p>}
+          </div>
+
+          <p>{props.infoValue}</p>
+        </div>
       )
   }
 }
