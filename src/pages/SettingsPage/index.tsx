@@ -8,6 +8,7 @@ import SideBar from '@components/SideBar'
 import SideBarNavigationButton from '@components/SideBar/buttons/SideBarNavigationButton'
 import { useParams } from 'react-router-dom'
 import '../styles.scss'
+import AppearanceSettingsPage from './AppearanceSettingsPage'
 import GeneralSettingsPage from './GeneralSettingsPage'
 
 const index = () => {
@@ -59,7 +60,7 @@ const index = () => {
         </div>
         <div className="page-content__container">
           {selectedSection === 'general' && <GeneralSettingsPage />}
-          {selectedSection === 'appearance' && <div>appearance Settings</div>}
+          {selectedSection === 'appearance' && <AppearanceSettingsPage />}
           {selectedSection === 'keybinds' && <div>Keybinds Settings</div>}
           {selectedSection === 'templates' && <div>Templates Settings</div>}
           {selectedSection === 'about' && <div>About Settings</div>}

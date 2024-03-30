@@ -1,6 +1,7 @@
 import DropdownSetting from './DropdownSetting'
 import SwitchSetting from './SwitchSetting'
 import TextSetting from './TextSetting'
+import ThemeSetting from './ThemeSetting'
 import './styles.scss'
 
 interface SettingProps {
@@ -10,16 +11,20 @@ interface SettingProps {
   onSwitchChange?: () => void
   onDropdownChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void
   onTextChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onThemeChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   switchChecked?: boolean
   dropdownOptions?: { value: string; label: string }[]
   activeDropdownValue?: string
   textValue?: string
+  themeOptions?: { name: string; value: string; preview: string }[]
+  activeTheme?: string
 }
 
 export enum SettingType {
   SWITCH,
   DROPDOWN,
   TEXT,
+  THEME,
 }
 
 const index = (props: SettingProps) => {
@@ -52,6 +57,17 @@ const index = (props: SettingProps) => {
           description={props.description}
           onChange={props.onTextChange}
           value={props.textValue}
+        />
+      )
+
+    case SettingType.THEME:
+      return (
+        <ThemeSetting
+          title={props.title}
+          description={props.description}
+          onChange={props.onThemeChange}
+          activeTheme={props.activeTheme}
+          themeOptions={props.themeOptions}
         />
       )
   }
