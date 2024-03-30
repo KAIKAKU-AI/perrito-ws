@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom'
 import '../styles.scss'
 import AppearanceSettingsPage from './AppearanceSettingsPage'
 import GeneralSettingsPage from './GeneralSettingsPage'
+import KeyboardSettingsPage from './KeyboardSettingsPage'
 
 const index = () => {
   const params = useParams()
@@ -36,10 +37,10 @@ const index = () => {
               icon={<PaletteIcon />}
             />
             <SideBarNavigationButton
-              id="keybinds"
-              title="Keybinds"
-              redirect="/settings/keybinds"
-              active={selectedSection === 'keybinds'}
+              id="keyboard"
+              title="Keyboard"
+              redirect="/settings/keyboard"
+              active={selectedSection === 'keyboard'}
               icon={<KeyboardIcon />}
             />
             <SideBarNavigationButton
@@ -61,7 +62,7 @@ const index = () => {
         <div className="page-content__container">
           {selectedSection === 'general' && <GeneralSettingsPage />}
           {selectedSection === 'appearance' && <AppearanceSettingsPage />}
-          {selectedSection === 'keybinds' && <div>Keybinds Settings</div>}
+          {selectedSection === 'keyboard' && <KeyboardSettingsPage />}
           {selectedSection === 'templates' && <div>Templates Settings</div>}
           {selectedSection === 'about' && <div>About Settings</div>}
         </div>
