@@ -11,6 +11,7 @@ import '../styles.scss'
 import AppearanceSettingsPage from './AppearanceSettingsPage'
 import GeneralSettingsPage from './GeneralSettingsPage'
 import KeyboardSettingsPage from './KeyboardSettingsPage'
+import TemplatesSettingsPage from './TemplatesSettingsPage'
 
 const index = () => {
   const params = useParams()
@@ -63,7 +64,7 @@ const index = () => {
           {selectedSection === 'general' && <GeneralSettingsPage />}
           {selectedSection === 'appearance' && <AppearanceSettingsPage />}
           {selectedSection === 'keyboard' && <KeyboardSettingsPage />}
-          {selectedSection === 'templates' && <div>Templates Settings</div>}
+          {selectedSection === 'templates' && <TemplatesSettingsPage />}
           {selectedSection === 'about' && <div>About Settings</div>}
         </div>
       </div>
