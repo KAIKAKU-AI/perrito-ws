@@ -1,7 +1,13 @@
 import Setting, { SettingType } from '@components/Setting'
 import { useConfig } from '@hooks/useConfig'
 import { randomWords } from '@utils/random-words'
-import { capitalize, formatServerHost, formatServerId, formatServerName, formatServerPort } from '@utils/string-formatting'
+import {
+  capitalize,
+  formatServerHost,
+  formatServerId,
+  formatServerName,
+  formatServerPort,
+} from '@utils/string-formatting'
 import { useEffect, useState } from 'react'
 import { BarLoader } from 'react-spinners'
 
@@ -10,7 +16,11 @@ interface CreateServerResponse {
   level: 'success' | 'error' | 'warning'
 }
 
-const CreateServerPage = () => {
+interface CreateServerPageProps {
+  setServers: (servers: any) => void
+}
+
+const CreateServerPage = (props: CreateServerPageProps) => {
   const generateRandomName = () => {
     // Choose 3 random words at random and stick them  together with a space
     let name = ''
@@ -22,8 +32,6 @@ const CreateServerPage = () => {
   }
 
   const { config } = useConfig()
-
-  const [servers, setServers] = useState([])
   const [serverName, setServerName] = useState('My Server')
   const [serverHost, setServerHost] = useState('127.0.0.1')
   const [serverPort, setServerPort] = useState('6969')
@@ -32,12 +40,9 @@ const CreateServerPage = () => {
     message: undefined,
     level: 'success',
   })
-  
-
 
   useEffect(() => {
     if (config === undefined) return
-    console.log('698763', config)
 
     if (config?.RANDOMIZE_SERVER_NAME === true) {
       setServerName(generateRandomName())
@@ -48,14 +53,10 @@ const CreateServerPage = () => {
     setServerPort(config?.DEFAULT_SERVER_PORT ?? '80')
   }, [config])
 
-  const handleCreateServer = () => {
-    setLoading(true)
-    handleAddServer()
-  }
-
-  const handleAddServer = async () => {
+  const handleCreateServer = async () => {
     // Re-validate the server name, host, and port just in case
     if (!serverName || !serverHost || !serverPort) return
+    setLoading(true)
 
     const name = formatServerName(serverName)
     const id = formatServerId(name)
@@ -65,7 +66,6 @@ const CreateServerPage = () => {
     window.servers
       .startServer(id, name, host, port)
       .then((response: any) => {
-        console.log('208007', response)
         setCreateServerResponse({
           message: response.message,
           level: 'success',
@@ -73,7 +73,7 @@ const CreateServerPage = () => {
         window.servers
           .getServers()
           .then((servers: any) => {
-            setServers(servers)
+            props.setServers(servers)
             setLoading(false)
           })
           .catch((error: any) => {
@@ -90,7 +90,6 @@ const CreateServerPage = () => {
         })
       })
   }
-
 
   return (
     <>

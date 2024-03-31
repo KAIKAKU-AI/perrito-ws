@@ -33,7 +33,7 @@ const index = () => {
   const [servers, setServers] = useState<Servers>({})
 
   const params = useParams()
-  const selectedServer = params.serverId
+  const selectedServerId = params.serverId
 
   useEffect(() => {
     window.servers
@@ -66,7 +66,7 @@ const index = () => {
                 key={serverId}
                 title={server.name}
                 id={server.id}
-                active={selectedServer === serverId}
+                active={selectedServerId === serverId}
                 redirect={`/servers/${serverId}`}
               />
             )
@@ -77,10 +77,10 @@ const index = () => {
           <div className="page__main">
             <SideBarController isOpen={sidebarOpen} onClick={() => setSidebarOpen(!sidebarOpen)} />
 
-            {window.location.pathname === '/servers/create' && <CreateServerPage />}
+            {window.location.pathname === '/servers/create' && <CreateServerPage setServers={setServers} />}
 
-            {selectedServer && window.location.pathname !== '/servers/create' && (
-              <ServerPage server={servers[selectedServer]} />
+            {selectedServerId && window.location.pathname !== '/servers/create' && (
+              <ServerPage serverId={selectedServerId} />
             )}
           </div>
         </div>

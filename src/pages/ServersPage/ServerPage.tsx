@@ -1,16 +1,40 @@
+import { useEffect, useState } from 'react'
 import { PulseLoader } from 'react-spinners'
 import { ServerDetails } from '.'
 
 interface ServerPageProps {
-  server: ServerDetails
+  serverId: string
 }
 
 const ServerPage = (props: ServerPageProps) => {
-  if (!props.server) return <PulseLoader color="#000" />
+  const [loading, setLoading] = useState(true)
+  const [server, setServer] = useState<ServerDetails | undefined>(undefined)
 
+  useEffect(() => {
+    window.servers
+      .getServers()
+      .then((servers: any) => {
+        setServer(servers[props.serverId])
+        setLoading(false)
+      })
+      .catch((error: any) => {
+        console.error('Error getting servers:', error)
+        setLoading(false)
+      })
+  }, [props.serverId])
+
+  if (loading) {
+    return (
+      <div className="loading">
+        <PulseLoader size={10} color="#000" />
+      </div>
+    )
+  }
+
+  console.log('843473', server)
   return (
     <div>
-      <p>{props.server.host}</p>
+      <p>{server.host}</p>
     </div>
   )
 }
