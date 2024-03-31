@@ -12,7 +12,7 @@ declare global {
 const GeneralSettingsPage = () => {
   const { config, updateConfig } = useConfig()
 
-  const [activeLanguage, setActiveLanguage] = useState('en')
+  const [activeLanguage, setActiveLanguage] = useState('en-gb')
   const [showStackTrace, setShowStackTrace] = useState(false)
   const [gatewayHost, setGatewayHost] = useState('localhost')
   const [gatewayPort, setGatewayPort] = useState('8080')
@@ -21,6 +21,12 @@ const GeneralSettingsPage = () => {
     if (config?.RUN_ON_STARTUP === undefined) updateConfig('RUN_ON_STARTUP', 'false')
 
     updateConfig('RUN_ON_STARTUP', !config.RUN_ON_STARTUP)
+  }
+
+  const handleLanguageChange = async (newLanguage: string) => {
+    if (config?.LANGUAGE === undefined) updateConfig('LANGUAGE', 'en-gb')
+
+    updateConfig('LANGUAGE', newLanguage)
   }
 
   return (
@@ -38,9 +44,9 @@ const GeneralSettingsPage = () => {
         type={SettingType.DROPDOWN}
         title="Change language"
         description="Work in progress - more languages coming soon!"
-        activeDropdownValue={activeLanguage}
-        dropdownOptions={[{ value: 'en', label: 'English' }]}
-        onDropdownChange={e => setActiveLanguage(e.target.value)}
+        activeDropdownValue={config?.LANGUAGE ?? 'en-gb'}
+        dropdownOptions={[{ value: 'en-gb', label: 'English UK' }]}
+        onDropdownChange={e => handleLanguageChange(e.target.value)}
       />
 
       <Setting
