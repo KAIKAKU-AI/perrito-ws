@@ -1,7 +1,7 @@
 import Header from '@components/Header'
 import SideBar from '@components/SideBar'
 import SideBarController from '@components/SideBar/SideBarController'
-import SideBarButton from '@components/SideBar/buttons/SideBarConnectionButton'
+import SideBarButton from '@components/SideBar/inputs/SideBarButton'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import '../styles.scss'
@@ -27,6 +27,7 @@ const index = () => {
       <Header activePage="dashboard" />
       <div id="page-content">
         <SideBar title="Connections" isOpen={sidebarOpen}>
+          <SideBarDropdown />
           {connections.map((connection, index) => (
             <SideBarButton
               key={index}
