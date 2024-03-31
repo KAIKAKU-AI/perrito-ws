@@ -1,10 +1,15 @@
-import { WebSocketServer } from 'ws'
+import { IncomingMessage } from 'electron'
+import { WebSocket, WebSocketServer } from 'ws'
 
 interface WebSocketServerInstance {
   name: string
   server: WebSocketServer
   host: string
   port: number
+  clients: {
+    socket: WebSocket
+    request: IncomingMessage
+  }[]
 }
 
 interface DaemonResponse {
@@ -72,7 +77,7 @@ class PerritoDaemon {
 
       // Resolve the promise once the server starts listening
       server.once('listening', () => {
-        this.servers[id] = { name, server, host, port } // Store the server info only after successful listening
+        this.servers[id] = { name, server, host, port, clients: [] } // Store the server info only after successful listening
         resolve({
           name: 'SUCCESS',
           message: `Server started successfully on ws://${host}:${port} with id ${id}`,
@@ -80,11 +85,22 @@ class PerritoDaemon {
       })
 
       // Connection handling remains unchanged
-      server.on('connection', ws => {
-        console.debug(`New connection on server ${id}`)
+      server.on('connection', (ws: WebSocket, req: IncomingMessage) => {
+        this.servers[id].clients.push({ socket: ws, request: req })
         ws.on('message', message => {
           // Handle incoming messages here
+          console.log('383883', message)
         })
+
+        ws.on('close', () => {
+          this.servers[id].clients = this.servers[id].clients.filter(client => client.socket !== ws)
+        })
+
+        this.servers[id].server = server
+      })
+
+      server.on('close', () => {
+        this.servers[id].server = server
       })
     })
   }
