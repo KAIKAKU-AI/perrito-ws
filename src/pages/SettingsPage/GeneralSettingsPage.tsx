@@ -20,6 +20,12 @@ const GeneralSettingsPage = () => {
     // Apply default values if they don't exists
     if (config.RUN_ON_STARTUP === undefined) updateConfig('RUN_ON_STARTUP', 'false')
     if (config.LANGUAGE === undefined) updateConfig('LANGUAGE', 'en-gb')
+    if (config.GATEWAY_HOST === undefined) updateConfig('GATEWAY_HOST', 'localhost')
+    if (config.GATEWAY_PORT === undefined) updateConfig('GATEWAY_PORT', '8080')
+
+    // Set the text fields to the current config values
+    setGatewayHost(config.GATEWAY_HOST)
+    setGatewayPort(config.GATEWAY_PORT)
   }, [config])
 
   return (
@@ -39,6 +45,7 @@ const GeneralSettingsPage = () => {
         description="Work in progress - more languages coming soon!"
         activeDropdownValue={config?.LANGUAGE ?? 'en-gb'}
         dropdownOptions={[{ value: 'en-gb', label: 'English UK' }]}
+        showSave
         onDropdownChange={e => updateConfig('LANGUAGE', e.target.value)}
       />
 
@@ -48,6 +55,8 @@ const GeneralSettingsPage = () => {
         description="Changing Perrito's host will require a restart of the application. Only change this if you know what you're doing."
         textValue={gatewayHost}
         onTextChange={e => setGatewayHost(e.target.value)}
+        showSave={'onchange'}
+        onSave={() => updateConfig('GATEWAY_HOST', gatewayHost)}
       />
 
       <Setting
@@ -56,6 +65,8 @@ const GeneralSettingsPage = () => {
         description="Changing Perrito's port will require a restart of the application. Only change this if you know what you're doing."
         textValue={gatewayPort}
         onTextChange={e => setGatewayPort(e.target.value)}
+        showSave={'onchange'}
+        onSave={() => updateConfig('GATEWAY_PORT', gatewayPort)}
       />
     </div>
   )

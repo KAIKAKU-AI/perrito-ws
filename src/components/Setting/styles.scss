@@ -1,5 +1,10 @@
 @import '../../styles/colors.scss';
 
+.base__setting {
+  display: flex;
+  flex-direction: column;
+}
+
 .setting {
   display: flex;
   flex-direction: row;
@@ -16,6 +21,23 @@
 
   &--column {
     flex-direction: column;
+  }
+
+  &__save {
+    align-self: flex-end;
+    width: fit-content;
+    padding: 0.25rem 1rem;
+    border: none;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    background-color: #2693e6;
+
+    &:hover {
+      background-color: darken(#2693e6, 10%);
+    }
   }
 
   &-info {
@@ -38,6 +60,8 @@
       padding-right: 2rem;
       margin-top: 0.5rem;
     }
+
+
   }
 
 
