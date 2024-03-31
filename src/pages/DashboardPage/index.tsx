@@ -1,12 +1,15 @@
 import Header from '@components/Header'
 import SideBar from '@components/SideBar'
+import SideBarController from '@components/SideBar/SideBarController'
 import SideBarConnectionButton from '@components/SideBar/buttons/SideBarConnectionButton'
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import '../styles.scss'
 
 const index = () => {
   const params = useParams()
   const selectedConnection = params.connectionId
+  const [sidebarOpen, setSidebarOpen] = useState(true)
 
   const connections = [
     {
@@ -23,18 +26,21 @@ const index = () => {
     <>
       <Header activePage="dashboard" />
       <div id="page-content">
-        <div className="sidebar-container">
-          <SideBar title="Connections" showController>
-            {connections.map((connection, index) => (
-              <SideBarConnectionButton
-                key={index}
-                title={connection.title}
-                id={connection.id}
-                active={selectedConnection === connection.id}
-                redirect={`/dashboard/${connection.id}`}
-              />
-            ))}
-          </SideBar>
+        <SideBar title="Connections" isOpen={sidebarOpen}>
+          {connections.map((connection, index) => (
+            <SideBarConnectionButton
+              key={index}
+              title={connection.title}
+              id={connection.id}
+              active={selectedConnection === connection.id}
+              redirect={`/dashboard/${connection.id}`}
+            />
+          ))}
+        </SideBar>
+        <div className="page-content__container">
+          <div className="page__main">
+            <SideBarController isOpen={sidebarOpen} onClick={() => setSidebarOpen(!sidebarOpen)} />
+          </div>
         </div>
       </div>
     </>

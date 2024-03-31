@@ -1,38 +1,37 @@
 @import '../../styles/colors.scss';
 @import '../../styles/fonts.scss';
 
-$sidebar-width: 16rem;
+$sidebar-width: 20rem;
 
 .sidebar {
   position: relative;
   height: 100%;
+  width: $sidebar-width;
   background-color: white;
   border-radius: 0 1rem 1rem 0;
-  transition: 0.3s;
-  width: $sidebar-width;
+  transition: width 0.3s ease, margin-left 0.3s ease;
+  overflow: hidden;
 
+  // When sidebar is open
   &--open {
-    right: 0;
-
-    .sidebar-content__content {
-      padding-right: 0rem;
-    }
-
+    width: $sidebar-width;
   }
 
+  // When sidebar is closed
   &--closed {
-    right: calc($sidebar-width - 2rem);
-    border-radius: 0 2rem 2rem 0;
+    width: 0;
+  }
 
-    .sidebar-content__content {
-      padding-right: 2rem;
-    }
+  // SIDEBAR CONTAINER
+  &-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
   }
 
   // SIDEBAR CONTENT
   &-content {
     height: 100%;
-    transition: 0.3s;
     box-sizing: border-box;
     padding: 1rem;
 
@@ -50,24 +49,13 @@ $sidebar-width: 16rem;
     &__content {
       display: flex;
       flex-direction: column;
-      transition: 0.3s;
-
     }
   }
 
   // SIDEBAR CONTROLLER
   &-controller {
-    &__container {
-      position: absolute;
-      display: flex;
-      height: 100%;
-      width: 2rem;
-      background-color: transparent;
-      z-index: 10;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      left: 100%;
-    }
+    position: fixed;
+    top: 50%;
+    translate: -1.5rem 50%;
   }
 }

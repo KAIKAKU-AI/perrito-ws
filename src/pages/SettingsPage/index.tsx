@@ -22,45 +22,43 @@ const index = () => {
     <>
       <Header activePage="settings" />
       <div id="page-content">
-        <div className="sidebar-container">
-          <SideBar showController>
-            <SideBarNavigationButton
-              id="general"
-              title="General"
-              redirect="/settings/general"
-              active={selectedSection === 'general'}
-              icon={<CogIcon />}
-            />
-            <SideBarNavigationButton
-              id="appearance"
-              title="Appearance"
-              redirect="/settings/appearance"
-              active={selectedSection === 'appearance'}
-              icon={<PaletteIcon />}
-            />
-            <SideBarNavigationButton
-              id="keyboard"
-              title="Keyboard"
-              redirect="/settings/keyboard"
-              active={selectedSection === 'keyboard'}
-              icon={<KeyboardIcon />}
-            />
-            <SideBarNavigationButton
-              id="templates"
-              title="Templates"
-              redirect="/settings/templates"
-              active={selectedSection === 'templates'}
-              icon={<PencilIcon />}
-            />
-            <SideBarNavigationButton
-              id="about"
-              title="About"
-              redirect="/settings/about"
-              active={selectedSection === 'about'}
-              icon={<InfoIcon />}
-            />
-          </SideBar>
-        </div>
+        <SideBar isOpen>
+          <SideBarNavigationButton
+            id="general"
+            title="General"
+            redirect="/settings/general"
+            active={selectedSection === 'general'}
+            icon={<CogIcon />}
+          />
+          <SideBarNavigationButton
+            id="appearance"
+            title="Appearance"
+            redirect="/settings/appearance"
+            active={selectedSection === 'appearance'}
+            icon={<PaletteIcon />}
+          />
+          <SideBarNavigationButton
+            id="keyboard"
+            title="Keyboard"
+            redirect="/settings/keyboard"
+            active={selectedSection === 'keyboard'}
+            icon={<KeyboardIcon />}
+          />
+          <SideBarNavigationButton
+            id="templates"
+            title="Templates"
+            redirect="/settings/templates"
+            active={selectedSection === 'templates'}
+            icon={<PencilIcon />}
+          />
+          <SideBarNavigationButton
+            id="about"
+            title="About"
+            redirect="/settings/about"
+            active={selectedSection === 'about'}
+            icon={<InfoIcon />}
+          />
+        </SideBar>
         <div className="page-content__container">
           {selectedSection === 'general' && <GeneralSettingsPage />}
           {selectedSection === 'appearance' && <AppearanceSettingsPage />}

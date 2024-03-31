@@ -1,5 +1,6 @@
 import Header from '@components/Header'
 import SideBar from '@components/SideBar'
+import SideBarController from '@components/SideBar/SideBarController'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import '../styles.scss'
@@ -11,6 +12,7 @@ declare global {
 }
 
 const index = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(true)
   const [servers, setServers] = useState([])
   const [serverName, setServerName] = useState('my server')
   const [serverHost, setServerHost] = useState('127.0.0.1')
@@ -71,12 +73,11 @@ const index = () => {
     <>
       <Header activePage="servers" />
       <div id="page-content">
-        <div className="sidebar-container">
-          <SideBar title="Servers" showController></SideBar>
-        </div>
+        <SideBar title="Servers" isOpen={sidebarOpen}></SideBar>
 
         <div className="page-content__container">
           <div className="page__main">
+            <SideBarController isOpen={sidebarOpen} onClick={() => setSidebarOpen(!sidebarOpen)} />
             <h1>Servers</h1>
             <form
               className="server__form"
