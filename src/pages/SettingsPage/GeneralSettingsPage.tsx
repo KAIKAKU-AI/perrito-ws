@@ -1,6 +1,6 @@
 import Setting, { SettingType } from '@components/Setting'
 import { useConfig } from '@hooks/useConfig'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './styles.scss'
 
 declare global {
@@ -11,23 +11,16 @@ declare global {
 
 const GeneralSettingsPage = () => {
   const { config, updateConfig } = useConfig()
-
-  const [activeLanguage, setActiveLanguage] = useState('en-gb')
-  const [showStackTrace, setShowStackTrace] = useState(false)
   const [gatewayHost, setGatewayHost] = useState('localhost')
   const [gatewayPort, setGatewayPort] = useState('8080')
 
-  const handleRunOnStartupChange = async () => {
-    if (config?.RUN_ON_STARTUP === undefined) updateConfig('RUN_ON_STARTUP', 'false')
+  useEffect(() => {
+    if (config === undefined) return
 
-    updateConfig('RUN_ON_STARTUP', !config.RUN_ON_STARTUP)
-  }
-
-  const handleLanguageChange = async (newLanguage: string) => {
-    if (config?.LANGUAGE === undefined) updateConfig('LANGUAGE', 'en-gb')
-
-    updateConfig('LANGUAGE', newLanguage)
-  }
+    // Apply default values if they don't exists
+    if (config.RUN_ON_STARTUP === undefined) updateConfig('RUN_ON_STARTUP', 'false')
+    if (config.LANGUAGE === undefined) updateConfig('LANGUAGE', 'en-gb')
+  }, [config])
 
   return (
     <div className="settings__main">
@@ -37,7 +30,7 @@ const GeneralSettingsPage = () => {
         type={SettingType.SWITCH}
         title="Run Perrito on startup"
         switchChecked={config?.RUN_ON_STARTUP ?? false}
-        onSwitchChange={handleRunOnStartupChange}
+        onSwitchChange={() => updateConfig('RUN_ON_STARTUP', !config.RUN_ON_STARTUP)}
       />
 
       <Setting
@@ -46,7 +39,7 @@ const GeneralSettingsPage = () => {
         description="Work in progress - more languages coming soon!"
         activeDropdownValue={config?.LANGUAGE ?? 'en-gb'}
         dropdownOptions={[{ value: 'en-gb', label: 'English UK' }]}
-        onDropdownChange={e => handleLanguageChange(e.target.value)}
+        onDropdownChange={e => updateConfig('LANGUAGE', e.target.value)}
       />
 
       <Setting
@@ -63,14 +56,6 @@ const GeneralSettingsPage = () => {
         description="Changing Perrito's port will require a restart of the application. Only change this if you know what you're doing."
         textValue={gatewayPort}
         onTextChange={e => setGatewayPort(e.target.value)}
-      />
-
-      <Setting
-        type={SettingType.SWITCH}
-        title="Show stack trace on error"
-        description="Show the full stack trace when an error occurs. This can be useful for debugging."
-        switchChecked={showStackTrace}
-        onSwitchChange={() => setShowStackTrace(!showStackTrace)}
       />
     </div>
   )

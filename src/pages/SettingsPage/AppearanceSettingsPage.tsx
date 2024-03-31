@@ -31,6 +31,7 @@ const AppearanceSettingsPage = () => {
     if (config === undefined) return
 
     if (config.THEME === undefined) updateConfig('THEME', 'light')
+    if (config.SHOW_STACK_TRACE === undefined) updateConfig('SHOW_STACK_TRACE', false)
 
     const setTheme = async () => {
       await window.theme.setTheme(config.THEME)
@@ -50,6 +51,14 @@ const AppearanceSettingsPage = () => {
         themeOptions={themes}
         activeTheme={config?.THEME ?? 'light'}
         onThemeChange={e => updateConfig('THEME', e.target.value)}
+      />
+
+      <Setting
+        type={SettingType.SWITCH}
+        title="Show stack trace on error"
+        description="Show the full stack trace when an error occurs. This can be useful for debugging."
+        switchChecked={config?.SHOW_STACK_TRACE ?? false}
+        onSwitchChange={() => updateConfig('SHOW_STACK_TRACE', !config.SHOW_STACK_TRACE)}
       />
     </div>
   )
