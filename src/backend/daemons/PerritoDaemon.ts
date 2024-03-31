@@ -3,7 +3,13 @@ import { WebSocketServer } from 'ws'
 interface WebSocketServerInstance {
   name: string
   server: WebSocketServer
+  host: string
   port: number
+}
+
+interface DaemonResponse {
+  name: string
+  message: string
 }
 
 class PerritoDaemon {
@@ -33,7 +39,7 @@ class PerritoDaemon {
     }
   }
 
-  private startServer(id: string, name: string, host: string, port: number) {
+  private startServer(id: string, name: string, host: string, port: number): Promise<DaemonResponse> {
     return new Promise((resolve, reject) => {
       if (this.servers[id]) {
         throw new Error(`Server with id ${id} already exists.`)
@@ -67,7 +73,10 @@ class PerritoDaemon {
       // Resolve the promise once the server starts listening
       server.once('listening', () => {
         this.servers[id] = { name, server, host, port } // Store the server info only after successful listening
-        resolve(`Server started successfully on ws://${host}:${port} with id ${id}`)
+        resolve({
+          name: 'SUCCESS',
+          message: `Server started successfully on ws://${host}:${port} with id ${id}`,
+        } as DaemonResponse)
       })
 
       // Connection handling remains unchanged
@@ -80,7 +89,7 @@ class PerritoDaemon {
     })
   }
 
-  private stopServer(id: string): Promise<string> {
+  private stopServer(id: string): Promise<DaemonResponse> {
     return new Promise((resolve, reject) => {
       const instance = this.servers[id]
       if (!instance) {
@@ -94,7 +103,10 @@ class PerritoDaemon {
 
         delete this.servers[id] // Remove the server from the tracking object after successful closure
         console.info(`Stopped WebSocket Server with id ${id}`)
-        resolve(`Server with id ${id} stopped successfully.`) // Resolve the promise on successful stop
+        resolve({
+          name: 'SUCCESS',
+          message: `Server with id ${id} stopped successfully`,
+        })
       })
     })
   }

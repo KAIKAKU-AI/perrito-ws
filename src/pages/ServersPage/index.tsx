@@ -3,6 +3,8 @@ import Setting, { SettingType } from '@components/Setting'
 import SideBar from '@components/SideBar'
 import SideBarController from '@components/SideBar/SideBarController'
 import SideBarButton from '@components/SideBar/buttons/SideBarConnectionButton'
+import { randomWords } from '@utils/random-words'
+import { capitalize } from '@utils/string-formatting'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { BarLoader } from 'react-spinners'
@@ -21,9 +23,19 @@ interface CreateServerResponse {
 }
 
 const index = () => {
+  const generateRandomName = () => {
+    // Choose 3 random words at random and stick them  together with a space
+    let name = ''
+    for (let i = 0; i < 3; i++) {
+      name += capitalize(randomWords[Math.floor(Math.random() * randomWords.length)] + ' ')
+    }
+
+    return name.trim()
+  }
+
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [servers, setServers] = useState([])
-  const [serverName, setServerName] = useState('my server')
+  const [serverName, setServerName] = useState('My Server')
   const [serverHost, setServerHost] = useState('127.0.0.1')
   const [serverPort, setServerPort] = useState('6969')
   const [loading, setLoading] = useState(false)
@@ -35,6 +47,8 @@ const index = () => {
   const selectedServer = params.serverId
 
   useEffect(() => {
+    setServerName(generateRandomName())
+
     window.servers
       .getServers()
       .then((servers: any) => {
@@ -59,6 +73,7 @@ const index = () => {
     window.servers
       .startServer(id, name, host, port)
       .then((response: any) => {
+        console.log('208007', response)
         setCreateServerResponse({
           message: response.message,
           level: 'success',
@@ -180,11 +195,10 @@ const index = () => {
             />
 
             <div className="create-server__footer">
-              {createServerResponse.message && (
-                <div className={`create-server__response create-server__response--${createServerResponse.level}`}>
-                  {createServerResponse.message}
-                </div>
-              )}
+              <div className={`create-server__response create-server__response--${createServerResponse.level}`}>
+                {createServerResponse.message}
+              </div>
+
               <button className="create-server__button" onClick={handleCreateServer}>
                 <span>
                   {loading ? (
