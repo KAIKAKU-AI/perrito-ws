@@ -1,5 +1,6 @@
 import { getConfig, setConfig, updateConfig } from '@utils/config-manager'
 import { app, ipcMain, nativeTheme, shell } from 'electron'
+import { getWebSocketServers, startWebSocketServer, stopWebSocketServer } from 'src/backend/router'
 
 export enum Theme {
   LIGHT = 'light',
@@ -59,5 +60,20 @@ export function setupIpcMainHandlers() {
 
   ipcMain.handle('update-config', async (_, key: string, value: any) => {
     updateConfig(key, value)
+  })
+
+  // SERVER DAEMON API
+  ipcMain.on('start-server', (_, serverName: string, host: string, port: number) => {
+    startWebSocketServer(serverName, host, port)
+  })
+
+  ipcMain.on('stop-server', (_, serverName: string) => {
+    stopWebSocketServer(serverName)
+  })
+
+  ipcMain.on('get-servers', event => {
+    getWebSocketServers().then(servers => {
+      event.returnValue = servers
+    })
   })
 }

@@ -6,35 +6,45 @@ interface WebSocketServerInstance {
 }
 
 class PerritoDaemon {
-  private servers: Map<string, WebSocketServerInstance>
+  private servers: { [key: string]: WebSocketServerInstance }
 
   constructor() {
-    this.servers = new Map()
+    this.servers = {}
     process.on('message', this.handleMessage.bind(this))
     console.log('563939', 'PerritoDaemon started')
   }
 
   private handleMessage(message: any) {
-    switch (message.command) {
+    switch (message.action) {
       case 'start':
-        console.log('105972', { message })
-        this.startServer(message.id, message.host, message.port)
+        let error = null
+        try {
+          this.startServer(message.id, message.host, message.port)
+        } catch (e) {
+          error = e.message
+        }
+
+        process.send({ correlationId: message.correlationId, data: 'Server started', error })
+        break
+      case 'get-servers':
+        process.send({ correlationId: message.correlationId, data: this.servers })
         break
       case 'stop':
         this.stopServer(message.id)
+        process.send({ correlationId: message.correlationId, data: 'Server stopped' })
         break
-      // Add additional cases for other commands
     }
   }
 
   private startServer(id: string, host: string, port: number) {
-    if (this.servers.has(id)) {
-      console.error(`Server with id ${id} already exists.`)
-      return
+    if (this.servers[id]) {
+      throw new Error(`Server with id ${id} already exists.`)
     }
 
+    // Validate the host and port
+
     const server = new WebSocketServer({ host, port })
-    this.servers.set(id, { server, port })
+    this.servers[id] = { server, port }
 
     server.on('connection', ws => {
       console.log(`New connection on server ${id}`)
@@ -48,16 +58,20 @@ class PerritoDaemon {
   }
 
   private stopServer(id: string) {
-    const instance = this.servers.get(id)
+    const instance = this.servers[id]
     if (instance) {
-      instance.server.close(() => {
-        console.log(`Stopped WebSocket Server with id ${id}`)
+      instance.server.close(err => {
+        if (err) {
+          throw err
+        }
+
+        console.info(`Stopped WebSocket Server with id ${id}`)
       })
-      this.servers.delete(id)
+      delete this.servers[id]
     } else {
-      console.error(`Server with id ${id} not found.`)
+      throw new Error(`Server with id ${id} does not exist.`)
     }
   }
 }
 
-const daemon = new PerritoDaemon()
+new PerritoDaemon()
