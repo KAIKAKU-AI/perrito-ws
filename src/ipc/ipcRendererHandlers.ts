@@ -26,9 +26,9 @@ export function setupIpcRendererHandlers() {
   })
 
   contextBridge.exposeInMainWorld('servers', {
-    startServer: (serverName: string, host: string, port: number) =>
-      ipcRenderer.send('start-server', serverName, host, port),
-    stopServer: (serverName: string) => ipcRenderer.send('stop-server', serverName),
-    getServers: () => ipcRenderer.sendSync('get-servers'),
+    startServer: (id: string, name: string, host: string, port: string) =>
+      ipcRenderer.invoke('start-server', id, name, host, port),
+    stopServer: (id: string) => ipcRenderer.invoke('stop-server', id),
+    getServers: () => ipcRenderer.invoke('get-servers'),
   })
 }

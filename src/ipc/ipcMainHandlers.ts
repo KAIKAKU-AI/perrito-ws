@@ -63,17 +63,30 @@ export function setupIpcMainHandlers() {
   })
 
   // SERVER DAEMON API
-  ipcMain.on('start-server', (_, serverName: string, host: string, port: number) => {
-    startWebSocketServer(serverName, host, port)
+  ipcMain.handle('start-server', async (_, serverId, serverName, host, port) => {
+    try {
+      const response = await startWebSocketServer(serverId, serverName, host, parseInt(port))
+      return response
+    } catch (error) {
+      throw error
+    }
   })
 
-  ipcMain.on('stop-server', (_, serverName: string) => {
-    stopWebSocketServer(serverName)
+  ipcMain.handle('stop-server', async (_, id) => {
+    try {
+      const response = await stopWebSocketServer(id)
+      return response
+    } catch (error) {
+      throw error
+    }
   })
 
-  ipcMain.on('get-servers', event => {
-    getWebSocketServers().then(servers => {
-      event.returnValue = servers
-    })
+  ipcMain.handle('get-servers', async _ => {
+    try {
+      const servers = await getWebSocketServers()
+      return servers
+    } catch (error) {
+      throw error
+    }
   })
 }

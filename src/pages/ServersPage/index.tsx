@@ -23,9 +23,25 @@ const index = () => {
 
     const name = formatName(serverName)
     const id = formatId(name)
+    const host = formatHost(serverHost)
+    const port = parseInt(formatPort(serverPort))
 
-    await window.servers.startServer(serverName, serverHost, serverPort)
-    setServers(await window.servers.getServers())
+    window.servers
+      .startServer(id, name, host, port)
+      .then((response: any) => {
+        console.log('Server started:', response)
+        window.servers
+          .getServers()
+          .then((servers: any) => {
+            setServers(servers)
+          })
+          .catch((error: any) => {
+            console.error('Error getting servers:', error)
+          })
+      })
+      .catch((error: any) => {
+        console.error('Error starting server:', error)
+      })
   }
 
   const formatId = (name: string) => {

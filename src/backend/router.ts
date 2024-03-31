@@ -13,7 +13,7 @@ interface PendingRequests {
 
 const pendingRequests = {} as PendingRequests
 
-function sendCommandToDaemon(command: { id?: string; action: string; host?: string; port?: number }) {
+function sendCommandToDaemon(command: { id?: string; action: string; name?: string; host?: string; port?: number }) {
   const correlationId = Date.now().toString() + Math.random().toString().substring(2)
   const commandWithCorrelationId = { ...command, correlationId }
 
@@ -44,28 +44,16 @@ perritoDaemonProcess.on('message', (message: any) => {
 })
 
 // Example usage of sending a command to start a new WebSocket server
-export function startWebSocketServer(id: string, host: string, port: number) {
-  sendCommandToDaemon({ id, action: 'start', host, port })
+export function startWebSocketServer(id: string, name: string, host: string, port: number) {
+  return sendCommandToDaemon({ id, action: 'start', name, host, port })
 }
 
 // Example usage of sending a command to stop an existing WebSocket server
 export function stopWebSocketServer(id: string) {
-  sendCommandToDaemon({ id, action: 'stop' })
+  return sendCommandToDaemon({ id, action: 'stop' })
 }
 export function getWebSocketServers() {
-  sendCommandToDaemon({ action: 'get-servers' })
-
-  // Return a promise that resolves when the response is received
-  return new Promise(resolve => {
-    const handleResponse = (message: any) => {
-      if (message.action === 'servers-list') {
-        perritoDaemonProcess.removeListener('message', handleResponse)
-        resolve(message.data)
-      }
-    }
-
-    perritoDaemonProcess.on('message', handleResponse)
-  })
+  return sendCommandToDaemon({ action: 'get-servers' })
 }
 
 export function killDaemons() {
