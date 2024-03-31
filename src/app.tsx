@@ -1,5 +1,6 @@
 import DashboardPage from '@pages/DashboardPage'
 import ErrorPage from '@pages/ErrorPage'
+import ServersPage from '@pages/ServersPage'
 import SettingsPage from '@pages/SettingsPage'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom/client'
@@ -22,6 +23,11 @@ const router = createBrowserRouter([
   {
     path: '/dashboard/:connectionId',
     element: <DashboardPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/servers',
+    element: <ServersPage />,
     errorElement: <ErrorPage />,
   },
   {

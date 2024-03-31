@@ -1,6 +1,7 @@
 import { configExists, getConfig, resetConfig, updateConfig } from '@utils/config-manager'
 import { BrowserWindow, app, nativeTheme } from 'electron'
 import path from 'path'
+import { killDaemons, startWebSocketServer } from './backend/router'
 import { setupIpcMainHandlers } from './ipc/ipcMainHandlers'
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -15,7 +16,6 @@ if (!configExists()) {
 }
 
 const perritoConfig = getConfig()
-
 const createWindow = () => {
   try {
     nativeTheme.themeSource = perritoConfig.theme
@@ -53,7 +53,10 @@ const createWindow = () => {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+app.on('ready', () => {
+  startWebSocketServer('server1', '127.0.0.1', 6969)
+  createWindow()
+})
 
 app.setLoginItemSettings({
   openAtLogin: perritoConfig.RUN_ON_STARTUP === 'true',
@@ -74,6 +77,11 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow()
   }
+})
+
+// on app close remove any child processes
+app.on('before-quit', () => {
+  killDaemons()
 })
 
 // In this file you can include the rest of your app's specific main process

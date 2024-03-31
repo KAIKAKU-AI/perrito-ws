@@ -1,10 +1,10 @@
-import type { ForgeConfig } from '@electron-forge/shared-types'
-import { MakerSquirrel } from '@electron-forge/maker-squirrel'
-import { MakerZIP } from '@electron-forge/maker-zip'
 import { MakerDeb } from '@electron-forge/maker-deb'
 import { MakerRpm } from '@electron-forge/maker-rpm'
-import { VitePlugin } from '@electron-forge/plugin-vite'
+import { MakerSquirrel } from '@electron-forge/maker-squirrel'
+import { MakerZIP } from '@electron-forge/maker-zip'
 import { FusesPlugin } from '@electron-forge/plugin-fuses'
+import { VitePlugin } from '@electron-forge/plugin-vite'
+import type { ForgeConfig } from '@electron-forge/shared-types'
 import { FuseV1Options, FuseVersion } from '@electron/fuses'
 
 const config: ForgeConfig = {
@@ -26,6 +26,10 @@ const config: ForgeConfig = {
         {
           entry: 'src/preload.ts',
           config: 'vite.preload.config.ts',
+        },
+        {
+          entry: 'src/backend/daemons/PerritoDaemon.ts',
+          config: 'vite.main.config.ts',
         },
       ],
       renderer: [

@@ -23,7 +23,7 @@ const index = () => {
       <Header activePage="settings" />
       <div id="page-content">
         <div className="sidebar-container">
-          <SideBar>
+          <SideBar showController>
             <SideBarNavigationButton
               id="general"
               title="General"
