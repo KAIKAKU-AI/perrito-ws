@@ -4,7 +4,13 @@ import SideBar from '@components/SideBar'
 import SideBarController from '@components/SideBar/SideBarController'
 import SideBarButton from '@components/SideBar/buttons/SideBarConnectionButton'
 import { randomWords } from '@utils/random-words'
-import { capitalize } from '@utils/string-formatting'
+import {
+  capitalize,
+  formatServerHost,
+  formatServerId,
+  formatServerName,
+  formatServerPort,
+} from '@utils/string-formatting'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { BarLoader } from 'react-spinners'
@@ -65,10 +71,10 @@ const index = () => {
     // Re-validate the server name, host, and port just in case
     if (!serverName || !serverHost || !serverPort) return
 
-    const name = formatName(serverName)
-    const id = formatId(name)
-    const host = formatHost(serverHost)
-    const port = parseInt(formatPort(serverPort))
+    const name = formatServerName(serverName)
+    const id = formatServerId(name)
+    const host = formatServerHost(serverHost)
+    const port = parseInt(formatServerPort(serverPort))
 
     window.servers
       .startServer(id, name, host, port)
@@ -97,29 +103,6 @@ const index = () => {
           level: 'error',
         })
       })
-  }
-
-  const formatId = (name: string) => {
-    // Convert the name to lowercase and replace spaces with hyphens
-    return name.toLowerCase().replace(/\s/g, '-')
-  }
-
-  const formatName = (name: string) => {
-    // Do not allow characters other than letters, numbers, and spaces
-    return name.replace(/[^a-zA-Z0-9\s]/g, '')
-  }
-
-  const formatHost = (host: string) => {
-    return host.replace(/[^a-zA-Z0-9\.\-]/g, '')
-  }
-
-  const formatPort = (port: string) => {
-    const cleanedPort = port.replace(/\D/g, '')
-
-    if (parseInt(cleanedPort) < 0) return '0'
-    if (parseInt(cleanedPort) > 65535) return '65535'
-
-    return cleanedPort.substring(0, 5)
   }
 
   const handleCreateServer = () => {
@@ -155,7 +138,7 @@ const index = () => {
               type={SettingType.TEXT}
               title="Server name"
               description="The name of the server. This will be displayed in the server list."
-              onTextChange={e => setServerName(formatName(e.target.value))}
+              onTextChange={e => setServerName(formatServerName(e.target.value))}
               textValue={serverName}
               extraClasses={['large']}
             />
@@ -164,7 +147,7 @@ const index = () => {
               type={SettingType.TEXT}
               title="Server ID"
               description="A unique identifier used by Perrito to identify a server."
-              textValue={formatId(serverName)}
+              textValue={formatServerId(serverName)}
               textOptions={{
                 readOnly: true,
               }}
@@ -175,7 +158,7 @@ const index = () => {
               type={SettingType.TEXT}
               title="Server host"
               description="The IP address or hostname of the server."
-              onTextChange={e => setServerHost(formatHost(e.target.value))}
+              onTextChange={e => setServerHost(formatServerHost(e.target.value))}
               textValue={serverHost}
             />
 
@@ -183,7 +166,7 @@ const index = () => {
               type={SettingType.TEXT}
               title="Server port"
               description="The port number the server will listen on. (Must be in range 0 - 65535)"
-              onTextChange={e => setServerPort(formatPort(e.target.value))}
+              onTextChange={e => setServerPort(formatServerPort(e.target.value))}
               textValue={serverPort}
               extraClasses={['small']}
             />

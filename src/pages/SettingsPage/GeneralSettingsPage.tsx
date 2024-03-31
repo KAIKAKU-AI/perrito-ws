@@ -1,5 +1,6 @@
 import Setting, { SettingType } from '@components/Setting'
 import { useConfig } from '@hooks/useConfig'
+import { formatServerHost, formatServerName, formatServerPort } from '@utils/string-formatting'
 import { useEffect, useState } from 'react'
 import './styles.scss'
 
@@ -12,6 +13,8 @@ declare global {
 const GeneralSettingsPage = () => {
   const { config, updateConfig } = useConfig()
   const [defaultServerName, setDefaultServerName] = useState('My Server')
+  const [defaultServerHost, setDefaultServerHost] = useState('127.0.0.1')
+  const [defaultServerPort, setDefaultServerPort] = useState('6969')
 
   useEffect(() => {
     if (config === undefined) return
@@ -59,8 +62,33 @@ const GeneralSettingsPage = () => {
         description="Only used when random server names are disabled."
         textValue={defaultServerName}
         showSave={'onchange'}
-        onSave={() => updateConfig('DEFAULT_SERVER_NAME', defaultServerName)}
-        onTextChange={e => setDefaultServerName(e.target.value)}
+        onSave={() => updateConfig('DEFAULT_SERVER_NAME', formatServerName(defaultServerName))}
+        onTextChange={e => setDefaultServerName(formatServerName(e.target.value))}
+        extraClasses={['large']}
+        textOptions={{
+          disabled: config?.RANDOMIZE_SERVER_NAME ?? false,
+        }}
+      />
+
+      <Setting
+        type={SettingType.TEXT}
+        title="Default server host"
+        description="The IP address or hostname of the server."
+        textValue={defaultServerHost}
+        showSave={'onchange'}
+        onSave={() => updateConfig('DEFAULT_SERVER_HOST', formatServerHost(defaultServerHost))}
+        onTextChange={e => setDefaultServerHost(formatServerHost(e.target.value))}
+      />
+
+      <Setting
+        type={SettingType.TEXT}
+        title="Default server port"
+        description="The port number of the server."
+        textValue={defaultServerPort}
+        showSave={'onchange'}
+        onSave={() => updateConfig('DEFAULT_SERVER_PORT', formatServerPort(defaultServerPort))}
+        onTextChange={e => setDefaultServerPort(formatServerPort(e.target.value))}
+        extraClasses={['small']}
       />
     </div>
   )
