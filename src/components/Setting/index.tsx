@@ -22,6 +22,8 @@ interface SettingProps {
   themeOptions?: { name: string; value: string; preview: string }[]
   activeTheme?: string
   infoValue?: string
+  textOptions?: React.HTMLProps<HTMLInputElement>
+  extraClasses?: string[]
 }
 
 export enum SettingType {
@@ -96,6 +98,8 @@ const index = (props: SettingProps) => {
             description={props.description}
             onChange={handleOnChange(props.onTextChange)}
             value={props.textValue}
+            options={props.textOptions}
+            extraClasses={props.extraClasses}
           />
           {renderSaveButton()}
         </div>

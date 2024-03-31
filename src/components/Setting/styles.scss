@@ -96,5 +96,14 @@
     border: 1px solid darken(white, 10%);
     border-radius: 0.5rem;
 
+    &.large {
+      width: 10rem;
+    }
+
+    &.small {
+      width: 3rem;
+      text-align: center;
+    }
+
   }
 }

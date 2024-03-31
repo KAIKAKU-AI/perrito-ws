@@ -1,4 +1,5 @@
 import Header from '@components/Header'
+import Setting, { SettingType } from '@components/Setting'
 import SideBar from '@components/SideBar'
 import SideBarController from '@components/SideBar/SideBarController'
 import { useState } from 'react'
@@ -79,7 +80,7 @@ const index = () => {
           <div className="page__main">
             <SideBarController isOpen={sidebarOpen} onClick={() => setSidebarOpen(!sidebarOpen)} />
             <h1>Servers</h1>
-            <form
+            {/* <form
               className="server__form"
               onSubmit={e => {
                 e.preventDefault()
@@ -112,7 +113,40 @@ const index = () => {
               />
 
               <button type="submit">Add Server</button>
-            </form>
+            </form> */}
+
+            <Setting
+              type={SettingType.TEXT}
+              title="Server name"
+              onTextChange={e => setServerName(formatName(e.target.value))}
+              textValue={serverName}
+              extraClasses={['large']}
+            />
+
+            <Setting
+              type={SettingType.TEXT}
+              title="Server ID"
+              textValue={formatId(serverName)}
+              textOptions={{
+                readOnly: true,
+              }}
+              extraClasses={['large']}
+            />
+
+            <Setting
+              type={SettingType.TEXT}
+              title="Server host"
+              onTextChange={e => setServerHost(formatHost(e.target.value))}
+              textValue={serverHost}
+            />
+
+            <Setting
+              type={SettingType.TEXT}
+              title="Server port"
+              onTextChange={e => setServerPort(formatPort(e.target.value))}
+              textValue={serverPort}
+              extraClasses={['small']}
+            />
           </div>
         </div>
       </div>

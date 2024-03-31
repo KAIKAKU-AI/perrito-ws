@@ -3,6 +3,8 @@ interface TextSettingProps {
   description?: string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   value?: string
+  options?: React.HTMLProps<HTMLInputElement>
+  extraClasses?: string[]
 }
 
 const TextSetting = (props: TextSettingProps) => {
@@ -13,7 +15,13 @@ const TextSetting = (props: TextSettingProps) => {
         {props.description && <p className="setting-info__description">{props.description}</p>}
       </div>
 
-      <input className="text" type="text" value={props.value} onChange={props.onChange} />
+      <input
+        className={`text ${props.extraClasses ? props.extraClasses.join(' ') : ''}`}
+        type="text"
+        value={props.value}
+        onChange={props.onChange}
+        {...props.options}
+      />
     </div>
   )
 }
