@@ -1,3 +1,4 @@
+import PlusIcon from '@assets/images/icons/plus.svg?react'
 import Header from '@components/Header'
 import Setting, { SettingType } from '@components/Setting'
 import SideBar from '@components/SideBar'
@@ -131,6 +132,13 @@ const index = () => {
       <Header activePage="servers" />
       <div id="page-content">
         <SideBar title="Servers" isOpen={sidebarOpen}>
+          <SideBarButton
+            id="create"
+            title="Create"
+            redirect="/servers/create"
+            active={window.location.pathname === '/servers/create'}
+            icon={<PlusIcon />}
+          />
           {Object.keys(servers).map((serverId: string) => {
             const server = (servers as any)[serverId] // Specify the type of the index expression as 'string'
 

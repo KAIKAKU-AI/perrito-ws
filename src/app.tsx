@@ -27,6 +27,11 @@ const router = createBrowserRouter([
   },
   {
     path: '/servers',
+    element: <Navigate to="/servers/create" replace />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/servers/create',
     element: <ServersPage />,
     errorElement: <ErrorPage />,
   },
