@@ -7,6 +7,7 @@ interface WebSocketServerInstance {
   host: string
   port: number
   clients: {
+    id: string
     socket: WebSocket
     request: IncomingMessage
   }[]
@@ -86,7 +87,8 @@ class PerritoDaemon {
 
       // Connection handling remains unchanged
       server.on('connection', (ws: WebSocket, req: IncomingMessage) => {
-        this.servers[id].clients.push({ socket: ws, request: req })
+        this.servers[id].clients.push({ id: `Client #${this.servers[id].clients.length}`, socket: ws, request: req })
+
         ws.on('message', message => {
           // Handle incoming messages here
           console.log('383883', message)
