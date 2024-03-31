@@ -21,10 +21,16 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: '/dashboard/:connectionId',
+    path: '/dashboard/:serverId',
     element: <DashboardPage />,
     errorElement: <ErrorPage />,
   },
+  {
+    path: '/dashboard/:serverId/:connectionId',
+    element: <DashboardPage />,
+    errorElement: <ErrorPage />,
+  },
+  ,
   {
     path: '/servers',
     element: <Navigate to="/servers/create" replace />,

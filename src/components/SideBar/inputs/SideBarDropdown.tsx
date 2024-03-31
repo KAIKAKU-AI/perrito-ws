@@ -1,35 +1,25 @@
-import DotsIcon from '@assets/images/icons/dots.svg?react'
-import { truncate } from '@utils/string-formatting'
-import { Link } from 'react-router-dom'
-import './sidebar-button.scss'
+import './sidebar-dropdown.scss';
 
-interface SideBarConnectionButtonProps {
+interface SideBarDropdownProps {
   title: string
-  id: string
-  redirect?: string
-  icon?: React.ReactNode
-  active?: boolean
-  extraDropdownItems?: { title: string; onClick: () => void }[]
+  defaultOption: { value: string; label: string }
+  dropdownOptions?: { value: string; label: string }[]
+  activeDropdownValue?: string
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
-const SideBarButton = (props: SideBarConnectionButtonProps) => {
+const SideBarDropdown = (props: SideBarDropdownProps) => {
   return (
-    <Link to={props.redirect} className={`sidebar-button ${props.active ? 'active' : ''}`}>
-      <div className="sidebar-button__title">
-        {props.icon && <div className="sidebar-button__icon">{props.icon}</div>}
-        <span>{truncate(props.title, 22)}</span>
-      </div>
-      {props.extraDropdownItems && props.extraDropdownItems.length > 0 && (
-        <button
-          className="sidebar-button__dots"
-          onClick={e => {
-            e.stopPropagation()
-          }}>
-          <DotsIcon />
-        </button>
-      )}
-    </Link>
+    // dropdown in sidebar
+    <select className="dropdown sidebar-dropdown" value={props.activeDropdownValue ?? ''} onChange={props.onChange}>
+      <option value={props.defaultOption.value}>{props.defaultOption.label}</option>
+      {props.dropdownOptions?.map(option => (
+        <option key={option.value} value={option.value}>
+          {option.label}
+        </option>
+      ))}
+    </select>
   )
 }
 
-export default SideBarButton
+export default SideBarDropdown

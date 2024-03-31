@@ -3,9 +3,10 @@ import Header from '@components/Header'
 import SideBar from '@components/SideBar'
 import SideBarController from '@components/SideBar/SideBarController'
 import SideBarButton from '@components/SideBar/inputs/SideBarButton'
+import { IncomingMessage } from 'electron'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { WebSocketServer } from 'ws'
+import { WebSocket, WebSocketServer } from 'ws'
 import '../styles.scss'
 import CreateServerPage from './CreateServerPage'
 import ServerPage from './ServerPage'
@@ -17,11 +18,18 @@ declare global {
   }
 }
 
+export interface ServerClientDetails {
+  id: string
+  socket: WebSocket
+  request: IncomingMessage
+}
+
 export interface ServerDetails {
   name: string
   host: string
   port: number
   server: WebSocketServer
+  clients: ServerClientDetails[]
 }
 
 export interface Servers {

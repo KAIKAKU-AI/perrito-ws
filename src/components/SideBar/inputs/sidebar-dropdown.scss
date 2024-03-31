@@ -1,0 +1,23 @@
+@import '../../../styles/colors.scss';
+@import '../../Setting/styles.scss';
+
+.dropdown {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid darken(white, 10%);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 0.75rem;
+  margin-bottom: 1rem;
+
+  &>option {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: $color-primary;
+  }
+}
