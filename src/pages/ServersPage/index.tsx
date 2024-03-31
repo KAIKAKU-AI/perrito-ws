@@ -3,6 +3,7 @@ import Setting, { SettingType } from '@components/Setting'
 import SideBar from '@components/SideBar'
 import SideBarController from '@components/SideBar/SideBarController'
 import SideBarButton from '@components/SideBar/buttons/SideBarConnectionButton'
+import { useConfig } from '@hooks/useConfig'
 import { randomWords } from '@utils/random-words'
 import {
   capitalize,
@@ -39,6 +40,8 @@ const index = () => {
     return name.trim()
   }
 
+  const { config } = useConfig()
+
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [servers, setServers] = useState([])
   const [serverName, setServerName] = useState('My Server')
@@ -66,6 +69,19 @@ const index = () => {
         setLoading(false)
       })
   }, [])
+
+  useEffect(() => {
+    if (config === undefined) return
+    console.log('698763', config)
+
+    if (config?.RANDOMIZE_SERVER_NAME === true) {
+      setServerName(generateRandomName())
+    } else {
+      setServerName(config?.DEFAULT_SERVER_NAME ?? 'My Server')
+    }
+    setServerHost(config?.DEFAULT_SERVER_HOST ?? '127.0.0.1')
+    setServerPort(config?.DEFAULT_SERVER_PORT ?? '80')
+  }, [config])
 
   const handleAddServer = async () => {
     // Re-validate the server name, host, and port just in case

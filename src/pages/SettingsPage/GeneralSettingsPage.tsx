@@ -14,18 +14,23 @@ const GeneralSettingsPage = () => {
   const { config, updateConfig } = useConfig()
   const [defaultServerName, setDefaultServerName] = useState('My Server')
   const [defaultServerHost, setDefaultServerHost] = useState('127.0.0.1')
-  const [defaultServerPort, setDefaultServerPort] = useState('6969')
+  const [defaultServerPort, setDefaultServerPort] = useState('80')
 
   useEffect(() => {
     if (config === undefined) return
 
     // Apply default values if they don't exists
-    if (config.RUN_ON_STARTUP === undefined) updateConfig('RUN_ON_STARTUP', 'false')
+    if (config.RUN_ON_STARTUP === undefined) updateConfig('RUN_ON_STARTUP', false)
     if (config.LANGUAGE === undefined) updateConfig('LANGUAGE', 'en-gb')
-    if (config.RANDOMIZE_SERVER_NAME === undefined) updateConfig('RANDOMIZE_SERVER_NAME', 'true')
+    if (config.RANDOMIZE_SERVER_NAME === undefined) updateConfig('RANDOMIZE_SERVER_NAME', true)
+    if (config.DEFAULT_SERVER_NAME === undefined) updateConfig('DEFAULT_SERVER_NAME', 'My Server')
+    if (config.DEFAULT_SERVER_HOST === undefined) updateConfig('DEFAULT_SERVER_HOST', '127.0.0.1')
+    if (config.DEFAULT_SERVER_PORT === undefined) updateConfig('DEFAULT_SERVER_PORT', '80')
 
     // Set the text fields to the current config values
     setDefaultServerName(config.DEFAULT_SERVER_NAME ?? 'My Server')
+    setDefaultServerHost(config.DEFAULT_SERVER_HOST ?? '127.0.0.1')
+    setDefaultServerPort(config.DEFAULT_SERVER_PORT ?? '80')
   }, [config])
 
   return (

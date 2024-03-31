@@ -58,7 +58,7 @@ app.on('ready', () => {
 })
 
 app.setLoginItemSettings({
-  openAtLogin: perritoConfig.RUN_ON_STARTUP === 'true',
+  openAtLogin: perritoConfig.RUN_ON_STARTUP,
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common
