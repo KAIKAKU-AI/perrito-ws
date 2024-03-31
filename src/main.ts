@@ -1,5 +1,5 @@
+import { configExists, getConfig, resetConfig, updateConfig } from '@utils/config-manager'
 import { BrowserWindow, app, nativeTheme } from 'electron'
-import fs from 'fs'
 import path from 'path'
 import { setupIpcMainHandlers } from './ipc/ipcMainHandlers'
 
@@ -8,17 +8,13 @@ if (require('electron-squirrel-startup')) {
   app.quit()
 }
 
-const appDataPath = app.getPath('userData')
-export const appConfigPath = path.join(appDataPath, 'perrito_config.json')
-
 // Check if the config file exists, if not, create it
-if (!fs.existsSync(appConfigPath)) {
+if (!configExists()) {
   console.warn('No previous config file found; creating a new one.')
-  fs.writeFileSync(appConfigPath, JSON.stringify({}))
+  resetConfig()
 }
 
-const perritoConfigFile = fs.readFileSync(appConfigPath, 'utf8')
-const perritoConfig = JSON.parse(perritoConfigFile)
+const perritoConfig = getConfig()
 
 const createWindow = () => {
   try {
@@ -26,6 +22,7 @@ const createWindow = () => {
   } catch (error) {
     console.warn('No previous theme setting found; using system default.')
     nativeTheme.themeSource = 'system'
+    updateConfig('THEME', 'system')
   }
 
   // Create the browser window.
@@ -58,7 +55,6 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
 
-console.log('Startup:', perritoConfig.RUN_ON_STARTUP === 'true')
 app.setLoginItemSettings({
   openAtLogin: perritoConfig.RUN_ON_STARTUP === 'true',
 })

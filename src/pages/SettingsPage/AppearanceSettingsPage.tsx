@@ -2,13 +2,12 @@ import DarkThemePreview from '@assets/images/themes/dark-theme-preview.jpg'
 import LightThemePreview from '@assets/images/themes/light-theme-preview.jpg'
 import SystemThemePreview from '@assets/images/themes/system-theme-preview.jpg'
 import Setting, { SettingType } from '@components/Setting'
-import { useState } from 'react'
+import { useConfig } from '@hooks/useConfig'
+import { useEffect } from 'react'
 import './styles.scss'
 
-interface AppearanceSettingsPageProps {}
-
-const AppearanceSettingsPage = (props: AppearanceSettingsPageProps) => {
-  const [theme, setTheme] = useState('dark')
+const AppearanceSettingsPage = () => {
+  const { config, updateConfig } = useConfig()
 
   const themes = [
     {
@@ -28,17 +27,29 @@ const AppearanceSettingsPage = (props: AppearanceSettingsPageProps) => {
     },
   ]
 
+  useEffect(() => {
+    if (config === undefined) return
+
+    if (config.THEME === undefined) updateConfig('THEME', 'light')
+
+    const setTheme = async () => {
+      await window.theme.setTheme(config.THEME)
+    }
+
+    setTheme()
+  }, [config])
+
   return (
     <div className="settings__main">
       <h1>Apperance</h1>
 
       <Setting
         type={SettingType.THEME}
-        title="Change your theme"
+        title="Set your default theme"
         description=" Choose how Perrito looks to you. Select a single theme, or sync with your system and automatically switch between day and night themes."
         themeOptions={themes}
-        activeTheme={theme}
-        onThemeChange={e => setTheme(e.target.value)}
+        activeTheme={config?.THEME ?? 'light'}
+        onThemeChange={e => updateConfig('THEME', e.target.value)}
       />
     </div>
   )

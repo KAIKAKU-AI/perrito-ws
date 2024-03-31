@@ -1,4 +1,4 @@
-import { getConfig, updateConfig } from '@utils/config-manager'
+import { getConfig, setConfig, updateConfig } from '@utils/config-manager'
 import { app, ipcMain, nativeTheme, shell } from 'electron'
 
 export enum Theme {
@@ -54,6 +54,10 @@ export function setupIpcMainHandlers() {
   })
 
   ipcMain.handle('set-config', async (_, newConfig: any) => {
-    updateConfig(newConfig)
+    setConfig(newConfig)
+  })
+
+  ipcMain.handle('update-config', async (_, key: string, value: any) => {
+    updateConfig(key, value)
   })
 }

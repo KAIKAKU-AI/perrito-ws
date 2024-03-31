@@ -1,5 +1,6 @@
 import Setting, { SettingType } from '@components/Setting'
-import { useEffect, useState } from 'react'
+import { useConfig } from '@hooks/useConfig'
+import { useState } from 'react'
 import './styles.scss'
 
 declare global {
@@ -9,34 +10,18 @@ declare global {
 }
 
 const GeneralSettingsPage = () => {
-  const [loadedConfig, setLoadedConfig] = useState<any>({})
+  const { config, updateConfig } = useConfig()
 
   const [activeLanguage, setActiveLanguage] = useState('en')
   const [showStackTrace, setShowStackTrace] = useState(false)
   const [gatewayHost, setGatewayHost] = useState('localhost')
   const [gatewayPort, setGatewayPort] = useState('8080')
 
-  useEffect(() => {
-    const loadSettings = async () => {
-      setLoadedConfig(await window.config.getConfig())
-    }
-
-    loadSettings()
-  }, [])
-
   const handleRunOnStartupChange = async () => {
-    // 1. Update the loaded config with the new value
-    const newConfig = { ...loadedConfig }
-    newConfig.RUN_ON_STARTUP = !newConfig.RUN_ON_STARTUP
+    if (config?.RUN_ON_STARTUP === undefined) updateConfig('RUN_ON_STARTUP', 'false')
 
-    // 2. Save the new config
-    await window.config.setConfig(newConfig)
-
-    // 3. Update the state
-    setLoadedConfig(newConfig)
+    updateConfig('RUN_ON_STARTUP', !config.RUN_ON_STARTUP)
   }
-
-  console.debug('Loaded config:', loadedConfig)
 
   return (
     <div className="settings__main">
@@ -45,7 +30,7 @@ const GeneralSettingsPage = () => {
       <Setting
         type={SettingType.SWITCH}
         title="Run Perrito on startup"
-        switchChecked={loadedConfig.RUN_ON_STARTUP ?? false}
+        switchChecked={config?.RUN_ON_STARTUP ?? false}
         onSwitchChange={handleRunOnStartupChange}
       />
 

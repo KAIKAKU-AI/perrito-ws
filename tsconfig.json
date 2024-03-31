@@ -18,7 +18,8 @@
       "@styles/*": ["src/styles/*"],
       "@pages/*": ["src/pages/*"],
       "@contexts/*": ["src/contexts/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@hooks/*": ["src/hooks/*"]
     },
     "types": ["vite-plugin-svgr/client", "jest"]
   }

@@ -1,5 +1,8 @@
+import { app } from 'electron'
 import fs from 'fs'
-import { appConfigPath } from '../main'
+import path from 'path'
+
+const appConfigPath = path.join(app.getPath('userData'), 'perrito_config.json')
 
 const readConfig = (): Record<string, any> => {
   const data = fs.readFileSync(appConfigPath, 'utf8')
@@ -10,7 +13,15 @@ const writeConfig = (config: Record<string, any>) => {
   fs.writeFileSync(appConfigPath, JSON.stringify(config, null, 2))
 }
 
-export const updateConfig = (newConfig: any) => {
+export const configExists = (): boolean => {
+  return fs.existsSync(appConfigPath)
+}
+
+export const resetConfig = () => {
+  fs.writeFileSync(appConfigPath, JSON.stringify({}))
+}
+
+export const setConfig = (newConfig: any) => {
   writeConfig(newConfig)
 }
 
@@ -21,4 +32,10 @@ export const getConfigKey = (key: string): any => {
 
 export const getConfig = (): any => {
   return readConfig()
+}
+
+export const updateConfig = (key: string, value: any) => {
+  const config = readConfig()
+  config[key] = value
+  writeConfig(config)
 }

@@ -22,5 +22,6 @@ export function setupIpcRendererHandlers() {
   contextBridge.exposeInMainWorld('config', {
     getConfig: () => ipcRenderer.invoke('get-config'),
     setConfig: (newConfig: any) => ipcRenderer.invoke('set-config', newConfig),
+    updateConfig: (key: string, value: any) => ipcRenderer.invoke('update-config', key, value),
   })
 }
