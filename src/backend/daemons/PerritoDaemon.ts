@@ -1,6 +1,5 @@
-import { IncomingMessage } from 'electron'
+import { IncomingMessage } from 'http'
 import { WebSocket, WebSocketServer } from 'ws'
-
 interface WebSocketServerInstance {
   name: string
   server: WebSocketServer

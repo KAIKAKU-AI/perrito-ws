@@ -1,4 +1,4 @@
-import './sidebar-dropdown.scss';
+import './sidebar-dropdown.scss'
 
 interface SideBarDropdownProps {
   title: string

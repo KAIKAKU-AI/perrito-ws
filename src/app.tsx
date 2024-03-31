@@ -26,7 +26,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: '/dashboard/:serverId/:connectionId',
+    path: '/dashboard/:serverId/:clientId',
     element: <DashboardPage />,
     errorElement: <ErrorPage />,
   },

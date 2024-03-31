@@ -7,13 +7,14 @@ import { ServerClientDetails, Servers } from '@pages/ServersPage'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import '../styles.scss'
+import ClientPage from './ClientPage'
 
 const index = () => {
   const params = useParams()
   const selectedServer = params.serverId
-  const selectedConnection = params.connectionId
+  const selectedClient = params.clientId
 
-  console.log('459075', selectedServer, selectedConnection)
+  console.log('459075', selectedServer, selectedClient)
 
   const [servers, setServers] = useState<Servers>({})
   const [sidebarOpen, setSidebarOpen] = useState(true)
@@ -48,19 +49,20 @@ const index = () => {
               window.location.href = `/dashboard/${e.target.value}`
             }}
           />
-          {clients.map((connection, index) => (
+          {clients.map((client, index) => (
             <SideBarButton
               key={index}
-              title={connection.id}
-              id={connection.id}
-              active={selectedConnection === connection.id}
-              redirect={`/dashboard/${selectedServer}/${connection.id}`}
+              title={client.id}
+              id={client.id}
+              active={selectedClient === client.id}
+              redirect={`/dashboard/${selectedServer}/${client.id}`}
             />
           ))}
         </SideBar>
         <div className="page-content__container">
           <div className="page__main">
             <SideBarController isOpen={sidebarOpen} onClick={() => setSidebarOpen(!sidebarOpen)} />
+            {selectedClient && selectedServer && <ClientPage serverId={selectedServer} clientId={selectedClient} />}
           </div>
         </div>
       </div>
