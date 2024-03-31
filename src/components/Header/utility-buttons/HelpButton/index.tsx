@@ -1,12 +1,16 @@
 import HelpIcon from '@assets/images/icons/help.svg?react'
 import HeaderUtilityButton from '@components/Header/HeaderUtilityButton'
 
-interface indexProps {}
+declare global {
+  interface Window {
+    shell: any
+  }
+}
 
-const index = (props: indexProps) => {
+const index = () => {
   const handleHelpClick = () => {
     // Using the exposed function from the preload script to open the URL
-    window.web.openExternalUrl('https://github.com/KAIKAKU-AI/perrito-ws/wiki')
+    window.shell.openExternalUrl('https://github.com/KAIKAKU-AI/perrito-ws/wiki')
   }
 
   return <HeaderUtilityButton icon={<HelpIcon />} onClick={handleHelpClick} tooltip="Help" />
