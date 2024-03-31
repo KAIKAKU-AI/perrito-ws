@@ -36,9 +36,11 @@ const index = () => {
             ))}
           </SideBar>
         </div>
-        
-        <div className="page__main">
-          <h1>Servers</h1>
+
+        <div className="page-content__container">
+          <div className="page__main">
+            <h1>Servers</h1>
+          </div>
         </div>
       </div>
     </>
