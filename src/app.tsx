@@ -31,6 +31,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
+    path: '/servers/:serverId',
+    element: <ServersPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
     path: '/settings',
     element: <Navigate to="/settings/general" replace />,
   },

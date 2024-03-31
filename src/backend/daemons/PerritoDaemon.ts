@@ -66,7 +66,7 @@ class PerritoDaemon {
 
       // Resolve the promise once the server starts listening
       server.once('listening', () => {
-        this.servers[id] = { name, server, port } // Store the server info only after successful listening
+        this.servers[id] = { name, server, host, port } // Store the server info only after successful listening
         resolve(`Server started successfully on ws://${host}:${port} with id ${id}`)
       })
 

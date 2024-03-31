@@ -1,6 +1,6 @@
 @import '../../../styles/colors.scss';
 
-.sidebar__connection-button {
+.sidebar-button {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -22,7 +22,7 @@
 
   &__title {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
 
     span {
@@ -42,5 +42,15 @@
     padding: 0;
     cursor: pointer;
     margin: 0;
+  }
+
+
+  &__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 14px;
+    height: 14px;
+    margin-right: 0.5rem;
   }
 }
