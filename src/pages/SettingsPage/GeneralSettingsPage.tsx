@@ -45,7 +45,6 @@ const GeneralSettingsPage = () => {
         description="Work in progress - more languages coming soon!"
         activeDropdownValue={config?.LANGUAGE ?? 'en-gb'}
         dropdownOptions={[{ value: 'en-gb', label: 'English UK' }]}
-        showSave
         onDropdownChange={e => updateConfig('LANGUAGE', e.target.value)}
       />
 

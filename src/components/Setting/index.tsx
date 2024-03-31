@@ -48,7 +48,7 @@ const index = (props: SettingProps) => {
     showSaveButton ? (
       <button
         onClick={() => {
-          setShowSaveButton(false)
+          props.showSave != true ? setShowSaveButton(false) : null
           if (props.onSave) {
             props.onSave()
           }
