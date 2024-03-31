@@ -1,6 +1,5 @@
+import { getConfig, updateConfig } from '@utils/config-manager'
 import { app, ipcMain, nativeTheme, shell } from 'electron'
-import fs from 'fs'
-import { themeConfigPath } from '../main'
 
 export enum Theme {
   LIGHT = 'light',
@@ -8,11 +7,8 @@ export enum Theme {
   SYSTEM = 'system',
 }
 
-const saveThemeSetting = (theme: string) => {
-  fs.writeFileSync(themeConfigPath, JSON.stringify({ theme }))
-}
-
 export function setupIpcMainHandlers() {
+  // THEME API GETTERS
   ipcMain.on('get-theme', event => {
     event.returnValue = nativeTheme.shouldUseDarkColors
   })
@@ -21,15 +17,17 @@ export function setupIpcMainHandlers() {
     event.returnValue = nativeTheme.themeSource
   })
 
-  ipcMain.on('set-theme', (event, theme: Theme) => {
+  // THEME API SETTERS
+  ipcMain.on('set-theme', (_, theme: Theme) => {
     nativeTheme.themeSource = theme
-    saveThemeSetting(theme)
   })
 
-  ipcMain.on('open-external-url', (event, url: string) => {
+  // SHELL API SETTERS
+  ipcMain.on('open-external-url', (_, url: string) => {
     shell.openExternal(url)
   })
 
+  // APP API GETTERS
   ipcMain.on('get-app-version', event => {
     event.returnValue = app.getVersion()
   })
@@ -48,5 +46,14 @@ export function setupIpcMainHandlers() {
 
   ipcMain.on('get-electron-version', event => {
     event.returnValue = process.versions.electron
+  })
+
+  // CONFIG API
+  ipcMain.handle('get-config', async _ => {
+    return getConfig()
+  })
+
+  ipcMain.handle('set-config', async (_, newConfig: any) => {
+    updateConfig(newConfig)
   })
 }

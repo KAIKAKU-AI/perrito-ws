@@ -18,4 +18,9 @@ export function setupIpcRendererHandlers() {
     getChromeVersion: () => ipcRenderer.sendSync('get-chrome-version'),
     getElectronVersion: () => ipcRenderer.sendSync('get-electron-version'),
   })
+
+  contextBridge.exposeInMainWorld('config', {
+    getConfig: () => ipcRenderer.invoke('get-config'),
+    setConfig: (newConfig: any) => ipcRenderer.invoke('set-config', newConfig),
+  })
 }

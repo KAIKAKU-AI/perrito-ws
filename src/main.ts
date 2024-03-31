@@ -9,15 +9,23 @@ if (require('electron-squirrel-startup')) {
 }
 
 const appDataPath = app.getPath('userData')
-export const themeConfigPath = path.join(appDataPath, 'theme-config.json')
+export const appConfigPath = path.join(appDataPath, 'perrito_config.json')
+
+// Check if the config file exists, if not, create it
+if (!fs.existsSync(appConfigPath)) {
+  console.warn('No previous config file found; creating a new one.')
+  fs.writeFileSync(appConfigPath, JSON.stringify({}))
+}
+
+const perritoConfigFile = fs.readFileSync(appConfigPath, 'utf8')
+const perritoConfig = JSON.parse(perritoConfigFile)
 
 const createWindow = () => {
   try {
-    const data = fs.readFileSync(themeConfigPath, 'utf8')
-    const config = JSON.parse(data)
-    nativeTheme.themeSource = config.theme
+    nativeTheme.themeSource = perritoConfig.theme
   } catch (error) {
     console.warn('No previous theme setting found; using system default.')
+    nativeTheme.themeSource = 'system'
   }
 
   // Create the browser window.
@@ -49,6 +57,11 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
+
+console.log('Startup:', perritoConfig.RUN_ON_STARTUP === 'true')
+app.setLoginItemSettings({
+  openAtLogin: perritoConfig.RUN_ON_STARTUP === 'true',
+})
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
