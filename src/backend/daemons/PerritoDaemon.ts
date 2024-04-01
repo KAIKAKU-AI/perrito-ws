@@ -41,7 +41,12 @@ class PerritoDaemon {
       name: server.name,
       host: server.host,
       port: server.port,
-      clients: server.clients.map(client => ({ id: client.id, request: client.request, messages: client.messages })), // Omit the socket from the client data
+      clients: server.clients.map(client => ({
+        id: client.id,
+        request: client.request,
+        readyState: client.socket.readyState,
+        messages: client.messages,
+      })), // Omit the socket from the client data
     }))
 
     process.send({ action: 'update-renderer', data: serversData })
@@ -99,6 +104,7 @@ class PerritoDaemon {
             url: req.url || '/',
           },
           socket: ws,
+          readyState: ws.readyState,
           messages: [],
         } as PerritoClientType
 
@@ -112,7 +118,7 @@ class PerritoDaemon {
         })
 
         ws.on('close', () => {
-          server.clients = server.clients.filter(client => client.id !== clientData.id)
+          clientData.readyState = ws.readyState
           this.sendRendererUpdate()
         })
 

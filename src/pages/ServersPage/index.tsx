@@ -4,11 +4,9 @@ import SideBar from '@components/SideBar'
 import SideBarController from '@components/SideBar/SideBarController'
 import SideBarButton from '@components/SideBar/inputs/SideBarButton'
 import { useServers } from '@contexts/ServerContext'
-import { IncomingMessage } from 'http'
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { PerritoServerType } from 'src/backend/daemons/PerritoTypes'
-import { WebSocket } from 'ws'
 import '../styles.scss'
 import CreateServerPage from './CreateServerPage'
 import ServerPage from './ServerPage'
@@ -20,15 +18,9 @@ declare global {
   }
 }
 
-export interface ServerClientDetails {
-  id: string
-  socket: WebSocket
-  request: IncomingMessage
-}
-
 const index = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true)
-  const { servers, fetchServers } = useServers()
+  const { servers } = useServers()
 
   const params = useParams()
   const selectedServerId = params.serverId

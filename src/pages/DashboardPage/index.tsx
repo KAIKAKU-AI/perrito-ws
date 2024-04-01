@@ -1,12 +1,12 @@
 import Header from '@components/Header'
 import SideBar from '@components/SideBar'
 import SideBarController from '@components/SideBar/SideBarController'
-import SideBarButton from '@components/SideBar/inputs/SideBarButton'
+import SideBarButton, { CircleColor } from '@components/SideBar/inputs/SideBarButton'
 import SideBarDropdown from '@components/SideBar/inputs/SideBarDropdown'
 import { useServers } from '@contexts/ServerContext'
-import { ServerClientDetails } from '@pages/ServersPage'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { PerritoClientType } from 'src/backend/daemons/PerritoTypes'
 import '../styles.scss'
 import ClientPage from './ClientPage'
 import InstructionPage from './InstructionPage'
@@ -25,7 +25,7 @@ const index = () => {
 
   const { servers } = useServers()
   const [sidebarOpen, setSidebarOpen] = useState(true)
-  const [clients, setClients] = useState<ServerClientDetails[]>([])
+  const [clients, setClients] = useState<PerritoClientType[]>([])
 
   useEffect(() => {
     if (selectedServer) {
@@ -53,15 +53,19 @@ const index = () => {
               window.location.href = `/dashboard/${e.target.value}`
             }}
           />
-          {clients.map((client, index) => (
-            <SideBarButton
-              key={index}
-              title={client.id}
-              id={client.id}
-              active={selectedClient === client.id}
-              redirect={`/dashboard/${selectedServer}/${client.id}`}
-            />
-          ))}
+          {clients.map((client, index) => {
+            return (
+              <SideBarButton
+                key={index}
+                title={client.id}
+                id={client.id}
+                active={selectedClient === client.id}
+                redirect={`/dashboard/${selectedServer}/${client.id}`}
+                showCircle={true}
+                circleColor={client.readyState === 1 ? CircleColor.SUCCESS : CircleColor.DANGER}
+              />
+            )
+          })}
         </SideBar>
         <div className="page-content__container">
           <div className="page__main">

@@ -12,6 +12,7 @@ export type PerritoClientType = {
     url: string
     headers: { [key: string]: string | string[] }
   }
+  readyState: number
   socket: WebSocket
   messages: WebSocketMessage[]
 }

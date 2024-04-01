@@ -14,8 +14,8 @@ const ClientPage = (props: ClientPageProps) => {
   useEffect(() => {
     const selectedServer = servers.find(server => server.id === props.serverId)
     const selectedClient = selectedServer?.clients.find(client => client.id === props.clientId)
-    setClient(selectedClient)
-    console.log("141056", selectedClient);
+    setClient(selectedClient) 
+    console.log("076078", selectedClient);
   }, [servers, props.serverId, props.clientId])
 
   return (
