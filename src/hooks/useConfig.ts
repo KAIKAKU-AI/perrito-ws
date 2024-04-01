@@ -18,7 +18,6 @@ export const useConfig = () => {
     await window.config.updateConfig(key, value)
 
     const newConfig = await window.config.getConfig()
-    console.log('482979', newConfig)
     setLoadedConfig(newConfig)
   }
 

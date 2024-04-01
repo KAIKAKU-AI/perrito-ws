@@ -43,17 +43,13 @@ const CreateServerPage = (props: CreateServerPageProps) => {
   })
 
   useEffect(() => {
-    const updateListener = (event: any, data: any) => {
-      console.log('sReceived update from daemon:', data)
+    const updateListener = (_: any, data: any) => {
       const serversData = data?.data
-      console.log('085114', serversData)
       if (serversData) {
-        console.log('844465 sett')
         props.setServers(serversData)
       } else {
         props.setServers([])
       }
-
       setLoading(false)
     }
 

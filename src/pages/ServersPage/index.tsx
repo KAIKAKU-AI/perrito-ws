@@ -55,8 +55,6 @@ const index = () => {
       })
   }, [])
 
-  console.log('835758', servers)
-
   return (
     <>
       <Header activePage="servers" />

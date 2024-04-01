@@ -14,7 +14,6 @@ const ServerPage = (props: ServerPageProps) => {
     window.servers
       .getServers()
       .then((servers: any) => {
-        console.log('912385', servers[props.serverId])
         setServer(servers[props.serverId])
         setLoading(false)
       })

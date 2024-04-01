@@ -26,7 +26,27 @@ const index = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [clients, setClients] = useState<ServerClientDetails[]>([])
 
-  useEffect(() => {}, [])
+  useEffect(() => {
+    console.log("445019", );
+    const updateListener = (_: any, data: any) => {
+      console.log("817986", data);
+      const serversData = data?.data
+      if (serversData) {
+        setServers(serversData)
+        setClients(serversData[selectedServer].clients)
+      } else {
+        setServers({})
+        setClients([])
+      }
+    }
+
+    window.daemon.onUpdate(updateListener)
+
+    // Cleanup
+    return () => {
+      window.daemon.removeUpdateListener(updateListener)
+    }
+  }, [])
 
   useEffect(() => {
     window.servers
@@ -44,18 +64,6 @@ const index = () => {
       .catch((error: any) => {
         console.error('Error getting servers:', error)
       })
-
-    const updateListener = (event: any, data: any) => {
-      console.log('Received update from daemon:', data)
-      // Handle the update
-    }
-
-    window.daemon.onUpdate(updateListener)
-
-    // Cleanup
-    return () => {
-      window.daemon.removeUpdateListener(updateListener)
-    }
   }, [])
 
   return (
