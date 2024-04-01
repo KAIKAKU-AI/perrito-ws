@@ -52,10 +52,7 @@ const ServerPage = (props: ServerPageProps) => {
           <button title="Restart server" className="server-page__header-icon-button" onClick={() => {}}>
             <img src={RefreshIcon} />
           </button>
-          <button
-            title="Copy server link"
-            className="server-page__header-icon-button"
-            onClick={handleCopyClick}>
+          <button title="Copy server link" className="server-page__header-icon-button" onClick={handleCopyClick}>
             <img src={LinkIcon} />
             <div className={`server-page__header-icon-button-confirmation ${showCopyConfirmation ? ' show' : ''}`}>
               <span>Copied!</span>
@@ -69,7 +66,11 @@ const ServerPage = (props: ServerPageProps) => {
       <Setting type={SettingType.INFO} title="Server url preview" infoValue={`ws://${server.host}:${server.port}`} />
       <Setting type={SettingType.INFO} title="Server host" infoValue={server.host} />
       <Setting type={SettingType.INFO} title="Server port" infoValue={server.port.toString()} />
-      <Setting type={SettingType.INFO} title="Number of clients" infoValue={server.clients.length.toString()} />
+      <Setting
+        type={SettingType.INFO}
+        title="Number of connected clients"
+        infoValue={server.clients.filter(client => client.readyState === 1).length.toString()}
+      />
 
       <div className="server-page__button-container">
         <button
