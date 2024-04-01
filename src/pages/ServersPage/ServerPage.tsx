@@ -1,6 +1,10 @@
+import EditIcon from '@assets/images/icons/edit.svg'
+import LinkIcon from '@assets/images/icons/link.svg'
+import RefreshIcon from '@assets/images/icons/refresh.svg'
 import { useEffect, useState } from 'react'
 import { PulseLoader } from 'react-spinners'
 import { PerritoServerType } from 'src/backend/daemons/PerritoTypes'
+import './server-page.scss'
 
 interface ServerPageProps {
   serverId: string
@@ -33,9 +37,28 @@ const ServerPage = (props: ServerPageProps) => {
   }
 
   return (
-    <div>
-      <p>{server?.host}</p>
-    </div>
+    <>
+      <div className="server-page__header">
+        <div className="server-page__header-title-container">
+          <h1 className="server-page__header-title">{server?.name}</h1>
+          {/* <h2 className="server-page__header-subtitle">127.0.0.1:8080</h2> */}
+          <h2 className="server-page__header-subtitle">
+            {server?.host}:{server?.port}
+          </h2>
+        </div>
+        <div className="server-page__header-icon-button-container">
+          <button title="Restart server" className="server-page__header-icon-button" onClick={() => {}}>
+            <img src={RefreshIcon} />
+          </button>
+          <button title="Copy server link" className="server-page__header-icon-button" onClick={() => {}}>
+            <img src={LinkIcon} />
+          </button>
+          <button title="Edit server" className="server-page__header-icon-button" onClick={() => {}}>
+            <img src={EditIcon} />
+          </button>
+        </div>
+      </div>
+    </>
   )
 }
 
