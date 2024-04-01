@@ -5,7 +5,7 @@ import SideBarButton from '@components/SideBar/inputs/SideBarButton'
 import SideBarDropdown from '@components/SideBar/inputs/SideBarDropdown'
 import { useServers } from '@contexts/ServerContext'
 import { ServerClientDetails } from '@pages/ServersPage'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import '../styles.scss'
 import ClientPage from './ClientPage'
@@ -26,6 +26,15 @@ const index = () => {
   const { servers } = useServers()
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [clients, setClients] = useState<ServerClientDetails[]>([])
+
+  useEffect(() => {
+    if (selectedServer) {
+      const server = servers.find(server => server.id === selectedServer)
+      if (server) {
+        setClients(server.clients)
+      }
+    }
+  }, [selectedServer, servers])
 
   return (
     <>
