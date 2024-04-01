@@ -1,6 +1,7 @@
 import EditIcon from '@assets/images/icons/edit.svg'
 import LinkIcon from '@assets/images/icons/link.svg'
 import RefreshIcon from '@assets/images/icons/refresh.svg'
+import Setting, { SettingType } from '@components/Setting'
 import { useEffect, useState } from 'react'
 import { PulseLoader } from 'react-spinners'
 import { PerritoServerType } from 'src/backend/daemons/PerritoTypes'
@@ -8,27 +9,18 @@ import './server-page.scss'
 
 interface ServerPageProps {
   serverId: string
+  servers: PerritoServerType[]
 }
 
 const ServerPage = (props: ServerPageProps) => {
-  const [loading, setLoading] = useState(true)
   const [server, setServer] = useState<PerritoServerType | undefined>(undefined)
 
   useEffect(() => {
-    window.servers
-      .getServers()
-      .then((servers: any) => {
-        const selectedServer = servers.find((server: PerritoServerType) => server.id === props.serverId)
-        setServer(selectedServer)
-        setLoading(false)
-      })
-      .catch((error: any) => {
-        console.error('Error getting servers:', error)
-        setLoading(false)
-      })
-  }, [props.serverId])
+    const selectedServer = props.servers.find((server: PerritoServerType) => server.id === props.serverId)
+    setServer(selectedServer)
+  }, [props.servers])
 
-  if (loading) {
+  if (!server) {
     return (
       <div className="loading">
         <PulseLoader size={10} color="#000" />
@@ -40,10 +32,9 @@ const ServerPage = (props: ServerPageProps) => {
     <>
       <div className="server-page__header">
         <div className="server-page__header-title-container">
-          <h1 className="server-page__header-title">{server?.name}</h1>
-          {/* <h2 className="server-page__header-subtitle">127.0.0.1:8080</h2> */}
+          <h1 className="server-page__header-title">{server.name}</h1>
           <h2 className="server-page__header-subtitle">
-            {server?.host}:{server?.port}
+            {server.host}:{server.port}
           </h2>
         </div>
         <div className="server-page__header-icon-button-container">
@@ -57,6 +48,19 @@ const ServerPage = (props: ServerPageProps) => {
             <img src={EditIcon} />
           </button>
         </div>
+      </div>
+      <Setting type={SettingType.INFO} title="Server url preview" infoValue={`ws://${server.host}:${server.port}`} />
+      <Setting type={SettingType.INFO} title="Server host" infoValue={server.host} />
+      <Setting type={SettingType.INFO} title="Server port" infoValue={server.port.toString()} />
+      <Setting type={SettingType.INFO} title="Number of clients" infoValue={server.clients.length.toString()} />
+
+      <div className="server-page__button-container">
+        <button className="server-page__button" onClick={() => {}}>
+          <span>Jump to clients</span>
+        </button>
+        <button className="server-page__button server-page__button--danger" onClick={() => {}}>
+          <span>Delete</span>
+        </button>
       </div>
     </>
   )

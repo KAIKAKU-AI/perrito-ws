@@ -41,7 +41,23 @@ const index = () => {
       .catch((error: any) => {
         console.error('Error getting servers:', error)
       })
-  }, [])
+
+    const updateListener = (_: any, data: any) => {
+      const serversData = data?.data
+      if (serversData) {
+        setServers(serversData)
+      } else {
+        setServers([])
+      }
+    }
+
+    window.daemon.onUpdate(updateListener)
+
+    // Cleanup
+    return () => {
+      window.daemon.removeUpdateListener(updateListener)
+    }
+  }, [selectedServerId])
 
   return (
     <>
@@ -55,19 +71,6 @@ const index = () => {
             active={window.location.pathname === '/servers/create'}
             icon={<PlusIcon />}
           />
-          {/* {Object.keys(servers).map((serverId: string) => {
-            const server = (servers as any)[serverId] // Specify the type of the index expression as 'string'
-
-            return (
-              <SideBarButton
-                key={serverId}
-                title={server.name}
-                id={server.id}
-                active={selectedServerId === serverId}
-                redirect={`/servers/${serverId}`}
-              />
-            )
-          })} */}
 
           {servers?.map((server: PerritoServerType) => {
             return (
@@ -89,7 +92,7 @@ const index = () => {
             {window.location.pathname === '/servers/create' && <CreateServerPage setServers={setServers} />}
 
             {selectedServerId && window.location.pathname !== '/servers/create' && (
-              <ServerPage serverId={selectedServerId} />
+              <ServerPage serverId={selectedServerId} servers={servers} />
             )}
           </div>
         </div>

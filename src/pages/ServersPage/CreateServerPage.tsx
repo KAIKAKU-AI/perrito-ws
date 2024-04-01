@@ -9,7 +9,6 @@ import {
   formatServerPort,
 } from '@utils/string-formatting'
 import { useEffect, useState } from 'react'
-import { BarLoader } from 'react-spinners'
 import { PerritoServerType } from 'src/backend/daemons/PerritoTypes'
 
 interface CreateServerResponse {
@@ -36,30 +35,10 @@ const CreateServerPage = (props: CreateServerPageProps) => {
   const [serverName, setServerName] = useState('My Server')
   const [serverHost, setServerHost] = useState('127.0.0.1')
   const [serverPort, setServerPort] = useState('6969')
-  const [loading, setLoading] = useState(false)
   const [createServerResponse, setCreateServerResponse] = useState<CreateServerResponse>({
     message: undefined,
     level: 'success',
   })
-
-  useEffect(() => {
-    const updateListener = (_: any, data: any) => {
-      const serversData = data?.data
-      if (serversData) {
-        props.setServers(serversData)
-      } else {
-        props.setServers([])
-      }
-      setLoading(false)
-    }
-
-    window.daemon.onUpdate(updateListener)
-
-    // Cleanup
-    return () => {
-      window.daemon.removeUpdateListener(updateListener)
-    }
-  }, [])
 
   useEffect(() => {
     if (config === undefined) return
@@ -76,7 +55,6 @@ const CreateServerPage = (props: CreateServerPageProps) => {
   const handleCreateServer = async () => {
     // Re-validate the server name, host, and port just in case
     if (!serverName || !serverHost || !serverPort) return
-    setLoading(true)
 
     const name = formatServerName(serverName)
     const id = formatServerId(name)
@@ -92,7 +70,6 @@ const CreateServerPage = (props: CreateServerPageProps) => {
         })
       })
       .catch((error: any) => {
-        setLoading(false)
         console.error('Error starting server:', error)
         setCreateServerResponse({
           message: error.message,
@@ -149,15 +126,7 @@ const CreateServerPage = (props: CreateServerPageProps) => {
         </div>
 
         <button className="create-server__button" onClick={handleCreateServer}>
-          <span>
-            {loading ? (
-              <>
-                <BarLoader color="#fff" loading={loading} height={6} width={75} />
-              </>
-            ) : (
-              'Create server'
-            )}
-          </span>
+          <span>Create server</span>
         </button>
       </div>
     </>
