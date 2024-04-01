@@ -37,7 +37,7 @@
     "prettier": "^3.2.5",
     "ts-node": "^10.9.2",
     "typescript": "~5.4.3",
-    "vite": "^5.0.12",
+    "vite": "^5.2.7",
     "wdio-electron-service": "^6.4.0",
     "wdio-wait-for": "^3.0.11"
   },
