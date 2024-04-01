@@ -3,6 +3,7 @@ import LinkIcon from '@assets/images/icons/link.svg'
 import RefreshIcon from '@assets/images/icons/refresh.svg'
 import Setting, { SettingType } from '@components/Setting'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { PulseLoader } from 'react-spinners'
 import { PerritoServerType } from 'src/backend/daemons/PerritoTypes'
 import './server-page.scss'
@@ -14,10 +15,12 @@ interface ServerPageProps {
 
 const ServerPage = (props: ServerPageProps) => {
   const [server, setServer] = useState<PerritoServerType | undefined>(undefined)
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const selectedServer = props.servers.find((server: PerritoServerType) => server.id === props.serverId)
-    setServer(selectedServer)
+    console.log('741099')
+    setServer(props.servers.find((server: PerritoServerType) => server.id === props.serverId))
+    console.log('220272')
   }, [props.servers])
 
   if (!server) {
@@ -27,7 +30,6 @@ const ServerPage = (props: ServerPageProps) => {
       </div>
     )
   }
-
   return (
     <>
       <div className="server-page__header">
@@ -58,7 +60,13 @@ const ServerPage = (props: ServerPageProps) => {
         <button className="server-page__button" onClick={() => {}}>
           <span>Jump to clients</span>
         </button>
-        <button className="server-page__button server-page__button--danger" onClick={() => {}}>
+        <button
+          className="server-page__button server-page__button--danger"
+          onClick={() => {
+            window.servers.stopServer(server.id)
+
+            navigate('/servers')
+          }}>
           <span>Delete</span>
         </button>
       </div>

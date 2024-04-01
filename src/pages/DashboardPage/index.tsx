@@ -3,8 +3,9 @@ import SideBar from '@components/SideBar'
 import SideBarController from '@components/SideBar/SideBarController'
 import SideBarButton from '@components/SideBar/inputs/SideBarButton'
 import SideBarDropdown from '@components/SideBar/inputs/SideBarDropdown'
-import { ServerClientDetails, Servers } from '@pages/ServersPage'
-import { useEffect, useState } from 'react'
+import { useServers } from '@contexts/ServerContext'
+import { ServerClientDetails } from '@pages/ServersPage'
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import '../styles.scss'
 import ClientPage from './ClientPage'
@@ -22,49 +23,11 @@ const index = () => {
   const selectedServer = params.serverId
   const selectedClient = params.clientId
 
-  const [servers, setServers] = useState<Servers>({})
+  const { servers, fetchServers } = useServers()
+  console.log('141614', servers)
+
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [clients, setClients] = useState<ServerClientDetails[]>([])
-
-  useEffect(() => {
-    console.log("445019", );
-    const updateListener = (_: any, data: any) => {
-      console.log("817986", data);
-      const serversData = data?.data
-      if (serversData) {
-        setServers(serversData)
-        setClients(serversData[selectedServer].clients)
-      } else {
-        setServers({})
-        setClients([])
-      }
-    }
-
-    window.daemon.onUpdate(updateListener)
-
-    // Cleanup
-    return () => {
-      window.daemon.removeUpdateListener(updateListener)
-    }
-  }, [])
-
-  useEffect(() => {
-    window.servers
-      .getServers()
-      .then((servers: any) => {
-        if (Object.keys(servers).length === 0) {
-          // No servers exist
-          setServers({})
-          setClients([])
-        } else {
-          setServers(servers)
-          setClients(servers[selectedServer].clients)
-        }
-      })
-      .catch((error: any) => {
-        console.error('Error getting servers:', error)
-      })
-  }, [])
 
   return (
     <>
@@ -74,9 +37,9 @@ const index = () => {
           <SideBarDropdown
             title="Select server"
             defaultOption={{ value: '', label: 'Select server' }}
-            dropdownOptions={Object.keys(servers).map(serverId => ({
-              value: serverId,
-              label: servers[serverId].name,
+            dropdownOptions={servers.map(server => ({
+              value: server.id,
+              label: server.name,
             }))}
             activeDropdownValue={selectedServer ? selectedServer : ''}
             onChange={e => {

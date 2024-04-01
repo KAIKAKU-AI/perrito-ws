@@ -1,4 +1,4 @@
-import { WebSocketServer } from 'ws'
+import { WebSocket, WebSocketServer } from 'ws'
 
 // A simplified combination of WebSocket and IncomingMessage (serializable!)
 export type PerritoClientType = {
@@ -7,6 +7,7 @@ export type PerritoClientType = {
     url: string
     headers: { [key: string]: string | string[] }
   }
+  socket: WebSocket
 }
 
 // A simplified combination of WebSocketServer

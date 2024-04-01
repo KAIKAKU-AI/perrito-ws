@@ -3,8 +3,9 @@ import Header from '@components/Header'
 import SideBar from '@components/SideBar'
 import SideBarController from '@components/SideBar/SideBarController'
 import SideBarButton from '@components/SideBar/inputs/SideBarButton'
+import { useServers } from '@contexts/ServerContext'
 import { IncomingMessage } from 'http'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { PerritoServerType } from 'src/backend/daemons/PerritoTypes'
 import { WebSocket } from 'ws'
@@ -27,37 +28,10 @@ export interface ServerClientDetails {
 
 const index = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true)
-  const [servers, setServers] = useState<PerritoServerType[]>([])
+  const { servers, fetchServers } = useServers()
 
   const params = useParams()
   const selectedServerId = params.serverId
-
-  useEffect(() => {
-    window.servers
-      .getServers()
-      .then((servers: PerritoServerType[]) => {
-        setServers(servers)
-      })
-      .catch((error: any) => {
-        console.error('Error getting servers:', error)
-      })
-
-    const updateListener = (_: any, data: any) => {
-      const serversData = data?.data
-      if (serversData) {
-        setServers(serversData)
-      } else {
-        setServers([])
-      }
-    }
-
-    window.daemon.onUpdate(updateListener)
-
-    // Cleanup
-    return () => {
-      window.daemon.removeUpdateListener(updateListener)
-    }
-  }, [selectedServerId])
 
   return (
     <>
@@ -89,7 +63,7 @@ const index = () => {
           <div className="page__main">
             <SideBarController isOpen={sidebarOpen} onClick={() => setSidebarOpen(!sidebarOpen)} />
 
-            {window.location.pathname === '/servers/create' && <CreateServerPage setServers={setServers} />}
+            {window.location.pathname === '/servers/create' && <CreateServerPage />}
 
             {selectedServerId && window.location.pathname !== '/servers/create' && (
               <ServerPage serverId={selectedServerId} servers={servers} />

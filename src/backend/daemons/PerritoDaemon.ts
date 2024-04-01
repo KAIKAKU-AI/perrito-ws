@@ -35,12 +35,13 @@ class PerritoDaemon {
   }
 
   private sendRendererUpdate() {
+    // Omit the server instance from the data sent to the renderer
     const serversData = this.servers.map(server => ({
       id: server.id,
       name: server.name,
       host: server.host,
       port: server.port,
-      clients: server.clients,
+      clients: server.clients.map(client => ({ id: client.id, request: client.request })), // Omit the socket from the client data
     }))
 
     process.send({ action: 'update-renderer', data: serversData })
@@ -97,6 +98,7 @@ class PerritoDaemon {
             headers: req.headers,
             url: req.url || '/',
           },
+          socket: ws,
         } as PerritoClientType
 
         server.clients.push(clientData)
@@ -128,13 +130,19 @@ class PerritoDaemon {
         return reject(new Error(`Server with id ${id} does not exist.`))
       }
 
+      // Close all client connections
+      serverInstance.clients.forEach(client => {
+        client.socket.close()
+      })
+
       serverInstance.server.close(err => {
         if (err) {
           return reject(err) // Reject the promise if there's an error closing the server
         }
-
         this.servers = this.servers.filter(server => server.id !== id)
+
         console.info(`Stopped WebSocket Server with id ${id}`)
+        this.sendRendererUpdate()
         resolve({
           name: 'SUCCESS',
           message: `Server with id ${id} stopped successfully`,

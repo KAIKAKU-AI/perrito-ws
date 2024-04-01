@@ -9,18 +9,13 @@ import {
   formatServerPort,
 } from '@utils/string-formatting'
 import { useEffect, useState } from 'react'
-import { PerritoServerType } from 'src/backend/daemons/PerritoTypes'
 
 interface CreateServerResponse {
   message?: string
   level: 'success' | 'error' | 'warning'
 }
 
-interface CreateServerPageProps {
-  setServers: (servers: PerritoServerType[]) => void
-}
-
-const CreateServerPage = (props: CreateServerPageProps) => {
+const CreateServerPage = () => {
   const generateRandomName = () => {
     // Choose 3 random words at random and stick them  together with a space
     let name = ''

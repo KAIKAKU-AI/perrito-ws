@@ -1,3 +1,4 @@
+import { ServerProvider } from '@contexts/ServerContext'
 import DashboardPage from '@pages/DashboardPage'
 import ErrorPage from '@pages/ErrorPage'
 import ServersPage from '@pages/ServersPage'
@@ -60,7 +61,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider>
-      <RouterProvider router={router} />
+      <ServerProvider>
+        <RouterProvider router={router} />
+      </ServerProvider>
     </ThemeProvider>
   </React.StrictMode>,
 )
