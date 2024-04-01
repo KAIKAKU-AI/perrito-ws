@@ -7,7 +7,7 @@ import { IncomingMessage } from 'http'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { PerritoServerType } from 'src/backend/daemons/PerritoTypes'
-import { WebSocket, WebSocketServer } from 'ws'
+import { WebSocket } from 'ws'
 import '../styles.scss'
 import CreateServerPage from './CreateServerPage'
 import ServerPage from './ServerPage'
@@ -23,18 +23,6 @@ export interface ServerClientDetails {
   id: string
   socket: WebSocket
   request: IncomingMessage
-}
-
-export interface ServerDetails {
-  name: string
-  host: string
-  port: number
-  server: WebSocketServer
-  clients: ServerClientDetails[]
-}
-
-export interface Servers {
-  [id: string]: ServerDetails
 }
 
 const index = () => {

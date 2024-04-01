@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { PulseLoader } from 'react-spinners'
-import { ServerDetails } from '.'
+import { PerritoServerType } from 'src/backend/daemons/PerritoTypes'
 
 interface ServerPageProps {
   serverId: string
@@ -8,13 +8,14 @@ interface ServerPageProps {
 
 const ServerPage = (props: ServerPageProps) => {
   const [loading, setLoading] = useState(true)
-  const [server, setServer] = useState<ServerDetails | undefined>(undefined)
+  const [server, setServer] = useState<PerritoServerType | undefined>(undefined)
 
   useEffect(() => {
     window.servers
       .getServers()
       .then((servers: any) => {
-        setServer(servers[props.serverId])
+        const selectedServer = servers.find((server: PerritoServerType) => server.id === props.serverId)
+        setServer(selectedServer)
         setLoading(false)
       })
       .catch((error: any) => {
@@ -33,7 +34,7 @@ const ServerPage = (props: ServerPageProps) => {
 
   return (
     <div>
-      <p>{server.host}</p>
+      <p>{server?.host}</p>
     </div>
   )
 }
