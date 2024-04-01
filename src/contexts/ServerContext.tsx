@@ -3,7 +3,7 @@ import { createContext, useCallback, useContext, useEffect, useState } from 'rea
 import { PerritoServerType } from 'src/backend/daemons/PerritoTypes'
 
 export const ServerContext = createContext({
-  servers: [],
+  servers: [] as PerritoServerType[],
   fetchServers: () => {},
 })
 

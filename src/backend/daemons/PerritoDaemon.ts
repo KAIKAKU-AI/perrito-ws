@@ -41,7 +41,7 @@ class PerritoDaemon {
       name: server.name,
       host: server.host,
       port: server.port,
-      clients: server.clients.map(client => ({ id: client.id, request: client.request })), // Omit the socket from the client data
+      clients: server.clients.map(client => ({ id: client.id, request: client.request, messages: client.messages })), // Omit the socket from the client data
     }))
 
     process.send({ action: 'update-renderer', data: serversData })
@@ -99,12 +99,15 @@ class PerritoDaemon {
             url: req.url || '/',
           },
           socket: ws,
+          messages: [],
         } as PerritoClientType
 
         server.clients.push(clientData)
 
         ws.on('message', message => {
-          // Handle incoming messages here
+          const timestamp = Date.now()
+
+          clientData.messages.push({ timestamp, data: message.toString() })
           this.sendRendererUpdate()
         })
 
