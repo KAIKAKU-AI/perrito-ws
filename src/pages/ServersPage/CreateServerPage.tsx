@@ -10,6 +10,7 @@ import {
 } from '@utils/string-formatting'
 import { useEffect, useState } from 'react'
 import { BarLoader } from 'react-spinners'
+import { PerritoServerType } from 'src/backend/daemons/PerritoTypes'
 
 interface CreateServerResponse {
   message?: string
@@ -17,7 +18,7 @@ interface CreateServerResponse {
 }
 
 interface CreateServerPageProps {
-  setServers: (servers: any) => void
+  setServers: (servers: PerritoServerType[]) => void
 }
 
 const CreateServerPage = (props: CreateServerPageProps) => {
@@ -40,6 +41,29 @@ const CreateServerPage = (props: CreateServerPageProps) => {
     message: undefined,
     level: 'success',
   })
+
+  useEffect(() => {
+    const updateListener = (event: any, data: any) => {
+      console.log('sReceived update from daemon:', data)
+      const serversData = data?.data
+      console.log('085114', serversData)
+      if (serversData) {
+        console.log('844465 sett')
+        props.setServers(serversData)
+      } else {
+        props.setServers([])
+      }
+
+      setLoading(false)
+    }
+
+    window.daemon.onUpdate(updateListener)
+
+    // Cleanup
+    return () => {
+      window.daemon.removeUpdateListener(updateListener)
+    }
+  }, [])
 
   useEffect(() => {
     if (config === undefined) return
@@ -70,16 +94,6 @@ const CreateServerPage = (props: CreateServerPageProps) => {
           message: response.message,
           level: 'success',
         })
-        window.servers
-          .getServers()
-          .then((servers: any) => {
-            props.setServers(servers)
-            setLoading(false)
-          })
-          .catch((error: any) => {
-            console.error('Error getting servers:', error)
-            setLoading(false)
-          })
       })
       .catch((error: any) => {
         setLoading(false)

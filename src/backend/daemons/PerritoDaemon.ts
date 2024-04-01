@@ -1,16 +1,6 @@
 import { IncomingMessage } from 'http'
 import { WebSocket, WebSocketServer } from 'ws'
-interface WebSocketServerInstance {
-  name: string
-  server: WebSocketServer
-  host: string
-  port: number
-  clients: {
-    id: string
-    socket: WebSocket
-    request: IncomingMessage
-  }[]
-}
+import { PerritoClientType, PerritoServerType } from './PerritoTypes'
 
 interface DaemonResponse {
   name: string
@@ -18,10 +8,10 @@ interface DaemonResponse {
 }
 
 class PerritoDaemon {
-  private servers: { [key: string]: WebSocketServerInstance }
+  private servers: PerritoServerType[]
 
   constructor() {
-    this.servers = {}
+    this.servers = []
     process.on('message', this.handleMessage.bind(this))
     console.info('PerritoDaemon started')
   }
@@ -44,9 +34,21 @@ class PerritoDaemon {
     }
   }
 
+  private sendRendererUpdate() {
+    const serversData = this.servers.map(server => ({
+      id: server.id,
+      name: server.name,
+      host: server.host,
+      port: server.port,
+      clients: server.clients,
+    }))
+
+    process.send({ action: 'update-renderer', data: serversData })
+  }
+
   private startServer(id: string, name: string, host: string, port: number): Promise<DaemonResponse> {
     return new Promise((resolve, reject) => {
-      if (this.servers[id]) {
+      if (this.servers.find(server => server.id === id)) {
         throw new Error(`Server with id ${id} already exists.`)
       }
 
@@ -77,7 +79,8 @@ class PerritoDaemon {
 
       // Resolve the promise once the server starts listening
       server.once('listening', () => {
-        this.servers[id] = { name, server, host, port, clients: [] } // Store the server info only after successful listening
+        this.servers.push({ id, name, host, port, clients: [], server })
+        this.sendRendererUpdate()
         resolve({
           name: 'SUCCESS',
           message: `Server started successfully on ws://${host}:${port} with id ${id}`,
@@ -86,39 +89,51 @@ class PerritoDaemon {
 
       // Connection handling remains unchanged
       server.on('connection', (ws: WebSocket, req: IncomingMessage) => {
-        this.servers[id].clients.push({ id: `Client_${this.servers[id].clients.length + 1}`, socket: ws, request: req })
+        // const clientData = { id: `Client_${this.servers[id].clients.length + 1}`, socket: ws, request: req }
+        const server = this.servers.find(server => server.id === id)
+        const clientData = {
+          id: `Client_${server.clients.length + 1}`,
+          request: {
+            headers: req.headers,
+            url: req.url || '/',
+          },
+        } as PerritoClientType
+
+        server.clients.push(clientData)
 
         ws.on('message', message => {
           // Handle incoming messages here
-          console.log('383883', message)
+          this.sendRendererUpdate()
         })
 
         ws.on('close', () => {
-          this.servers[id].clients = this.servers[id].clients.filter(client => client.socket !== ws)
+          server.clients = server.clients.filter(client => client.id !== clientData.id)
+          this.sendRendererUpdate()
         })
 
-        this.servers[id].server = server
+        this.sendRendererUpdate()
       })
 
       server.on('close', () => {
-        this.servers[id].server = server
+        console.info(`WebSocket Server with id ${id} closed`)
+        this.servers = this.servers.filter(server => server.id !== id)
       })
     })
   }
 
   private stopServer(id: string): Promise<DaemonResponse> {
     return new Promise((resolve, reject) => {
-      const instance = this.servers[id]
-      if (!instance) {
+      const serverInstance = this.servers.find(server => server.id === id)
+      if (!serverInstance) {
         return reject(new Error(`Server with id ${id} does not exist.`))
       }
 
-      instance.server.close(err => {
+      serverInstance.server.close(err => {
         if (err) {
           return reject(err) // Reject the promise if there's an error closing the server
         }
 
-        delete this.servers[id] // Remove the server from the tracking object after successful closure
+        this.servers = this.servers.filter(server => server.id !== id)
         console.info(`Stopped WebSocket Server with id ${id}`)
         resolve({
           name: 'SUCCESS',

@@ -3,6 +3,7 @@ import { BrowserWindow, app, nativeTheme } from 'electron'
 import path from 'path'
 import { killDaemons } from './backend/router'
 import { setupIpcMainHandlers } from './ipc/ipcMainHandlers'
+import { setupIpcMainListeners } from './ipc/ipcMainListeners'
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -45,6 +46,7 @@ const createWindow = () => {
   }
 
   setupIpcMainHandlers()
+  setupIpcMainListeners(mainWindow)
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools()

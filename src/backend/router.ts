@@ -5,7 +5,7 @@ import path from 'path'
 const daemonPath = path.join(__dirname, 'PerritoDaemon.js')
 
 // Fork the PerritoDaemon process
-const perritoDaemonProcess = fork(daemonPath)
+export const perritoDaemonProcess = fork(daemonPath)
 
 interface PendingRequests {
   [key: string]: { resolve: Function; reject: Function }

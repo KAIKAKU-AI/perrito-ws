@@ -6,6 +6,7 @@ import SideBarButton from '@components/SideBar/inputs/SideBarButton'
 import { IncomingMessage } from 'http'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { PerritoServerType } from 'src/backend/daemons/PerritoTypes'
 import { WebSocket, WebSocketServer } from 'ws'
 import '../styles.scss'
 import CreateServerPage from './CreateServerPage'
@@ -38,7 +39,7 @@ export interface Servers {
 
 const index = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true)
-  const [servers, setServers] = useState<Servers>({})
+  const [servers, setServers] = useState<PerritoServerType[]>([])
 
   const params = useParams()
   const selectedServerId = params.serverId
@@ -46,13 +47,15 @@ const index = () => {
   useEffect(() => {
     window.servers
       .getServers()
-      .then((servers: any) => {
+      .then((servers: PerritoServerType[]) => {
         setServers(servers)
       })
       .catch((error: any) => {
         console.error('Error getting servers:', error)
       })
   }, [])
+
+  console.log('835758', servers)
 
   return (
     <>
@@ -66,7 +69,7 @@ const index = () => {
             active={window.location.pathname === '/servers/create'}
             icon={<PlusIcon />}
           />
-          {Object.keys(servers).map((serverId: string) => {
+          {/* {Object.keys(servers).map((serverId: string) => {
             const server = (servers as any)[serverId] // Specify the type of the index expression as 'string'
 
             return (
@@ -76,6 +79,18 @@ const index = () => {
                 id={server.id}
                 active={selectedServerId === serverId}
                 redirect={`/servers/${serverId}`}
+              />
+            )
+          })} */}
+
+          {servers?.map((server: PerritoServerType) => {
+            return (
+              <SideBarButton
+                key={server.id}
+                title={server.name}
+                id={server.id}
+                active={selectedServerId === server.id}
+                redirect={`/servers/${server.id}`}
               />
             )
           })}

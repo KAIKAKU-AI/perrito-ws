@@ -10,16 +10,23 @@ import '../styles.scss'
 import ClientPage from './ClientPage'
 import InstructionPage from './InstructionPage'
 
+declare global {
+  interface Window {
+    servers: any
+    daemon: any
+  }
+}
+
 const index = () => {
   const params = useParams()
   const selectedServer = params.serverId
   const selectedClient = params.clientId
 
-  console.log('459075', selectedServer, selectedClient)
-
   const [servers, setServers] = useState<Servers>({})
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [clients, setClients] = useState<ServerClientDetails[]>([])
+
+  useEffect(() => {}, [])
 
   useEffect(() => {
     window.servers
@@ -37,6 +44,18 @@ const index = () => {
       .catch((error: any) => {
         console.error('Error getting servers:', error)
       })
+
+    const updateListener = (event: any, data: any) => {
+      console.log('Received update from daemon:', data)
+      // Handle the update
+    }
+
+    window.daemon.onUpdate(updateListener)
+
+    // Cleanup
+    return () => {
+      window.daemon.removeUpdateListener(updateListener)
+    }
   }, [])
 
   return (
