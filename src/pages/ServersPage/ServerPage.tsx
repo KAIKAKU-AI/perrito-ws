@@ -15,6 +15,8 @@ interface ServerPageProps {
 
 const ServerPage = (props: ServerPageProps) => {
   const [server, setServer] = useState<PerritoServerType | undefined>(undefined)
+
+  const [showCopyConfirmation, setShowCopyConfirmation] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -28,6 +30,15 @@ const ServerPage = (props: ServerPageProps) => {
       </div>
     )
   }
+
+  const handleCopyClick = () => {
+    navigator.clipboard.writeText(`ws://${server.host}:${server.port}`)
+    setShowCopyConfirmation(true)
+    setTimeout(() => {
+      setShowCopyConfirmation(false)
+    }, 1250) // Hide after 1 second
+  }
+
   return (
     <>
       <div className="server-page__header">
@@ -41,8 +52,14 @@ const ServerPage = (props: ServerPageProps) => {
           <button title="Restart server" className="server-page__header-icon-button" onClick={() => {}}>
             <img src={RefreshIcon} />
           </button>
-          <button title="Copy server link" className="server-page__header-icon-button" onClick={() => {}}>
+          <button
+            title="Copy server link"
+            className="server-page__header-icon-button"
+            onClick={handleCopyClick}>
             <img src={LinkIcon} />
+            <div className={`server-page__header-icon-button-confirmation ${showCopyConfirmation ? ' show' : ''}`}>
+              <span>Copied!</span>
+            </div>
           </button>
           <button title="Edit server" className="server-page__header-icon-button" onClick={() => {}}>
             <img src={EditIcon} />
@@ -55,7 +72,11 @@ const ServerPage = (props: ServerPageProps) => {
       <Setting type={SettingType.INFO} title="Number of clients" infoValue={server.clients.length.toString()} />
 
       <div className="server-page__button-container">
-        <button className="server-page__button" onClick={() => {}}>
+        <button
+          className="server-page__button"
+          onClick={() => {
+            navigate(`/dashboard/${server.id}`)
+          }}>
           <span>Jump to clients</span>
         </button>
         <button

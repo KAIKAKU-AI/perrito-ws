@@ -31,6 +31,7 @@
     }
 
     &-icon-button {
+      position: relative;
       background-color: transparent;
       border: none;
       cursor: pointer;
@@ -48,6 +49,28 @@
         align-items: center;
         justify-content: space-between;
         gap: 0.5rem;
+      }
+
+      &-confirmation {
+        position: absolute;
+        padding: 0.25rem 2rem;
+        background-color: rgba(0, 0, 0, 0.6);
+        right: 50%;
+        transform: translateX(50%);
+        transition: opacity 0.3s, visibility 0.5s;
+        opacity: 0;
+        visibility: hidden;
+
+        &.show {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        &>span {
+          font-size: 0.75rem;
+          color: white;
+          font-weight: 500;
+        }
       }
     }
   }
