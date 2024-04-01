@@ -27,7 +27,6 @@ export const ServerProvider = ({ children }: any) => {
     const updateListener = (_event: any, data: { data: any }) => {
       const serversData = data?.data
       if (serversData) {
-        console.log('701743', serversData)
         setServers(serversData)
       } else {
         setServers([])

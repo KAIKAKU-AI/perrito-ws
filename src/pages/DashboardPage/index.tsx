@@ -23,9 +23,7 @@ const index = () => {
   const selectedServer = params.serverId
   const selectedClient = params.clientId
 
-  const { servers, fetchServers } = useServers()
-  console.log('141614', servers)
-
+  const { servers } = useServers()
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [clients, setClients] = useState<ServerClientDetails[]>([])
 

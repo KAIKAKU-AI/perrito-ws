@@ -14,7 +14,6 @@ const ClientPage = (props: ClientPageProps) => {
       return
     }
     const updateListener = (_: any, data: any) => {
-      console.log('869593')
       const serversData = data?.data
       const selectedServer = serversData.find((server: any) => server.id === props.serverId)
       setClient(selectedServer.clients.find((client: ServerClientDetails) => client.id === props.clientId))

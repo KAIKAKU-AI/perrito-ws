@@ -18,9 +18,7 @@ const ServerPage = (props: ServerPageProps) => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    console.log('741099')
     setServer(props.servers.find((server: PerritoServerType) => server.id === props.serverId))
-    console.log('220272')
   }, [props.servers])
 
   if (!server) {
