@@ -1,0 +1,35 @@
+@import '../../styles/colors.scss';
+
+.instruction-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  &__perrito {
+    height: 16rem;
+    margin-bottom: 2rem;
+
+    & img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 1rem;
+    color: $color-primary;
+  }
+
+  &__description {
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+    color: $color-primary;
+  }
+}
