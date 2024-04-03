@@ -13,7 +13,7 @@ interface PendingRequests {
 
 const pendingRequests = {} as PendingRequests
 
-function sendCommandToDaemon(command: { id?: string; action: string; name?: string; host?: string; port?: number }) {
+function sendCommandToDaemon(command: { action: string } & Record<string, any>) {
   const correlationId = Date.now().toString() + Math.random().toString().substring(2)
   const commandWithCorrelationId = { ...command, correlationId }
 
@@ -43,17 +43,24 @@ perritoDaemonProcess.on('message', (message: any) => {
   }
 })
 
-// Example usage of sending a command to start a new WebSocket server
 export function startWebSocketServer(id: string, name: string, host: string, port: number) {
   return sendCommandToDaemon({ id, action: 'start', name, host, port })
 }
 
-// Example usage of sending a command to stop an existing WebSocket server
 export function stopWebSocketServer(id: string) {
   return sendCommandToDaemon({ id, action: 'stop' })
 }
+
 export function getWebSocketServers() {
   return sendCommandToDaemon({ action: 'get-servers' })
+}
+
+export function sendMessageToClient(serverId: string, clientId: string, message: string) {
+  return sendCommandToDaemon({ action: 'send-message', serverId, clientId, message })
+}
+
+export function disconnectClient(serverId: string, clientId: string) {
+  return sendCommandToDaemon({ action: 'disconnect-client', serverId, clientId })
 }
 
 export function killDaemons() {

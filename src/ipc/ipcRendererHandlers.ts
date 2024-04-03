@@ -31,4 +31,11 @@ export function setupIpcRendererHandlers() {
     stopServer: (id: string) => ipcRenderer.invoke('stop-server', id),
     getServers: () => ipcRenderer.invoke('get-servers'),
   })
+
+  contextBridge.exposeInMainWorld('clients', {
+    sendMessageToClient: (serverId: string, clientId: string, message: string) =>
+      ipcRenderer.invoke('send-message-to-client', serverId, clientId, message),
+    disconnectClient: (serverId: string, clientId: string) =>
+      ipcRenderer.invoke('disconnect-client', serverId, clientId),
+  })
 }

@@ -1,6 +1,6 @@
 import { getConfig, setConfig, updateConfig } from '@utils/config-manager'
 import { app, ipcMain, nativeTheme, shell } from 'electron'
-import { getWebSocketServers, startWebSocketServer, stopWebSocketServer } from 'src/backend/router'
+import { disconnectClient, getWebSocketServers, sendMessageToClient, startWebSocketServer, stopWebSocketServer } from 'src/backend/router'
 
 export enum Theme {
   LIGHT = 'light',
@@ -65,8 +65,7 @@ export function setupIpcMainHandlers() {
   // SERVER DAEMON API
   ipcMain.handle('start-server', async (_, serverId, serverName, host, port) => {
     try {
-      const response = await startWebSocketServer(serverId, serverName, host, parseInt(port))
-      return response
+      return startWebSocketServer(serverId, serverName, host, parseInt(port))
     } catch (error) {
       throw error
     }
@@ -74,8 +73,7 @@ export function setupIpcMainHandlers() {
 
   ipcMain.handle('stop-server', async (_, id) => {
     try {
-      const response = await stopWebSocketServer(id)
-      return response
+      return stopWebSocketServer(id)
     } catch (error) {
       throw error
     }
@@ -83,8 +81,23 @@ export function setupIpcMainHandlers() {
 
   ipcMain.handle('get-servers', async _ => {
     try {
-      const servers = await getWebSocketServers()
-      return servers
+      return getWebSocketServers()
+    } catch (error) {
+      throw error
+    }
+  })
+
+  ipcMain.handle('send-message-to-client', async (_, serverId, clientId, message) => {
+    try {
+      return sendMessageToClient(serverId, clientId, message)
+    } catch (error) {
+      throw error
+    }
+  })
+
+  ipcMain.handle('disconnect-client', async (_, serverId, clientId) => {
+    try {
+      return disconnectClient(serverId, clientId)
     } catch (error) {
       throw error
     }

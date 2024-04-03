@@ -31,6 +31,21 @@ class PerritoDaemon {
       case 'get-servers':
         process.send({ correlationId: message.correlationId, data: this.servers })
         break
+      case 'send-message':
+        const serverId = message.serverId
+        const clientId = message.clientId
+        const messageContent = message.message
+
+        this.sendToClient(serverId, clientId, messageContent)
+          .then(data => process.send({ correlationId: message.correlationId, data, error: null }))
+          .catch(error => process.send({ correlationId: message.correlationId, data: null, error: error.message }))
+
+        break
+      case 'disconnect-client':
+        this.disconnectClient(message.serverId, message.clientId)
+          .then(data => process.send({ correlationId: message.correlationId, data, error: null }))
+          .catch(error => process.send({ correlationId: message.correlationId, data: null, error: error.message }))
+        break
     }
   }
 
@@ -50,6 +65,54 @@ class PerritoDaemon {
     }))
 
     process.send({ action: 'update-renderer', data: serversData })
+  }
+
+  private async disconnectClient(serverId: string, clientId: string): Promise<DaemonResponse> {
+    return new Promise((resolve, reject) => {
+      const server = this.servers.find(server => server.id === serverId)
+      if (!server) {
+        return reject(new Error(`Server with id ${serverId} not found`))
+      }
+
+      const client = server.clients.find(client => client.id === clientId)
+      if (!client) {
+        return reject(new Error(`Client with id ${clientId} not found`))
+      }
+
+      client.socket.close()
+      this.sendRendererUpdate()
+
+      resolve({
+        name: 'SUCCESS',
+        message: `Client with id ${clientId} disconnected from server with id ${serverId}`,
+      })
+    })
+  }
+
+  private async sendToClient(serverId: string, clientId: string, message: string): Promise<DaemonResponse> {
+    return new Promise((resolve, reject) => {
+      const server = this.servers.find(server => server.id === serverId)
+      if (!server) {
+        return reject(new Error(`Server with id ${serverId} not found`))
+      }
+
+      const client = server.clients.find(client => client.id === clientId)
+      if (!client) {
+        return reject(new Error(`Client with id ${clientId} not found`))
+      }
+
+      if (client.socket.readyState !== WebSocket.OPEN) {
+        return reject(new Error(`Client with id ${clientId} is not connected`))
+      }
+
+      client.messages.push({ timestamp: Date.now(), data: message, direction: 'outbound' })
+      client.socket.send(message)
+      this.sendRendererUpdate()
+      resolve({
+        name: 'SUCCESS',
+        message: `Message sent to client with id ${clientId} on server with id ${serverId}`,
+      })
+    })
   }
 
   private startServer(id: string, name: string, host: string, port: number): Promise<DaemonResponse> {
@@ -115,7 +178,7 @@ class PerritoDaemon {
         ws.on('message', message => {
           const timestamp = Date.now()
 
-          clientData.messages.push({ timestamp, data: message.toString() })
+          clientData.messages.push({ timestamp, data: message.toString(), direction: 'inbound' })
           this.sendRendererUpdate()
         })
 

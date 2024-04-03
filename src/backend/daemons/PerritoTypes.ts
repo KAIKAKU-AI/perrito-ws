@@ -1,6 +1,7 @@
 import { WebSocket, WebSocketServer } from 'ws'
 
 export type WebSocketMessage = {
+  direction: 'inbound' | 'outbound'
   timestamp: number
   data: string
 }
