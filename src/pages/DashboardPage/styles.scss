@@ -33,3 +33,101 @@
     color: $color-primary;
   }
 }
+
+.client-page {
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $color-secondary;
+
+    &-title {
+      font-size: 1.5rem;
+      color: $color-primary;
+      margin: 0;
+
+      &-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+      }
+    }
+
+    &-subtitle {
+      font-size: 0.75rem;
+      color: darken($color-secondary, 10%);
+      margin: 0;
+      font-weight: 500;
+    }
+  }
+
+  &__button {
+    background-color: $color-primary;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s;
+
+    &-container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &>span {
+      white-space: nowrap;
+    }
+
+
+    &:hover {
+      background-color: darken($color-primary, 10%);
+    }
+
+    &--danger {
+      background-color: $color-error;
+
+      &:hover {
+        background-color: darken($color-error, 10%);
+      }
+    }
+  }
+
+  &__subtitle {
+    font-size: 1rem;
+    color: $color-primary;
+    margin: 1rem 0;
+    font-weight: 700;
+  }
+
+  &__textarea {
+    width: 100%;
+    height: 10rem;
+    margin-bottom: 1rem;
+    font-family: monospace;
+    font-size: 12px;
+    border: 1px solid $color-primary;
+    border-radius: 0.5rem;
+    color: black;
+    background-color: #F8F6FA;
+    padding: 1rem;
+    box-sizing: border-box;
+    resize: vertical;
+    max-height: 10rem;
+  }
+
+  &__content {
+    overflow-y: auto;
+    height: 100%;
+  }
+}

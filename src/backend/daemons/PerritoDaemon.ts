@@ -101,7 +101,9 @@ class PerritoDaemon {
           id: `Client_${server.clients.length + 1}`,
           request: {
             headers: req.headers,
-            url: req.url || '/',
+            path: req.url || '/',
+            host: server.host,
+            port: server.port,
           },
           socket: ws,
           readyState: ws.readyState,

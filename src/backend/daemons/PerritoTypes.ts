@@ -9,8 +9,10 @@ export type WebSocketMessage = {
 export type PerritoClientType = {
   id: string
   request: {
-    url: string
     headers: { [key: string]: string | string[] }
+    host: string
+    port: number
+    path: string
   }
   readyState: number
   socket: WebSocket
