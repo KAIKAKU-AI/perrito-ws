@@ -15,6 +15,11 @@
     & img {
       width: 100%;
       height: 100%;
+
+      @media (prefers-color-scheme: dark) {
+        filter: invert(1) hue-rotate(180deg);
+      }
+
     }
   }
 
@@ -24,6 +29,11 @@
     margin: 0;
     margin-bottom: 1rem;
     color: $color-primary;
+
+    @media (prefers-color-scheme: dark) {
+      color: $color-secondary;
+    }
+
   }
 
   &__description {
@@ -31,6 +41,10 @@
     font-weight: 400;
     margin: 0;
     color: $color-primary;
+
+    @media (prefers-color-scheme: dark) {
+      color: $color-secondary;
+    }
   }
 }
 
@@ -44,10 +58,18 @@
     padding-bottom: 1rem;
     border-bottom: 1px solid $color-secondary;
 
+    @media (prefers-color-scheme: dark) {
+      border-bottom: 2px solid $color-primary;
+    }
+
     &-title {
       font-size: 1.5rem;
       color: $color-primary;
       margin: 0;
+
+      @media (prefers-color-scheme: dark) {
+        color: $color-secondary;
+      }
 
       &-container {
         display: flex;
@@ -63,6 +85,8 @@
       color: darken($color-secondary, 10%);
       margin: 0;
       font-weight: 500;
+
+
     }
   }
 
@@ -128,6 +152,11 @@
     color: $color-primary;
     margin: 0.75rem 0;
     font-weight: 700;
+
+    @media (prefers-color-scheme: dark) {
+      color: $color-secondary;
+    }
+
   }
 
   &__textarea {
@@ -144,6 +173,12 @@
     box-sizing: border-box;
     resize: vertical;
     max-height: 10rem;
+
+    @media (prefers-color-scheme: dark) {
+      border: 2px solid $color-primary;
+      background-color: $color-dark-secondary;
+      color: white;
+    }
 
     &::placeholder {
       color: lighten($color-primary, 35%);
@@ -167,6 +202,12 @@
       border: 1px solid $color-primary;
       height: 10rem;
       overflow-y: auto;
+
+      @media (prefers-color-scheme: dark) {
+        background-color: $color-dark-secondary;
+        border: 2px solid $color-primary;
+      }
+
     }
 
     &-item {
@@ -178,17 +219,31 @@
       padding-top: 0;
       border-bottom: 1px solid $color-secondary;
 
+      @media (prefers-color-scheme: dark) {
+        border-bottom: 1px solid $color-primary;
+      }
+
       & span {
         font-size: 0.75rem;
         color: $color-primary;
         font-weight: 600;
         font-family: 'Courier New', Courier, monospace;
+
+        @media (prefers-color-scheme: dark) {
+          color: $color-secondary;
+        }
+
       }
 
       &-icon {
         width: 10px;
         height: 10px;
         margin-right: 0.4rem;
+
+        @media (prefers-color-scheme: dark) {
+          filter: invert(1) hue-rotate(180deg);
+        }
+
       }
     }
   }
