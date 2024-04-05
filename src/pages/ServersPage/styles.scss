@@ -9,6 +9,10 @@
     align-items: center;
     justify-content: space-between;
 
+    @media (prefers-color-scheme: dark) {
+      border-top: 1px solid $color-secondary;
+    }
+
   }
 
   &__response {
@@ -16,6 +20,10 @@
     font-weight: 600;
     color: $color-primary;
     padding-right: 2rem;
+
+    @media (prefers-color-scheme: dark) {
+      color: $color-secondary;
+    }
 
     &--error {
       color: $color-error;
