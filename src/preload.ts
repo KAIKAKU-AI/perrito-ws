@@ -1,5 +1,5 @@
-import { setupIpcRendererHandlers } from './ipc/ipcRendererHandlers'
-import { setupIpcRendererListeners } from './ipc/ipcRendererListeners'
+import { setupIpcRendererHandlers } from "./ipc/ipcRendererHandlers";
+import { setupIpcRendererListeners } from "./ipc/ipcRendererListeners";
 
-setupIpcRendererHandlers()
-setupIpcRendererListeners()
+setupIpcRendererHandlers();
+setupIpcRendererListeners();

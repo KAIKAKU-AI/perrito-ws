@@ -1,4 +1,4 @@
-@import '../../styles/colors.scss';
+@import "../../styles/colors.scss";
 
 .header {
   display: flex;
@@ -8,13 +8,18 @@
   align-items: center;
   justify-content: space-between;
 
-  // TODO: Implement dark mode
-  // @media (prefers-color-scheme: dark) {
-  //   background-color: $color-secondary;
-  // }
+  @media (prefers-color-scheme: dark) {
+    background-color: $color-dark-primary;
+  }
 
   &__logo {
     width: 60px;
+
+    @media (prefers-color-scheme: dark) {
+      &>svg {
+        fill: red;
+      }
+    }
   }
 
   &-nav {
