@@ -5,7 +5,7 @@ import SideBarButton, { CircleColor } from "@components/SideBar/inputs/SideBarBu
 import SideBarDropdown from "@components/SideBar/inputs/SideBarDropdown";
 import { useServers } from "@contexts/ServerContext";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { PerritoClientType } from "src/backend/daemons/PerritoTypes";
 import "../styles.scss";
 import ClientPage from "./ClientPage";
@@ -20,6 +20,7 @@ declare global {
 
 const index = () => {
 	const params = useParams();
+	const navigate = useNavigate();
 	const selectedServer = params.serverId;
 	const selectedClient = params.clientId;
 
@@ -50,7 +51,8 @@ const index = () => {
 						}))}
 						activeDropdownValue={selectedServer ? selectedServer : ""}
 						onChange={(e) => {
-							window.location.href = `/dashboard/${e.target.value}`;
+							// window.location.href = `/dashboard/${e.target.value}`;
+							navigate(`/dashboard/${e.target.value}`);
 						}}
 					/>
 					{clients.map((client, index) => {
