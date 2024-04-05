@@ -16,8 +16,14 @@
   text-decoration: none;
   padding: 0.5rem 0.75rem;
 
+
   &.active {
     background-color: darken(white, 6%);
+
+    @media (prefers-color-scheme: dark) {
+      background-color: darken($color-dark-secondary, 6%);
+    }
+
   }
 
   &__title {
@@ -29,6 +35,10 @@
       font-size: 0.75rem;
       font-weight: 600;
       color: $color-primary;
+
+      @media (prefers-color-scheme: dark) {
+        color: $color-secondary;
+      }
     }
   }
 
@@ -42,6 +52,12 @@
     padding: 0;
     cursor: pointer;
     margin: 0;
+
+    @media (prefers-color-scheme: dark) {
+      path {
+        fill: $color-secondary;
+      }
+    }
   }
 
   &__icon {
@@ -51,6 +67,12 @@
     width: 14px;
     height: 14px;
     margin-right: 0.4rem;
+
+    @media (prefers-color-scheme: dark) {
+      path {
+        fill: $color-secondary;
+      }
+    }
   }
 
   &__circle {
@@ -64,5 +86,9 @@
     font-size: 0.75rem;
     font-weight: 600;
     margin-right: 0.25rem;
+
+    @media (prefers-color-scheme: dark) {
+      background-color: $color-secondary;
+    }
   }
 }

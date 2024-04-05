@@ -15,9 +15,36 @@
   font-size: 0.75rem;
   margin-bottom: 1rem;
 
+  @media (prefers-color-scheme: dark) {
+    border: 1px solid darken($color-dark-secondary, 10%);
+    background-color: darken($color-dark-secondary, 6%);
+    color: $color-secondary;
+  }
+
+
   &>option {
     font-size: 0.75rem;
     font-weight: 600;
     color: $color-primary;
+
+    @media (prefers-color-scheme: dark) {
+      color: $color-secondary;
+      background-color: darken($color-dark-secondary, 6%);
+
+      &:hover {
+        background-color: darken($color-dark-secondary, 6%);
+      }
+
+      &:active {
+        background-color: darken($color-dark-secondary, 12%);
+      }
+
+      &:focus {
+        outline-color: $color-secondary;
+        outline-style: dashed;
+        outline-width: 2px;
+      }
+
+    }
   }
 }

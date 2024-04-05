@@ -12,6 +12,10 @@ $sidebar-width: 20rem;
   transition: width 0.3s ease, margin-left 0.3s ease;
   overflow: hidden;
 
+  @media (prefers-color-scheme: dark) {
+    background-color: $color-dark-secondary;
+  }
+
   // When sidebar is open
   &--open {
     width: $sidebar-width;
@@ -43,6 +47,10 @@ $sidebar-width: 20rem;
         font-weight: 700;
         margin: 0;
         margin-bottom: 1rem;
+
+        @media (prefers-color-scheme: dark) {
+          color: $color-secondary;
+        }
       }
     }
 

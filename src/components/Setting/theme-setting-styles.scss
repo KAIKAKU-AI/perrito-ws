@@ -15,13 +15,22 @@
     flex-direction: column;
     align-items: center;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: border-color 0.3s ease;
     border-radius: 0.5rem;
     border: 1px solid $color-secondary;
     width: 30%;
 
+    @media (prefers-color-scheme: dark) {
+      border: 2px solid $color-primary;
+    }
+
     &:hover {
       border: 1px solid $color-primary;
+
+      @media (prefers-color-scheme: dark) {
+        border: 2px solid $color-secondary;
+      }
+
     }
 
     &-preview {
@@ -61,6 +70,11 @@
         font-weight: 600;
         margin: 0;
         color: $color-primary;
+
+        @media (prefers-color-scheme: dark) {
+          color: $color-secondary;
+        }
+
       }
     }
   }

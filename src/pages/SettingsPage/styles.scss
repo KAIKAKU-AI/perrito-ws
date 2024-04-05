@@ -8,10 +8,18 @@
   border-radius: 1rem 1rem 0 0;
   box-sizing: border-box;
 
+  @media (prefers-color-scheme: dark) {
+    background-color: $color-dark-secondary;
+  }
+
   h1 {
     font-size: 1.25rem;
     margin: 0;
     margin-bottom: 1rem;
     color: $color-primary;
+
+    @media (prefers-color-scheme: dark) {
+      color: $color-secondary;
+    }
   }
 }

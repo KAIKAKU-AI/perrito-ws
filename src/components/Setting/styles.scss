@@ -1,4 +1,4 @@
-@import '../../styles/colors.scss';
+@import "../../styles/colors.scss";
 
 .base__setting {
   display: flex;
@@ -12,11 +12,19 @@
   border-top: 1px solid darken(white, 10%);
   padding: 1rem 0;
 
+  @media (prefers-color-scheme: dark) {
+    border-top: 1px solid black;
+  }
+
   &>p {
     font-size: 0.75rem;
     font-weight: 600;
     margin: 0;
     color: $color-primary;
+
+    @media (prefers-color-scheme: dark) {
+      color: $color-secondary;
+    }
   }
 
   &--column {
@@ -50,6 +58,10 @@
       font-weight: 600;
       margin: 0;
       color: $color-primary;
+
+      @media (prefers-color-scheme: dark) {
+        color: $color-secondary;
+      }
     }
 
     &__description {
@@ -59,11 +71,12 @@
       color: #444;
       padding-right: 2rem;
       margin-top: 0.5rem;
+
+      @media (prefers-color-scheme: dark) {
+        color: #888;
+      }
     }
-
-
   }
-
 
   .dropdown {
     position: relative;
@@ -77,6 +90,10 @@
     border-radius: 0.5rem;
     cursor: pointer;
     font-size: 0.75rem;
+
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid $color-primary;
+    }
 
     &>option {
       font-size: 0.75rem;
@@ -96,6 +113,12 @@
     border: 1px solid darken(white, 10%);
     border-radius: 0.5rem;
 
+    @media (prefers-color-scheme: dark) {
+      background-color: $color-dark-primary;
+      border: 1px solid $color-primary;
+      color: $color-secondary;
+    }
+
     &.large {
       width: 10rem;
     }
@@ -104,6 +127,5 @@
       width: 3rem;
       text-align: center;
     }
-
   }
 }

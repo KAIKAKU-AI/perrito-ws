@@ -6,6 +6,10 @@
   background-color: $color-tertiary;
   display: flex;
   flex-direction: row;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: $color-dark-primary;
+  }
 }
 
 .page-content__container {
