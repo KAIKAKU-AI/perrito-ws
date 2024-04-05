@@ -1,0 +1,27 @@
+@import "../../styles/colors.scss";
+@import "../../styles/fonts.scss";
+
+.header-utility {
+  &__button {
+    display: flex;
+    border: none;
+    background-color: transparent;
+    width: fit-content;
+    height: fit-content;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+
+    @media (prefers-color-scheme: dark) {
+      path {
+        fill: $color-secondary;
+      }
+    }
+
+    &:focus-visible {
+      outline-color: $color-primary;
+      outline-style: dashed;
+      outline-width: 2px;
+    }
+  }
+}

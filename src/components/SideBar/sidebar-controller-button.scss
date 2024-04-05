@@ -1,0 +1,107 @@
+@import '../../styles/colors.scss';
+
+$rotate-amount: 25deg;
+
+// Function to get the rotate value based on direction
+@function rotate-value($direction) {
+  @if $direction =='left' {
+    @return -$rotate-amount;
+  }
+
+  @else if $direction =='right' {
+    @return $rotate-amount;
+  }
+
+  @else {
+    @return 0deg;
+  }
+}
+
+.sidebar-controller__button {
+  border: none;
+  background-color: transparent;
+
+  &:focus-visible {
+    outline-style: dashed;
+    outline-color: $color-primary;
+    outline-width: 2px;
+  }
+
+  &-top,
+  &-bottom {
+    width: 4px;
+    height: 16px;
+    transition: 0.3s;
+    border-radius: 999px;
+    background-color: $color-secondary;
+  }
+
+  // REMEMBER: The rotation is inverted for the top (rotate-left needs a value of right and vice versa)
+  &-top.rotate-left {
+    transform: translateY(2px) rotate(rotate-value('right'));
+  }
+
+  &-top.rotate-right {
+    transform: translateY(2px) rotate(rotate-value('left'));
+  }
+
+  &-top.rotate-center {
+    transform: translateY(2px) rotate(rotate-value('center'));
+  }
+
+  // Default rotation classes for bottom
+  &-bottom.rotate-left {
+    // Invert for symmetry
+    transform: translateY(-2px) rotate(rotate-value('right')); // Notice the inversion here
+  }
+
+  &-bottom.rotate-right {
+    // Invert for symmetry
+    transform: translateY(-2px) rotate(rotate-value('left')); // And here
+  }
+
+  &-bottom.rotate-center {
+    transform: translateY(-2px) rotate(rotate-value('center'));
+  }
+
+  // Hover rotation classes for top
+  &:hover {
+    cursor: pointer;
+
+
+    .sidebar-controller__button {
+
+      &-top,
+      &-bottom {
+        background-color: darken($color-secondary, 10%);
+      }
+    }
+
+    .sidebar-controller__button-top.hover-rotate-left {
+      transform: translateY(2px) rotate(rotate-value('right'));
+    }
+
+    .sidebar-controller__button-top.hover-rotate-right {
+      transform: translateY(2px) rotate(rotate-value('left'));
+    }
+
+    .sidebar-controller__button-top.hover-rotate-center {
+      transform: translateY(2px) rotate(rotate-value('center'));
+    }
+
+    // Hover rotation classes for bottom
+    .sidebar-controller__button-bottom.hover-rotate-left {
+      // Invert for symmetry
+      transform: translateY(-2px) rotate(rotate-value('right'));
+    }
+
+    .sidebar-controller__button-bottom.hover-rotate-right {
+      // Invert for symmetry
+      transform: translateY(-2px) rotate(rotate-value('left'));
+    }
+
+    .sidebar-controller__button-bottom.hover-rotate-center {
+      transform: translateY(-2px) rotate(rotate-value('center'));
+    }
+  }
+}

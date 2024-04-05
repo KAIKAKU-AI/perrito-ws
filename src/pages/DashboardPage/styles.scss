@@ -1,0 +1,250 @@
+@import '../../styles/colors.scss';
+
+.instruction-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  &__perrito {
+    height: 16rem;
+    margin-bottom: 2rem;
+
+    & img {
+      width: 100%;
+      height: 100%;
+
+      @media (prefers-color-scheme: dark) {
+        filter: invert(1) hue-rotate(180deg);
+      }
+
+    }
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 1rem;
+    color: $color-primary;
+
+    @media (prefers-color-scheme: dark) {
+      color: $color-secondary;
+    }
+
+  }
+
+  &__description {
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+    color: $color-primary;
+
+    @media (prefers-color-scheme: dark) {
+      color: $color-secondary;
+    }
+  }
+}
+
+.client-page {
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $color-secondary;
+
+    @media (prefers-color-scheme: dark) {
+      border-bottom: 2px solid $color-primary;
+    }
+
+    &-title {
+      font-size: 1.5rem;
+      color: $color-primary;
+      margin: 0;
+
+      @media (prefers-color-scheme: dark) {
+        color: $color-secondary;
+      }
+
+      &-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+      }
+    }
+
+    &-subtitle {
+      font-size: 0.75rem;
+      color: darken($color-secondary, 10%);
+      margin: 0;
+      font-weight: 500;
+
+
+    }
+  }
+
+  &__response {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: $color-primary;
+    padding-right: 2rem;
+    margin: 0;
+
+    &--error {
+      color: $color-error;
+    }
+
+    &--success {
+      color: $color-success;
+    }
+
+    &--warning {
+      color: $color-warning;
+    }
+  }
+
+  &__button {
+    background-color: $color-primary;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s;
+
+    &-container {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &>span {
+      white-space: nowrap;
+    }
+
+
+    &:hover {
+      background-color: darken($color-primary, 10%);
+    }
+
+    &--danger {
+      background-color: $color-error;
+
+      &:hover {
+        background-color: darken($color-error, 10%);
+      }
+    }
+  }
+
+  &__subtitle {
+    font-size: 1rem;
+    color: $color-primary;
+    margin: 0.75rem 0;
+    font-weight: 700;
+
+    @media (prefers-color-scheme: dark) {
+      color: $color-secondary;
+    }
+
+  }
+
+  &__textarea {
+    width: 100%;
+    height: 10rem;
+    margin-bottom: 1rem;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+    border: 1px solid $color-primary;
+    border-radius: 0.5rem;
+    color: black;
+    background-color: #F8F6FA;
+    padding: 1rem;
+    box-sizing: border-box;
+    resize: vertical;
+    max-height: 10rem;
+
+    @media (prefers-color-scheme: dark) {
+      border: 2px solid $color-primary;
+      background-color: $color-dark-secondary;
+      color: white;
+    }
+
+    &::placeholder {
+      color: lighten($color-primary, 35%);
+    }
+
+
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__message {
+    &-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      background-color: $color-tertiary;
+      padding: 0.5rem;
+      border: 1px solid $color-primary;
+      height: 10rem;
+      overflow-y: auto;
+
+      @media (prefers-color-scheme: dark) {
+        background-color: $color-dark-secondary;
+        border: 2px solid $color-primary;
+      }
+
+    }
+
+    &-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 0;
+      padding-top: 0;
+      border-bottom: 1px solid $color-secondary;
+
+      @media (prefers-color-scheme: dark) {
+        border-bottom: 1px solid $color-primary;
+      }
+
+      & span {
+        font-size: 0.75rem;
+        color: $color-primary;
+        font-weight: 600;
+        font-family: 'Courier New', Courier, monospace;
+
+        @media (prefers-color-scheme: dark) {
+          color: $color-secondary;
+        }
+
+      }
+
+      &-icon {
+        width: 10px;
+        height: 10px;
+        margin-right: 0.4rem;
+
+        @media (prefers-color-scheme: dark) {
+          filter: invert(1) hue-rotate(180deg);
+        }
+
+      }
+    }
+  }
+}
