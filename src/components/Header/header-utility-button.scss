@@ -12,6 +12,12 @@
     justify-content: center;
     align-items: center;
 
+    @media (prefers-color-scheme: dark) {
+      path {
+        fill: $color-secondary;
+      }
+    }
+
     &:focus-visible {
       outline-color: $color-primary;
       outline-style: dashed;

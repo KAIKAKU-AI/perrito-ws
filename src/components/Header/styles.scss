@@ -16,8 +16,8 @@
     width: 60px;
 
     @media (prefers-color-scheme: dark) {
-      &>svg {
-        fill: red;
+      path {
+        fill: $color-secondary;
       }
     }
   }

@@ -18,14 +18,27 @@
     font-weight: 600;
     -webkit-user-drag: none;
 
-
+    @media (prefers-color-scheme: dark) {
+      background-color: $color-dark-tertiary;
+      color: $color-secondary;
+    }
 
     &:hover {
       background-color: lighten($color-secondary, 6%);
+
+      @media (prefers-color-scheme: dark) {
+        background-color: darken($color-primary, 5%);
+      }
+
     }
 
     &:active {
       background-color: lighten($color-secondary, 12%);
+
+      @media (prefers-color-scheme: dark) {
+        background-color: darken($color-primary, 10%);
+      }
+
     }
 
     &:focus-visible {
@@ -39,12 +52,25 @@
       background-color: $color-secondary;
       color: $color-primary;
 
+
+      @media (prefers-color-scheme: dark) {
+        background-color: $color-primary;
+        color: $color-secondary;
+      }
+
       &:hover {
         background-color: darken($color-secondary, 10%);
+
+        @media (prefers-color-scheme: dark) {
+          background-color: darken($color-primary, 10%);
+        }
+
       }
 
       &:active {
         background-color: darken($color-secondary, 15%);
+
+
       }
     }
 
@@ -54,6 +80,15 @@
       width: 18px;
       height: 18px;
       align-items: center;
+
+
+      @media (prefers-color-scheme: dark) {
+
+        path {
+          fill: $color-secondary;
+        }
+      }
+
     }
 
   }
