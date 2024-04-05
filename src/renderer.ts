@@ -26,5 +26,4 @@
  * ```
  */
 
-import './app'
-
+import "./app";
