@@ -4,6 +4,7 @@ import SideBarController from "@components/SideBar/SideBarController";
 import SideBarButton, { CircleColor } from "@components/SideBar/inputs/SideBarButton";
 import SideBarDropdown from "@components/SideBar/inputs/SideBarDropdown";
 import { useServers } from "@contexts/ServerContext";
+import { useConfig } from "@hooks/useConfig";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { PerritoClientType } from "src/backend/daemons/PerritoTypes";
@@ -24,6 +25,7 @@ const index = () => {
 	const selectedServer = params.serverId;
 	const selectedClient = params.clientId;
 
+	const {config} = useConfig();
 	const { servers } = useServers();
 	const [sidebarOpen, setSidebarOpen] = useState(true);
 	const [clients, setClients] = useState<PerritoClientType[]>([]);
@@ -37,11 +39,13 @@ const index = () => {
 		}
 	}, [selectedServer, servers]);
 
+	console.log("712522", config?.keybinds?.a);
+
 	return (
 		<>
 			<Header activePage="dashboard" />
 			<div id="page-content">
-				<SideBar title="Clients" isOpen={sidebarOpen}>
+				<SideBar title="Clients" isOpen={sidebarOpen} setOpen={setSidebarOpen}>
 					<SideBarDropdown
 						title="Select server"
 						defaultOption={{ value: "", label: "Select server" }}
@@ -65,6 +69,7 @@ const index = () => {
 								redirect={`/dashboard/${selectedServer}/${client.id}`}
 								showCircle={true}
 								circleColor={client.readyState === 1 ? CircleColor.SUCCESS : CircleColor.DANGER}
+								keybind={`ALT+${index + 1}`}
 							/>
 						);
 					})}

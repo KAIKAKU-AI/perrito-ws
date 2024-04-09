@@ -1,6 +1,7 @@
 import DotsIcon from "@assets/images/icons/dots.svg?react";
 import { truncate } from "@utils/string-formatting";
-import { Link } from "react-router-dom";
+import { useHotkeys } from "react-hotkeys-hook";
+import { Link, useNavigate } from "react-router-dom";
 import "./sidebar-button.scss";
 
 export enum CircleColor {
@@ -18,9 +19,18 @@ interface SideBarButtonProps {
 	extraDropdownItems?: { title: string; onClick: () => void }[];
 	showCircle?: boolean;
 	circleColor?: string | CircleColor;
+	keybind?: string;
 }
 
 const SideBarButton = (props: SideBarButtonProps) => {
+	const navigation = useNavigate();
+
+	useHotkeys(props.keybind || "", () => {
+		if (props.redirect) {
+			navigation(props.redirect);
+		}
+	});
+
 	return (
 		<Link to={props.redirect} className={`sidebar-button ${props.active ? "active" : ""}`}>
 			<div className="sidebar-button__title">

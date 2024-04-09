@@ -1,0 +1,52 @@
+@import "../../styles/colors.scss";
+
+.keybinds-table {
+  border-collapse: collapse;
+  width: 100%;
+
+  thead {
+    background-color: $color-tertiary;
+    color: $color-primary;
+    text-align: left;
+
+    th {
+      font-size: 1rem;
+      padding: 0.5rem;
+    }
+  }
+
+  tbody {
+    tr {
+      &:nth-child(odd) {
+        background-color: $color-tertiary;
+      }
+
+      &:nth-child(even) {
+        background-color: darken($color-tertiary, 3%)
+      }
+
+      td {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.5rem;
+      }
+    }
+  }
+
+
+  &__button {
+    background-color: $color-secondary;
+    border: none;
+    color: $color-primary;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 1rem;
+    transition: background-color 0.3s;
+    border-radius: 999px;
+
+    &:hover {
+      background-color: darken($color-secondary, 5%);
+    }
+  }
+
+}
