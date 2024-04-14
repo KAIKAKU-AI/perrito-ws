@@ -21,11 +21,14 @@ const initialKeybinds = [
 ] as KeybindType[];
 
 const KeybindsTable = () => {
-	const { config, updateConfig } = useConfig();
+	const { config, updateConfig, setDisableKeybinds } = useConfig();
 	const [keybinds, setKeybinds] = useState(initialKeybinds);
 	const [editingIndex, setEditingIndex] = useState(null); // Index of the keybind currently being edited
 
 	const handleKeybindChangeStart = (index: number) => {
+		// Disable keybinds while editing
+		setDisableKeybinds(true);
+
 		setEditingIndex(index);
 		// Function to determine if the pressed key is a modifier key
 		const isModifierKey = (key: string) => {
@@ -49,6 +52,7 @@ const KeybindsTable = () => {
 			updatedKeybinds[index].keybind = newKeybind;
 			setKeybinds(updatedKeybinds);
 			setEditingIndex(null); // Exit editing mode
+			setDisableKeybinds(false); // Re-enable keybinds
 
 			// Update the config
 			const updatedConfig = { ...config };

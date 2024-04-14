@@ -16,6 +16,8 @@ interface ConfigContextType {
 	config: ConfigType | undefined;
 	updateConfig: (key: string, value: any) => Promise<void>;
 	setCompleteConfig: (newConfig: ConfigType) => Promise<void>;
+	setDisableKeybinds: React.Dispatch<React.SetStateAction<boolean>>;
+	disableKeybinds: boolean;
 }
 
 // Creating the context with a default null value, but with specific types defined.
@@ -58,6 +60,7 @@ const defaultConfig: ConfigType = {
 // Provider component implementation.
 export const ConfigProvider: React.FC<Props> = ({ children }) => {
 	const [config, setConfig] = useState<ConfigType | undefined>(defaultConfig);
+	const [disableKeybinds, setDisableKeybinds] = useState(false);
 
 	useEffect(() => {
 		// Assume `window.config.getConfig()` fetches configuration settings.
@@ -74,6 +77,10 @@ export const ConfigProvider: React.FC<Props> = ({ children }) => {
 		loadConfig();
 	}, []);
 
+	useEffect(() => {
+		console.log("000254",disableKeybinds);
+	}, [disableKeybinds]);
+
 	// Method to update individual config settings.
 	const updateConfig = async (key: string, value: any) => {
 		await window.config.updateConfig(key, value);
@@ -89,7 +96,8 @@ export const ConfigProvider: React.FC<Props> = ({ children }) => {
 
 	// Providing the context value with the configuration object and methods to manipulate it.
 	return (
-		<ConfigContext.Provider value={{ config, updateConfig, setCompleteConfig }}>
+		<ConfigContext.Provider
+			value={{ config, updateConfig, setCompleteConfig, setDisableKeybinds, disableKeybinds }}>
 			{children}
 		</ConfigContext.Provider>
 	);

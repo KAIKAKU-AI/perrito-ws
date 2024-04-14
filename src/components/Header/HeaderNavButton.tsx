@@ -13,14 +13,14 @@ interface HeaderNavButtonProps {
 
 const HeaderNavButton = (props: HeaderNavButtonProps) => {
 	const navigation = useNavigate();
-	const { config } = useConfig();
+	const { config, disableKeybinds } = useConfig();
 
 	const keybind = config?.KEYBINDS.find(
 		(keybind: KeybindType) => keybind.id === props.keybindId,
 	) as KeybindType;
 
 	useHotkeys([keybind.keybind], () => {
-		navigation(props.redirect);
+		disableKeybinds ? null : navigation(props.redirect);
 	});
 
 	return (

@@ -1,3 +1,4 @@
+import { KeybindType, useConfig } from "@contexts/ConfigContext";
 import { useHotkeys } from "react-hotkeys-hook";
 import "./styles.scss";
 
@@ -9,9 +10,18 @@ interface indexProps {
 }
 
 const index = (props: indexProps) => {
-	useHotkeys("CTRL+SHIFT+S", () => {
+	const { disableKeybinds } = useConfig();
+
+	const { config } = useConfig();
+	const keybindId = "hide-show-sidebar";
+
+	const keybind = config?.KEYBINDS.find(
+		(keybind: KeybindType) => keybind.id === keybindId,
+	) as KeybindType;
+
+	useHotkeys([keybind.keybind], () => {
 		if (props.setOpen) {
-			props.setOpen(!props.isOpen);
+			disableKeybinds ? null : props.setOpen(!props.isOpen);
 		}
 	});
 
