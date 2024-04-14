@@ -1,7 +1,7 @@
 {
 	"name": "perrito-ws",
 	"productName": "perrito-ws",
-	"version": "0.9.0",
+	"version": "0.9.1",
 	"description": "A fast, straightforward way of setting up a WebSocket server, making real-time communication between clients and servers effortless.",
 	"main": ".vite/build/main.js",
 	"scripts": {
@@ -41,7 +41,7 @@
 		"prettier-eslint-cli": "^8.0.1",
 		"sass": "^1.72.0",
 		"ts-node": "^10.9.2",
-		"typescript": "~5.4.3",
+		"typescript": "~5.4.5",
 		"vite": "^5.2.8",
 		"vite-plugin-svgr": "^4.2.0",
 		"vite-tsconfig-paths": "^4.3.2",
