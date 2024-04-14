@@ -68,7 +68,6 @@ export const ConfigProvider: React.FC<Props> = ({ children }) => {
 			try {
 				const initialConfig: ConfigType = await window.config.getConfig();
 				setConfig(initialConfig);
-				console.log("614024", initialConfig);
 			} catch (error) {
 				console.error("Failed to load configuration settings - factory reset.");
 				await window.config.setConfig(defaultConfig);
