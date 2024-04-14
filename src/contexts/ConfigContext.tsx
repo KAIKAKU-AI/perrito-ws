@@ -68,6 +68,7 @@ export const ConfigProvider: React.FC<Props> = ({ children }) => {
 			try {
 				const initialConfig: ConfigType = await window.config.getConfig();
 				setConfig(initialConfig);
+				console.log("614024", initialConfig);
 			} catch (error) {
 				console.error("Failed to load configuration settings - factory reset.");
 				await window.config.setConfig(defaultConfig);
@@ -77,9 +78,7 @@ export const ConfigProvider: React.FC<Props> = ({ children }) => {
 		loadConfig();
 	}, []);
 
-	useEffect(() => {
-		console.log("000254",disableKeybinds);
-	}, [disableKeybinds]);
+	useEffect(() => {}, [disableKeybinds]);
 
 	// Method to update individual config settings.
 	const updateConfig = async (key: string, value: any) => {
