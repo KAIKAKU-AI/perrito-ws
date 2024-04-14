@@ -1,4 +1,5 @@
 import DotsIcon from "@assets/images/icons/dots.svg?react";
+import { KeybindType, useConfig } from "@contexts/ConfigContext";
 import { truncate } from "@utils/string-formatting";
 import { useHotkeys } from "react-hotkeys-hook";
 import { Link, useNavigate } from "react-router-dom";
@@ -19,16 +20,20 @@ interface SideBarButtonProps {
 	extraDropdownItems?: { title: string; onClick: () => void }[];
 	showCircle?: boolean;
 	circleColor?: string | CircleColor;
-	keybind?: string;
+	keybindId?: string;
 }
 
 const SideBarButton = (props: SideBarButtonProps) => {
 	const navigation = useNavigate();
 
-	useHotkeys(props.keybind || "", () => {
-		if (props.redirect) {
-			navigation(props.redirect);
-		}
+	const { config } = useConfig();
+
+	const keybind = config?.KEYBINDS.find(
+		(keybind: KeybindType) => keybind.id === props.keybindId,
+	) as KeybindType;
+
+	useHotkeys([keybind.keybind], () => {
+		navigation(props.redirect);
 	});
 
 	return (

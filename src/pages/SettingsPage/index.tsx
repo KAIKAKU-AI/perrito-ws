@@ -29,15 +29,15 @@ const index = () => {
 						redirect="/settings/general"
 						active={selectedSection === "general"}
 						icon={<CogIcon />}
-						keybind="ALT+1"
+						keybindId="select-sidebar-option-1"
 					/>
 					<SideBarButton
 						id="appearance"
 						title="Appearance"
 						redirect="/settings/appearance"
 						active={selectedSection === "appearance"}
-						icon={<PaletteIcon />}
-						keybind="ALT+2"
+						icon={<PaletteIcon />} 
+						keybindId="select-sidebar-option-2"
 					/>
 					<SideBarButton
 						id="keyboard"
@@ -45,7 +45,7 @@ const index = () => {
 						redirect="/settings/keyboard"
 						active={selectedSection === "keyboard"}
 						icon={<KeyboardIcon />}
-						keybind="ALT+3"
+						keybindId="select-sidebar-option-3"
 					/>
 					<SideBarButton
 						id="templates"
@@ -53,7 +53,7 @@ const index = () => {
 						redirect="/settings/templates"
 						active={selectedSection === "templates"}
 						icon={<PencilIcon />}
-						keybind="ALT+4"
+						keybindId="select-sidebar-option-4"
 					/>
 					<SideBarButton
 						id="about"
@@ -61,7 +61,7 @@ const index = () => {
 						redirect="/settings/about"
 						active={selectedSection === "about"}
 						icon={<InfoIcon />}
-						keybind="ALT+5"
+						keybindId="select-sidebar-option-5"
 					/>
 				</SideBar>
 				<div className="page-content__container">

@@ -36,7 +36,7 @@ const index = () => {
 						redirect="/servers/create"
 						active={window.location.pathname === "/servers/create"}
 						icon={<PlusIcon />}
-						keybind="ALT+1"
+						keybindId="select-sidebar-option-1"
 					/>
 
 					{servers?.map((server: PerritoServerType, idx: number) => {
@@ -47,7 +47,7 @@ const index = () => {
 								id={server.id}
 								active={selectedServerId === server.id}
 								redirect={`/servers/${server.id}`}
-								keybind={`ALT+${idx + 2}`}
+								keybindId={`select-sidebar-option-${idx + 2}`}
 							/>
 						);
 					})}

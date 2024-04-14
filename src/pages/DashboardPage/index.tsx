@@ -65,7 +65,7 @@ const index = () => {
 								redirect={`/dashboard/${selectedServer}/${client.id}`}
 								showCircle={true}
 								circleColor={client.readyState === 1 ? CircleColor.SUCCESS : CircleColor.DANGER}
-								keybind={`ALT+${index + 1}`}
+								keybindId={`select-sidebar-option-${index + 1}`}
 							/>
 						);
 					})}
