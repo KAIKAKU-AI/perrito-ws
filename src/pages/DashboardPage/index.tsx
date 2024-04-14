@@ -41,7 +41,7 @@ const index = () => {
 		<>
 			<Header activePage="dashboard" />
 			<div id="page-content">
-				<SideBar title="Clients" isOpen={sidebarOpen}>
+				<SideBar title="Clients" isOpen={sidebarOpen} setOpen={setSidebarOpen}>
 					<SideBarDropdown
 						title="Select server"
 						defaultOption={{ value: "", label: "Select server" }}
@@ -65,6 +65,7 @@ const index = () => {
 								redirect={`/dashboard/${selectedServer}/${client.id}`}
 								showCircle={true}
 								circleColor={client.readyState === 1 ? CircleColor.SUCCESS : CircleColor.DANGER}
+								keybindId={`select-sidebar-option-${index + 1}`}
 							/>
 						);
 					})}

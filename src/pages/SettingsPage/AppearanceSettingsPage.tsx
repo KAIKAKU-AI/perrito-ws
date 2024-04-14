@@ -2,7 +2,7 @@ import DarkThemePreview from "@assets/images/themes/dark-theme-preview.jpg";
 import LightThemePreview from "@assets/images/themes/light-theme-preview.jpg";
 import SystemThemePreview from "@assets/images/themes/system-theme-preview.jpg";
 import Setting, { SettingType } from "@components/Setting";
-import { useConfig } from "@hooks/useConfig";
+import { useConfig } from "@contexts/ConfigContext";
 import { useEffect } from "react";
 import "./styles.scss";
 

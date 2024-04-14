@@ -29,16 +29,17 @@ const index = () => {
 		<>
 			<Header activePage="servers" />
 			<div id="page-content">
-				<SideBar title="Servers" isOpen={sidebarOpen}>
+				<SideBar title="Servers" isOpen={sidebarOpen} setOpen={setSidebarOpen}>
 					<SideBarButton
 						id="create"
 						title="Create"
 						redirect="/servers/create"
 						active={window.location.pathname === "/servers/create"}
 						icon={<PlusIcon />}
+						keybindId="select-sidebar-option-1"
 					/>
 
-					{servers?.map((server: PerritoServerType) => {
+					{servers?.map((server: PerritoServerType, idx: number) => {
 						return (
 							<SideBarButton
 								key={server.id}
@@ -46,6 +47,7 @@ const index = () => {
 								id={server.id}
 								active={selectedServerId === server.id}
 								redirect={`/servers/${server.id}`}
+								keybindId={`select-sidebar-option-${idx + 2}`}
 							/>
 						);
 					})}

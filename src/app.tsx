@@ -1,3 +1,4 @@
+import { ConfigProvider } from "@contexts/ConfigContext";
 import { ServerProvider } from "@contexts/ServerContext";
 import DashboardPage from "@pages/DashboardPage";
 import ErrorPage from "@pages/ErrorPage";
@@ -60,10 +61,12 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
-		<ThemeProvider>
-			<ServerProvider>
-				<RouterProvider router={router} />
-			</ServerProvider>
-		</ThemeProvider>
+		<ConfigProvider>
+			<ThemeProvider>
+				<ServerProvider>
+					<RouterProvider router={router} />
+				</ServerProvider>
+			</ThemeProvider>
+		</ConfigProvider>
 	</React.StrictMode>,
 );

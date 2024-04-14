@@ -24,6 +24,7 @@ const index = (props: indexProps) => {
 					title="Dashboard"
 					active={props.activePage === "dashboard"}
 					redirect="/"
+					keybindId="open-dashboard-page"
 				/>
 
 				<HeaderNavButton
@@ -31,6 +32,7 @@ const index = (props: indexProps) => {
 					title="Servers"
 					active={props.activePage === "servers"}
 					redirect="/servers"
+					keybindId="open-servers-page"
 				/>
 
 				<HeaderNavButton
@@ -38,6 +40,7 @@ const index = (props: indexProps) => {
 					title="Settings"
 					active={props.activePage === "settings"}
 					redirect="/settings"
+					keybindId="open-settings-page"
 				/>
 			</div>
 
