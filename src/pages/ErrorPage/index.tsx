@@ -1,6 +1,6 @@
 import PerritoSad from "@assets/images/perrito/perrito-sad.svg?react";
 import Header from "@components/Header";
-import { useConfig } from "@hooks/useConfig";
+import { useConfig } from "@contexts/ConfigContext";
 import { useLocation, useRouteError } from "react-router-dom";
 import "../styles.scss";
 import "./error-page.scss";

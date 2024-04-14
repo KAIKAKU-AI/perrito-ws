@@ -1,30 +1,30 @@
-import { useConfig } from "@hooks/useConfig";
+import { KeybindType, useConfig } from "@contexts/ConfigContext";
 import { useEffect, useState } from "react";
 import "./styles.scss";
 
 // Mock data
 const initialKeybinds = [
-	{ command: "Open Dashboard Page", keybind: "Ctrl+1" },
-	{ command: "Open Servers Page", keybind: "Ctrl+2" },
-	{ command: "Open Settings Page", keybind: "Ctrl+3" },
-	{ command: "Select Sidebar Option 1", keybind: "Alt+1" },
-	{ command: "Select Sidebar Option 2", keybind: "Alt+2" },
-	{ command: "Select Sidebar Option 3", keybind: "Alt+3" },
-	{ command: "Select Sidebar Option 4", keybind: "Alt+4" },
-	{ command: "Select Sidebar Option 5", keybind: "Alt+5" },
-	{ command: "Select Sidebar Option 6", keybind: "Alt+6" },
-	{ command: "Select Sidebar Option 7", keybind: "Alt+7" },
-	{ command: "Select Sidebar Option 8", keybind: "Alt+8" },
-	{ command: "Select Sidebar Option 9", keybind: "Alt+9" },
-	{ command: "Select Sidebar Option 10", keybind: "Alt+0" },
-	{ command: "Hide/Show Sidebar", keybind: "Ctrl+Shift+S" },
-];
+	{ id: "open-dashboard-page", name: "Open Dashboard Page", keybind: "Ctrl+1" },
+	{ id: "open-servers-page", name: "Open Servers Page", keybind: "Ctrl+2" },
+	{ id: "open-settings-page", name: "Open Settings Page", keybind: "Ctrl+3" },
+	{ id: "select-sidebar-option-1", name: "Select Sidebar Option 1", keybind: "Alt+1" },
+	{ id: "select-sidebar-option-2", name: "Select Sidebar Option 2", keybind: "Alt+2" },
+	{ id: "select-sidebar-option-3", name: "Select Sidebar Option 3", keybind: "Alt+3" },
+	{ id: "select-sidebar-option-4", name: "Select Sidebar Option 4", keybind: "Alt+4" },
+	{ id: "select-sidebar-option-5", name: "Select Sidebar Option 5", keybind: "Alt+5" },
+	{ id: "select-sidebar-option-6", name: "Select Sidebar Option 6", keybind: "Alt+6" },
+	{ id: "select-sidebar-option-7", name: "Select Sidebar Option 7", keybind: "Alt+7" },
+	{ id: "select-sidebar-option-8", name: "Select Sidebar Option 8", keybind: "Alt+8" },
+	{ id: "select-sidebar-option-9", name: "Select Sidebar Option 9", keybind: "Alt+9" },
+	{ id: "select-sidebar-option-10", name: "Select Sidebar Option 10", keybind: "Alt+0" },
+	{ id: "hide-show-sidebar", name: "Hide/Show Sidebar", keybind: "Ctrl+Shift+S" },
+] as KeybindType[];
 
 const KeybindsTable = () => {
 	const { config, updateConfig } = useConfig();
 	const [keybinds, setKeybinds] = useState(initialKeybinds);
 	const [editingIndex, setEditingIndex] = useState(null); // Index of the keybind currently being edited
-	
+
 	const handleKeybindChangeStart = (index: number) => {
 		setEditingIndex(index);
 		// Function to determine if the pressed key is a modifier key
@@ -63,7 +63,6 @@ const KeybindsTable = () => {
 	};
 
 	useEffect(() => {
-		console.log("180241", config);
 		if (config === undefined) return;
 
 		if (config.KEYBINDS === undefined) updateConfig("KEYBINDS", {});
@@ -80,8 +79,8 @@ const KeybindsTable = () => {
 			</thead>
 			<tbody>
 				{keybinds.map((item, index) => (
-					<tr key={index}>
-						<td>{item.command}</td>
+					<tr key={index} title={item.id}>
+						<td>{item.name}</td>
 						<td>{item.keybind}</td>
 						<td>
 							{editingIndex === index ? (

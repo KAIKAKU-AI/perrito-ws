@@ -1,5 +1,5 @@
 import Setting, { SettingType } from "@components/Setting";
-import { useConfig } from "@hooks/useConfig";
+import { useConfig } from "@contexts/ConfigContext";
 import { formatServerHost, formatServerName, formatServerPort } from "@utils/string-formatting";
 import { useEffect, useState } from "react";
 import "./styles.scss";

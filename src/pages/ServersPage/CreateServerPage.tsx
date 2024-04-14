@@ -1,5 +1,5 @@
 import Setting, { SettingType } from "@components/Setting";
-import { useConfig } from "@hooks/useConfig";
+import { useConfig } from "@contexts/ConfigContext";
 import { randomWords } from "@utils/random-words";
 import {
 	capitalize,
