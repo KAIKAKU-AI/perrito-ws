@@ -110,43 +110,6 @@
     }
   }
 
-  &__button {
-    background-color: $color-primary;
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.25rem;
-    transition: background-color 0.2s;
-
-    &-container {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    &>span {
-      white-space: nowrap;
-    }
-
-
-    &:hover {
-      background-color: darken($color-primary, 10%);
-    }
-
-    &--danger {
-      background-color: $color-error;
-
-      &:hover {
-        background-color: darken($color-error, 10%);
-      }
-    }
-  }
-
   &__subtitle {
     font-size: 1rem;
     color: $color-primary;

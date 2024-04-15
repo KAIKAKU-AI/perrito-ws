@@ -12,7 +12,7 @@ const SideBarDropdown = (props: SideBarDropdownProps) => {
 	return (
 		// dropdown in sidebar
 		<select
-			className="dropdown sidebar-dropdown"
+			className="sidebar-dropdown"
 			value={props.activeDropdownValue ?? ""}
 			onChange={props.onChange}>
 			<option value={props.defaultOption.value}>{props.defaultOption.label}</option>

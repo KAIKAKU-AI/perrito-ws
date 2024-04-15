@@ -3,6 +3,8 @@ import { useServers } from "@contexts/ServerContext";
 import { useEffect, useState } from "react";
 import { PerritoClientType } from "src/backend/daemons/PerritoTypes";
 
+import Button, { ButtonThemes } from "@components/Button";
+import Dropdown from "@components/Setting/Dropdown";
 import "./styles.scss";
 
 declare global {
@@ -57,6 +59,10 @@ const ClientPage = (props: ClientPageProps) => {
 		return date.toLocaleTimeString();
 	};
 
+	const onPresetChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		console.log(e.target.value);
+	};
+
 	const sortedMessages = client.messages.sort((a, b) => a.timestamp - b.timestamp).reverse();
 
 	return (
@@ -70,8 +76,8 @@ const ClientPage = (props: ClientPageProps) => {
 					</h2>
 				</div>
 				<div className="client-page__header-icon-button-container">
-					<button
-						className="client-page__button server-page__button--danger"
+					<Button
+						theme={ButtonThemes.DANGER}
 						onClick={() => {
 							window.clients.disconnectClient(props.serverId, props.clientId).then(
 								() => {
@@ -84,7 +90,7 @@ const ClientPage = (props: ClientPageProps) => {
 							);
 						}}>
 						<span>Disconnect</span>
-					</button>
+					</Button>
 				</div>
 			</div>
 
@@ -97,16 +103,29 @@ const ClientPage = (props: ClientPageProps) => {
 					placeholder="Type a message to send to the client"
 				/>
 
-				<div className="client-page__button-container">
+				<div
+					style={{
+						display: "flex",
+						justifyContent: "space-between",
+					}}>
 					<p
 						className={`client-page__response client-page__response--${sendMessageResponse.level}`}>
 						{sendMessageResponse.message}
 					</p>
 
-					<div style={{ display: "flex", gap: "1rem" }}>
-						<button className="client-page__button" onClick={handleSendMessage}>
+					<div style={{ display: "flex", gap: "1rem", alignItems: "baseline" }}>
+						<Dropdown
+							dropdownOptions={[
+								{ label: "Apply message preset", value: "default" },
+								{ label: "Option 2", value: "option2" },
+							]}
+							activeDropdownValue={"default"}
+							onChange={onPresetChange}
+						/>
+
+						<Button theme={ButtonThemes.PRIMARY} onClick={handleSendMessage}>
 							<span>Send</span>
-						</button>
+						</Button>
 					</div>
 				</div>
 

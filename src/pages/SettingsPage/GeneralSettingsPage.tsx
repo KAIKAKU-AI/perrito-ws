@@ -35,7 +35,9 @@ const GeneralSettingsPage = () => {
 
 	return (
 		<div className="settings__main">
-			<h1>General</h1>
+			<div className="settings__header">
+				<h1>General</h1>
+			</div>
 
 			<Setting
 				type={SettingType.SWITCH}

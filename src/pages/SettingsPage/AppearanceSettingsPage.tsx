@@ -42,7 +42,9 @@ const AppearanceSettingsPage = () => {
 
 	return (
 		<div className="settings__main">
-			<h1>Apperance</h1>
+			<div className="settings__header">
+				<h1>Appearance</h1>
+			</div>
 
 			<Setting
 				type={SettingType.THEME}

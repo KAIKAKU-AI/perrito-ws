@@ -47,29 +47,5 @@
   }
 
 
-  &__button {
-    background-color: $color-secondary;
-    border: none;
-    color: $color-primary;
-    cursor: pointer;
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.2rem 1rem;
-    transition: background-color 0.3s;
-    border-radius: 999px;
-
-    @media (prefers-color-scheme: dark) {
-      background-color: $color-dark-secondary;
-      color: $color-secondary;
-    }
-
-    &:hover {
-      background-color: darken($color-secondary, 5%);
-
-      @media (prefers-color-scheme: dark) {
-        background-color: darken($color-dark-secondary, 5%);
-      }
-    }
-  }
 
 }

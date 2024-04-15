@@ -86,46 +86,4 @@
       }
     }
   }
-
-  &__button {
-    background-color: $color-primary;
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.25rem;
-    transition: background-color 0.2s;
-
-    &>span {
-      white-space: nowrap;
-    }
-
-    &:hover {
-      background-color: darken($color-primary, 10%);
-    }
-
-    &--danger {
-      background-color: $color-error;
-
-      &:hover {
-        background-color: darken($color-error, 10%);
-      }
-
-    }
-
-    &-container {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 1rem;
-      border-top: 1px solid $color-secondary;
-      padding-top: 1rem;
-    }
-  }
 }

@@ -10,7 +10,9 @@ declare global {
 const AboutSettingsPage = () => {
 	return (
 		<div className="settings__main">
-			<h1>About</h1>
+			<div className="settings__header">
+				<h1>About</h1>
+			</div>
 
 			<Setting type={SettingType.INFO} title="App version" infoValue={window.app.getVersion()} />
 			<Setting type={SettingType.INFO} title="System OS" infoValue={window.app.getPlatform()} />

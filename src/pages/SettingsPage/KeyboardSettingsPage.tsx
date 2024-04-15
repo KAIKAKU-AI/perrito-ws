@@ -6,7 +6,9 @@ interface KeyboardSettingsPageProps {}
 const KeyboardSettingsPage = (props: KeyboardSettingsPageProps) => {
 	return (
 		<div className="settings__main">
-			<h1>Keyboard</h1>
+			<div className="settings__header">
+				<h1>Keyboard</h1>
+			</div>
 
 			<KeybindsTable />
 		</div>

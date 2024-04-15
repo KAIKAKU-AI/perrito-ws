@@ -1,6 +1,7 @@
 import EditIcon from "@assets/images/icons/edit.svg";
 import LinkIcon from "@assets/images/icons/link.svg";
 import RefreshIcon from "@assets/images/icons/refresh.svg";
+import Button, { ButtonThemes } from "@components/Button";
 import Setting, { SettingType } from "@components/Setting";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -86,23 +87,30 @@ const ServerPage = (props: ServerPageProps) => {
 				infoValue={server.clients.filter((client) => client.readyState === 1).length.toString()}
 			/>
 
-			<div className="server-page__button-container">
-				<button
-					className="server-page__button"
+			<div
+				style={{
+					display: "flex",
+					justifyContent: "flex-end",
+					marginTop: "1rem",
+					gap: "1rem",
+				}}>
+				<Button
+					theme={ButtonThemes.PRIMARY}
 					onClick={() => {
 						navigate(`/dashboard/${server.id}`);
 					}}>
 					<span>Jump to clients</span>
-				</button>
-				<button
-					className="server-page__button server-page__button--danger"
+				</Button>
+
+				<Button
+					theme={ButtonThemes.DANGER}
 					onClick={() => {
-						window.servers.stopServer(server.id);
+						// window.servers.stopServer(server.id);
 
 						navigate("/servers");
 					}}>
 					<span>Delete</span>
-				</button>
+				</Button>
 			</div>
 		</>
 	);

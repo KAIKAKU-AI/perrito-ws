@@ -1,3 +1,4 @@
+import Button, { ButtonThemes } from "@components/Button";
 import { useState } from "react";
 import DropdownSetting from "./DropdownSetting";
 import SwitchSetting from "./SwitchSetting";
@@ -49,16 +50,17 @@ const index = (props: SettingProps) => {
 
 	const renderSaveButton = () =>
 		showSaveButton ? (
-			<button
+			<Button
+				style={{ marginLeft: "auto", marginBottom: "1rem" }}
 				onClick={() => {
 					props.showSave != true ? setShowSaveButton(false) : null;
 					if (props.onSave) {
 						props.onSave();
 					}
 				}}
-				className="setting__save">
-				Save
-			</button>
+				theme={ButtonThemes.SUCCESS}>
+				<span>Save</span>
+			</Button>
 		) : null;
 
 	switch (props.type) {

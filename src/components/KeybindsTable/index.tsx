@@ -1,3 +1,4 @@
+import Button, { ButtonThemes } from "@components/Button";
 import { KeybindType, useConfig } from "@contexts/ConfigContext";
 import { useEffect, useState } from "react";
 import "./styles.scss";
@@ -72,11 +73,20 @@ const KeybindsTable = () => {
 							{editingIndex === index ? (
 								"Listening..."
 							) : (
-								<button
-									className="keybinds-table__button"
-									onClick={() => handleKeybindChangeStart(index)}>
-									Edit
-								</button>
+								<Button
+									onClick={() => handleKeybindChangeStart(index)}
+									theme={ButtonThemes.PRIMARY}
+									style={{
+										paddingTop: "0.3rem",
+										paddingBottom: "0.3rem",
+									}}>
+									<span
+										style={{
+											fontSize: "0.65rem",
+										}}>
+										Edit
+									</span>
+								</Button>
 							)}
 						</td>
 					</tr>

@@ -1,3 +1,4 @@
+import Button, { ButtonThemes } from "@components/Button";
 import Setting, { SettingType } from "@components/Setting";
 import { useConfig } from "@contexts/ConfigContext";
 import { randomWords } from "@utils/random-words";
@@ -125,9 +126,9 @@ const CreateServerPage = () => {
 					{createServerResponse.message}
 				</div>
 
-				<button className="create-server__button" onClick={handleCreateServer}>
+				<Button onClick={handleCreateServer} theme={ButtonThemes.PRIMARY}>
 					<span>Create server</span>
-				</button>
+				</Button>
 			</div>
 		</>
 	);
