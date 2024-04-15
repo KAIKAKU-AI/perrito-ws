@@ -5,6 +5,7 @@ import { PerritoClientType } from "src/backend/daemons/PerritoTypes";
 
 import Button, { ButtonThemes } from "@components/Button";
 import Dropdown from "@components/Setting/Dropdown";
+import Textarea from "@components/Textarea";
 import "./styles.scss";
 
 declare global {
@@ -96,11 +97,12 @@ const ClientPage = (props: ClientPageProps) => {
 
 			<div className="client-page__content">
 				<h2 className="client-page__subtitle">Send message</h2>
-				<textarea
-					className="client-page__textarea"
+
+				<Textarea
 					value={sendMessageContent}
 					onChange={(e) => setSendMessageContent(e.target.value)}
 					placeholder="Type a message to send to the client"
+					style={{ marginBottom: "1rem" }}
 				/>
 
 				<div
