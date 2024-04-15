@@ -25,6 +25,15 @@ export function setupIpcRendererHandlers() {
 		updateConfig: (key: string, value: any) => ipcRenderer.invoke("update-config", key, value),
 	});
 
+	contextBridge.exposeInMainWorld("presets", {
+		getMessagePreset: (id: string) => ipcRenderer.invoke("get-message-preset", id),
+		listMessagePresets: () => ipcRenderer.invoke("list-message-presets"),
+		saveMessagePreset: (preset: any) => ipcRenderer.invoke("save-message-preset", preset),
+		deleteMessagePreset: (id: string) => ipcRenderer.invoke("delete-message-preset", id),
+		updateMessagePreset: (id: string, preset: any) =>
+			ipcRenderer.invoke("update-message-preset", id, preset),
+	});
+
 	contextBridge.exposeInMainWorld("servers", {
 		startServer: (id: string, name: string, host: string, port: string) =>
 			ipcRenderer.invoke("start-server", id, name, host, port),

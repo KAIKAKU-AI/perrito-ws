@@ -1,5 +1,6 @@
 import { configExists, getConfig, resetConfig, updateConfig } from "@utils/config-manager";
 import { CONFIG_VERSION } from "@utils/default-config";
+import { presetsDirExists, resetPresetsDir } from "@utils/presets-manager";
 import { BrowserWindow, app, nativeTheme } from "electron";
 import path from "path";
 import { killDaemons } from "./backend/router";
@@ -16,6 +17,10 @@ if (!configExists()) {
 	resetConfig();
 }
 
+if (!presetsDirExists()) {
+	console.warn("No presets directory found. Creating new presets directory");
+	resetPresetsDir();
+}
 const perritoConfig = getConfig();
 
 if (perritoConfig?.CONFIG_VERSION !== CONFIG_VERSION) {

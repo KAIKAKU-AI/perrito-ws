@@ -1,4 +1,11 @@
 import { getConfig, setConfig, updateConfig } from "@utils/config-manager";
+import {
+	deletePreset,
+	getPreset,
+	listPresets,
+	savePreset,
+	updatePreset,
+} from "@utils/presets-manager";
 import { app, ipcMain, nativeTheme, shell } from "electron";
 import {
 	disconnectClient,
@@ -66,6 +73,27 @@ export function setupIpcMainHandlers() {
 
 	ipcMain.handle("update-config", async (_, key: string, value: any) => {
 		updateConfig(key, value);
+	});
+
+	// MESSAGE PRESETS API
+	ipcMain.handle("get-message-preset", async (_, id: string) => {
+		return getPreset(id);
+	});
+
+	ipcMain.handle("list-message-presets", async (_) => {
+		return listPresets();
+	});
+
+	ipcMain.handle("save-message-preset", async (_, newPreset: any) => {
+		return savePreset(newPreset);
+	});
+
+	ipcMain.handle("delete-message-preset", async (_, id: string) => {
+		return deletePreset(id);
+	});
+
+	ipcMain.handle("update-message-preset", async (_, id: string, newPreset: any) => {
+		return updatePreset(id, newPreset);
 	});
 
 	// SERVER DAEMON API

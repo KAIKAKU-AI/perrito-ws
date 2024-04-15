@@ -1,4 +1,5 @@
 import { ConfigProvider } from "@contexts/ConfigContext";
+import { MessagePresetsProvider } from "@contexts/PresetsContext";
 import { ServerProvider } from "@contexts/ServerContext";
 import DashboardPage from "@pages/DashboardPage";
 import ErrorPage from "@pages/ErrorPage";
@@ -62,11 +63,13 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
 		<ConfigProvider>
-			<ThemeProvider>
-				<ServerProvider>
-					<RouterProvider router={router} />
-				</ServerProvider>
-			</ThemeProvider>
+			<MessagePresetsProvider>
+				<ThemeProvider>
+					<ServerProvider>
+						<RouterProvider router={router} />
+					</ServerProvider>
+				</ThemeProvider>
+			</MessagePresetsProvider>
 		</ConfigProvider>
 	</React.StrictMode>,
 );
