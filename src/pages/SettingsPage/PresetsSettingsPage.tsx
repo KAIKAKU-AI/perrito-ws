@@ -81,6 +81,7 @@ const PresetsSettingsPage = () => {
 					theme={ButtonThemes.SUCCESS}
 					onClick={() => {
 						savePreset(activePreset);
+						setActiveMessagePresetId("perr-##-create");
 					}}>
 					<span>Save</span>
 				</Button>

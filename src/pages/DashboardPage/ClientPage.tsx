@@ -6,6 +6,7 @@ import { PerritoClientType } from "src/backend/daemons/PerritoTypes";
 import Button, { ButtonThemes } from "@components/Button";
 import Dropdown from "@components/Setting/Dropdown";
 import Textarea from "@components/Textarea";
+import { useMessagePresets } from "@contexts/PresetsContext";
 import "./styles.scss";
 
 declare global {
@@ -26,6 +27,8 @@ interface SendMessageResponse {
 
 const ClientPage = (props: ClientPageProps) => {
 	const { servers } = useServers();
+	const { presets } = useMessagePresets();
+
 	const [client, setClient] = useState<PerritoClientType | null>(null);
 	const [sendMessageContent, setSendMessageContent] = useState<string>("");
 	const [sendMessageResponse, setSendMessageResponse] = useState<SendMessageResponse>({
@@ -61,7 +64,10 @@ const ClientPage = (props: ClientPageProps) => {
 	};
 
 	const onPresetChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		console.log(e.target.value);
+		const selectedPreset = presets.find((preset) => preset.id === e.target.value);
+		if (selectedPreset) {
+			setSendMessageContent(selectedPreset.content);
+		}
 	};
 
 	const sortedMessages = client.messages.sort((a, b) => a.timestamp - b.timestamp).reverse();
@@ -103,6 +109,23 @@ const ClientPage = (props: ClientPageProps) => {
 					onChange={(e) => setSendMessageContent(e.target.value)}
 					placeholder="Type a message to send to the client"
 					style={{ marginBottom: "1rem" }}
+					onKeyDown={(e) => {
+						if (e.key === "Tab") {
+							e.preventDefault(); // Prevent the default tab key behavior
+							const start = (e.target as HTMLTextAreaElement).selectionStart;
+							const end = (e.target as HTMLTextAreaElement).selectionEnd;
+							const newValue =
+								sendMessageContent.substring(0, start) + "\t" + sendMessageContent.substring(end);
+							setSendMessageContent(newValue);
+
+							// Move cursor to right after the inserted tab
+							setTimeout(() => {
+								(e.target as HTMLTextAreaElement).selectionStart = (
+									e.target as HTMLTextAreaElement
+								).selectionEnd = start + 1;
+							}, 0);
+						}
+					}}
 				/>
 
 				<div
@@ -119,7 +142,7 @@ const ClientPage = (props: ClientPageProps) => {
 						<Dropdown
 							dropdownOptions={[
 								{ label: "Apply message preset", value: "default" },
-								{ label: "Option 2", value: "option2" },
+								...presets.map((preset) => ({ value: preset.id, label: preset.name })),
 							]}
 							activeDropdownValue={"default"}
 							onChange={onPresetChange}
