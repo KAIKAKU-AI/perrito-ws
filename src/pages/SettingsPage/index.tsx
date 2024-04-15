@@ -12,7 +12,7 @@ import AboutSettingsPage from "./AboutSettingsPage";
 import AppearanceSettingsPage from "./AppearanceSettingsPage";
 import GeneralSettingsPage from "./GeneralSettingsPage";
 import KeyboardSettingsPage from "./KeyboardSettingsPage";
-import TemplatesSettingsPage from "./TemplatesSettingsPage";
+import PresetsSettingsPage from "./PresetsSettingsPage";
 
 const index = () => {
 	const params = useParams();
@@ -36,7 +36,7 @@ const index = () => {
 						title="Appearance"
 						redirect="/settings/appearance"
 						active={selectedSection === "appearance"}
-						icon={<PaletteIcon />} 
+						icon={<PaletteIcon />}
 						keybindId="select-sidebar-option-2"
 					/>
 					<SideBarButton
@@ -48,10 +48,10 @@ const index = () => {
 						keybindId="select-sidebar-option-3"
 					/>
 					<SideBarButton
-						id="templates"
-						title="Templates"
-						redirect="/settings/templates"
-						active={selectedSection === "templates"}
+						id="presets"
+						title="Presets"
+						redirect="/settings/presets"
+						active={selectedSection === "presets"}
 						icon={<PencilIcon />}
 						keybindId="select-sidebar-option-4"
 					/>
@@ -68,7 +68,7 @@ const index = () => {
 					{selectedSection === "general" && <GeneralSettingsPage />}
 					{selectedSection === "appearance" && <AppearanceSettingsPage />}
 					{selectedSection === "keyboard" && <KeyboardSettingsPage />}
-					{selectedSection === "templates" && <TemplatesSettingsPage />}
+					{selectedSection === "presets" && <PresetsSettingsPage />}
 					{selectedSection === "about" && <AboutSettingsPage />}
 				</div>
 			</div>
