@@ -1,6 +1,7 @@
 import { app } from "electron";
 import fs from "fs";
 import path from "path";
+import { defaultConfig } from "./default-config";
 
 const appConfigPath = path.join(app.getPath("userData"), "perrito_config.json");
 
@@ -18,7 +19,7 @@ export const configExists = (): boolean => {
 };
 
 export const resetConfig = () => {
-	fs.writeFileSync(appConfigPath, JSON.stringify({}));
+	fs.writeFileSync(appConfigPath, JSON.stringify(defaultConfig));
 };
 
 export const setConfig = (newConfig: any) => {

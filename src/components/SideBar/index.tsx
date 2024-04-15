@@ -15,7 +15,7 @@ const index = (props: indexProps) => {
 	const { config } = useConfig();
 	const keybindId = "hide-show-sidebar";
 
-	const keybind = config?.KEYBINDS.find(
+	const keybind = config?.KEYBINDS?.find(
 		(keybind: KeybindType) => keybind.id === keybindId,
 	) as KeybindType;
 

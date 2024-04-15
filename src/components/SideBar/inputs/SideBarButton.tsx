@@ -28,7 +28,7 @@ const SideBarButton = (props: SideBarButtonProps) => {
 
 	const { config, disableKeybinds } = useConfig();
 
-	const keybind = config?.KEYBINDS.find(
+	const keybind = config?.KEYBINDS?.find(
 		(keybind: KeybindType) => keybind.id === props.keybindId,
 	) as KeybindType;
 
