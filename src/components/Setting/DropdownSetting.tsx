@@ -1,3 +1,5 @@
+import Dropdown from "./Dropdown";
+
 interface DropdownSettingProps {
 	title: string;
 	description?: string;
@@ -13,16 +15,11 @@ const DropdownSetting = (props: DropdownSettingProps) => {
 				<p className="setting-info__title">{props.title}</p>
 				{props.description && <p className="setting-info__description">{props.description}</p>}
 			</div>
-			<select
-				className="dropdown"
-				value={props.activeDropdownValue ?? ""}
-				onChange={props.onChange}>
-				{props.dropdownOptions?.map((option) => (
-					<option key={option.value} value={option.value}>
-						{option.label}
-					</option>
-				))}
-			</select>
+			<Dropdown
+				dropdownOptions={props.dropdownOptions}
+				activeDropdownValue={props.activeDropdownValue}
+				onChange={props.onChange}
+			/>
 		</div>
 	);
 };

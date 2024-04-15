@@ -103,9 +103,11 @@ const ClientPage = (props: ClientPageProps) => {
 						{sendMessageResponse.message}
 					</p>
 
-					<button className="client-page__button" onClick={handleSendMessage}>
-						<span>Send</span>
-					</button>
+					<div style={{ display: "flex", gap: "1rem" }}>
+						<button className="client-page__button" onClick={handleSendMessage}>
+							<span>Send</span>
+						</button>
+					</div>
 				</div>
 
 				<h2 className="client-page__subtitle">Message history</h2>
