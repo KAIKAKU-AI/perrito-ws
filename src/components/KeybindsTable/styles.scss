@@ -9,6 +9,12 @@
     color: $color-primary;
     text-align: left;
 
+
+    @media (prefers-color-scheme: dark) {
+      background-color: $color-dark-primary;
+      color: $color-secondary;
+    }
+
     th {
       font-size: 1rem;
       padding: 0.5rem;
@@ -19,10 +25,18 @@
     tr {
       &:nth-child(odd) {
         background-color: $color-tertiary;
+
+        @media (prefers-color-scheme: dark) {
+          background-color: $color-dark-tertiary;
+        }
       }
 
       &:nth-child(even) {
-        background-color: darken($color-tertiary, 3%)
+        background-color: darken($color-tertiary, 3%);
+
+        @media (prefers-color-scheme: dark) {
+          background-color: darken($color-dark-tertiary, 5%);
+        }
       }
 
       td {
@@ -44,8 +58,17 @@
     transition: background-color 0.3s;
     border-radius: 999px;
 
+    @media (prefers-color-scheme: dark) {
+      background-color: $color-dark-secondary;
+      color: $color-secondary;
+    }
+
     &:hover {
       background-color: darken($color-secondary, 5%);
+
+      @media (prefers-color-scheme: dark) {
+        background-color: darken($color-dark-secondary, 5%);
+      }
     }
   }
 
