@@ -1,22 +1,28 @@
 import { configExists, getConfig, resetConfig, updateConfig } from "@utils/config-manager";
+import { CONFIG_VERSION } from "@utils/default-config";
 import { BrowserWindow, app, nativeTheme } from "electron";
 import path from "path";
 import { killDaemons } from "./backend/router";
 import { setupIpcMainHandlers } from "./ipc/ipcMainHandlers";
 import { setupIpcMainListeners } from "./ipc/ipcMainListeners";
-
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
 	app.quit();
 }
 
-// Check if the config file exists, if not, create it
+// Check if the config file exists, if not, create  it
 if (!configExists()) {
-	console.warn("No previous config file found; creating a new one.");
+	console.warn("No previous config file found. Creating new config file with default values");
 	resetConfig();
 }
 
 const perritoConfig = getConfig();
+
+if (perritoConfig?.CONFIG_VERSION !== CONFIG_VERSION) {
+	console.warn("Config file version mismatch. Resetting config file to default values.");
+	resetConfig();
+}
+
 const createWindow = () => {
 	try {
 		nativeTheme.themeSource = perritoConfig.THEME;

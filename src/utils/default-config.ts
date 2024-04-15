@@ -1,6 +1,9 @@
 import { ConfigType, KeybindType } from "@contexts/ConfigContext";
 
+export const CONFIG_VERSION = "2.0.0";
+
 export const defaultConfig: ConfigType = {
+	CONFIG_VERSION,
 	THEME: "system",
 	RUN_ON_STARTUP: false,
 	LANGUAGE: "en-gb",
