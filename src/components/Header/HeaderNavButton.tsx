@@ -19,7 +19,7 @@ const HeaderNavButton = (props: HeaderNavButtonProps) => {
 		(keybind: KeybindType) => keybind.id === props.keybindId,
 	) as KeybindType;
 
-	useHotkeys([keybind.keybind], () => {
+	useHotkeys([keybind?.keybind], () => {
 		disableKeybinds ? null : navigation(props.redirect);
 	});
 

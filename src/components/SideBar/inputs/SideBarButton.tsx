@@ -32,7 +32,7 @@ const SideBarButton = (props: SideBarButtonProps) => {
 		(keybind: KeybindType) => keybind.id === props.keybindId,
 	) as KeybindType;
 
-	useHotkeys([keybind.keybind], () => {
+	useHotkeys([keybind?.keybind], () => {
 		disableKeybinds ? null : navigation(props.redirect);
 	});
 

@@ -19,7 +19,7 @@ const index = (props: indexProps) => {
 		(keybind: KeybindType) => keybind.id === keybindId,
 	) as KeybindType;
 
-	useHotkeys([keybind.keybind], () => {
+	useHotkeys([keybind?.keybind], () => {
 		if (props.setOpen) {
 			disableKeybinds ? null : props.setOpen(!props.isOpen);
 		}
