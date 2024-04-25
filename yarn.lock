@@ -290,6 +290,15 @@
     fs-extra "^10.0.0"
     which "^2.0.2"
 
+"@electron-forge/maker-base@7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@electron-forge/maker-base/-/maker-base-7.4.0.tgz#28e0ef3a06241a313e1f74e193c8073d7344a4eb"
+  integrity sha512-LwWS4VPdwjISl1KpLhmM1Qr1M3sRTTQ/RsX+GlFd7cQ1W/FsgxMjaTG4Od1d+a5CGVTh3s6X2g99TSUfxjOveg==
+  dependencies:
+    "@electron-forge/shared-types" "7.4.0"
+    fs-extra "^10.0.0"
+    which "^2.0.2"
+
 "@electron-forge/maker-deb@^7.3.1":
   version "7.3.1"
   resolved "https://registry.npmjs.org/@electron-forge/maker-deb/-/maker-deb-7.3.1.tgz"
@@ -321,13 +330,13 @@
   optionalDependencies:
     electron-winstaller "^5.3.0"
 
-"@electron-forge/maker-zip@^7.3.1":
-  version "7.3.1"
-  resolved "https://registry.npmjs.org/@electron-forge/maker-zip/-/maker-zip-7.3.1.tgz"
-  integrity sha512-kH8M5gZnzO13rZIjzEPe+xLFZ0OrxLpJCrF64km2SksVCP8GKdWuD92z/vXZsyXfzQpa8mjHvqigzAB5R6mEiQ==
+"@electron-forge/maker-zip@^7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@electron-forge/maker-zip/-/maker-zip-7.4.0.tgz#e82ab6174344c43eb9a30b2fb5e2c2e32de2113d"
+  integrity sha512-UGbMdpuK/P29x1FFRWNOs3bNz+7QNFWVWyTM5hcWqib66cNuUmoaPifQyuwW2POIrIohrxlzLK87/i9Zc8g4dA==
   dependencies:
-    "@electron-forge/maker-base" "7.3.1"
-    "@electron-forge/shared-types" "7.3.1"
+    "@electron-forge/maker-base" "7.4.0"
+    "@electron-forge/shared-types" "7.4.0"
     cross-zip "^4.0.0"
     fs-extra "^10.0.0"
     got "^11.8.5"
@@ -385,6 +394,16 @@
     "@electron/rebuild" "^3.2.10"
     listr2 "^5.0.3"
 
+"@electron-forge/shared-types@7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@electron-forge/shared-types/-/shared-types-7.4.0.tgz#1355b99e77d66f3e568b7b09fb9aa107d2f856f3"
+  integrity sha512-5Ehy6enUjBaU08odf9u9TOhmOVXlqobzMvKUixtkdAWgV1XZAUJmn+p21xhj0IkO92MQiXMGv66w9pDNjRT8uQ==
+  dependencies:
+    "@electron-forge/tracer" "7.4.0"
+    "@electron/packager" "^18.3.1"
+    "@electron/rebuild" "^3.2.10"
+    listr2 "^7.0.2"
+
 "@electron-forge/template-base@7.3.1":
   version "7.3.1"
   resolved "https://registry.npmjs.org/@electron-forge/template-base/-/template-base-7.3.1.tgz"
@@ -436,6 +455,13 @@
   version "7.3.1"
   resolved "https://registry.npmjs.org/@electron-forge/tracer/-/tracer-7.3.1.tgz"
   integrity sha512-Jz6SgnHZ2Gk4l7WRu/rLyQTe6F23dXcTNsjI5gtUEJxjjd2K9L0UoxVcGikA7SEMUufaPyskSJfrW7NSZ4s43Q==
+  dependencies:
+    chrome-trace-event "^1.0.3"
+
+"@electron-forge/tracer@7.4.0":
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/@electron-forge/tracer/-/tracer-7.4.0.tgz#b6cbff22e56f27ce1add18da07ea0301a774c580"
+  integrity sha512-F4jbnDn4yIZjmky1FZ6rgBKTM05AZQQfHkyJW2hdS4pDKJjdKAqWytoZKDi1/S6Cr6tN+DD0TFGD3V0i6HPHYQ==
   dependencies:
     chrome-trace-event "^1.0.3"
 
@@ -541,6 +567,31 @@
     parse-author "^2.0.0"
     plist "^3.0.0"
     rcedit "^4.0.0"
+    resolve "^1.1.6"
+    semver "^7.1.3"
+    yargs-parser "^21.1.1"
+
+"@electron/packager@^18.3.1":
+  version "18.3.2"
+  resolved "https://registry.yarnpkg.com/@electron/packager/-/packager-18.3.2.tgz#49412a06b3233635bd9cdf87edf9cd9e2aa0567f"
+  integrity sha512-orjylavppgIh24qkNpWm2B/LQUpCS/YLOoKoU+eMK/hJgIhShLDsusPIQzgUGVwNCichu8/zPAGfdQZXHG0gtw==
+  dependencies:
+    "@electron/asar" "^3.2.1"
+    "@electron/get" "^3.0.0"
+    "@electron/notarize" "^2.1.0"
+    "@electron/osx-sign" "^1.0.5"
+    "@electron/universal" "^2.0.1"
+    "@electron/windows-sign" "^1.0.0"
+    debug "^4.0.1"
+    extract-zip "^2.0.0"
+    filenamify "^4.1.0"
+    fs-extra "^11.1.0"
+    galactus "^1.0.0"
+    get-package-info "^1.0.0"
+    junk "^3.1.0"
+    parse-author "^2.0.0"
+    plist "^3.0.0"
+    resedit "^2.0.0"
     resolve "^1.1.6"
     semver "^7.1.3"
     yargs-parser "^21.1.1"
@@ -1868,6 +1919,13 @@ ansi-escapes@^4.3.0, ansi-escapes@^4.3.2:
   dependencies:
     type-fest "^0.21.3"
 
+ansi-escapes@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-5.0.0.tgz#b6a0caf0eef0c41af190e9a749e0c00ec04bb2a6"
+  integrity sha512-5GFMVX8HqE/TB+FuBJGuO5XG0WrsA6ptUqoODaT/n9mmUaZFkqnBueB4leqGBCmrUHnCnC4PCZTCd0E7QQ83bA==
+  dependencies:
+    type-fest "^1.0.2"
+
 ansi-regex@^2.0.0:
   version "2.1.1"
   resolved "https://registry.npmjs.org/ansi-regex/-/ansi-regex-2.1.1.tgz"
@@ -1907,7 +1965,7 @@ ansi-styles@^5.0.0:
   resolved "https://registry.npmjs.org/ansi-styles/-/ansi-styles-5.2.0.tgz"
   integrity sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA==
 
-ansi-styles@^6.1.0:
+ansi-styles@^6.0.0, ansi-styles@^6.1.0:
   version "6.2.1"
   resolved "https://registry.npmjs.org/ansi-styles/-/ansi-styles-6.2.1.tgz"
   integrity sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==
@@ -2518,6 +2576,13 @@ cli-cursor@^3.1.0:
   dependencies:
     restore-cursor "^3.1.0"
 
+cli-cursor@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/cli-cursor/-/cli-cursor-4.0.0.tgz#3cecfe3734bf4fe02a8361cbdc0f6fe28c6a57ea"
+  integrity sha512-VGtlMu3x/4DOtIUwEkRezxUZ2lBacNJCHash0N0WeZDBS+7Ux1dm3XWAgWYxLJFMMdOeXMHXorshEFhbMSGelg==
+  dependencies:
+    restore-cursor "^4.0.0"
+
 cli-spinners@^2.5.0, cli-spinners@^2.9.0:
   version "2.9.2"
   resolved "https://registry.npmjs.org/cli-spinners/-/cli-spinners-2.9.2.tgz"
@@ -2530,6 +2595,14 @@ cli-truncate@^2.1.0:
   dependencies:
     slice-ansi "^3.0.0"
     string-width "^4.2.0"
+
+cli-truncate@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/cli-truncate/-/cli-truncate-3.1.0.tgz#3f23ab12535e3d73e839bb43e73c9de487db1389"
+  integrity sha512-wfOBkjXteqSnI59oPcJkcPl/ZmwvMMOj340qUIY1SKZCv0B9Cf4D4fAucRkIKQmsIuYK3x1rrgU7MeGRruiuiA==
+  dependencies:
+    slice-ansi "^5.0.0"
+    string-width "^5.0.0"
 
 cli-width@^4.1.0:
   version "4.1.0"
@@ -2595,7 +2668,7 @@ color-support@^1.1.3:
   resolved "https://registry.npmjs.org/color-support/-/color-support-1.1.3.tgz"
   integrity sha512-qiBjkpbMLO/HL68y+lh4q0/O1MZFj2RX6X/KmMa3+gJD3z+WwI1ZzDHysvqHGS3mP6mznPckpXmw1nI9cJjyRg==
 
-colorette@^2.0.19:
+colorette@^2.0.19, colorette@^2.0.20:
   version "2.0.20"
   resolved "https://registry.npmjs.org/colorette/-/colorette-2.0.20.tgz"
   integrity sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==
@@ -3527,6 +3600,11 @@ event-target-shim@^5.0.0:
   version "5.0.1"
   resolved "https://registry.npmjs.org/event-target-shim/-/event-target-shim-5.0.1.tgz"
   integrity sha512-i/2XbnSz/uxRCU6+NdVJgKWDTM427+MqYbkQzD321DuCQJUqOuJKIA0IM2+W2xtYHdKOmZ4dR6fExsd4SXL+WQ==
+
+eventemitter3@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-5.0.1.tgz#53f5ffd0a492ac800721bb42c66b841de96423c4"
+  integrity sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA==
 
 events@^3.3.0:
   version "3.3.0"
@@ -4701,6 +4779,11 @@ is-fullwidth-code-point@^3.0.0:
   resolved "https://registry.npmjs.org/is-fullwidth-code-point/-/is-fullwidth-code-point-3.0.0.tgz"
   integrity sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==
 
+is-fullwidth-code-point@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/is-fullwidth-code-point/-/is-fullwidth-code-point-4.0.0.tgz#fae3167c729e7463f8461ce512b080a49268aa88"
+  integrity sha512-O4L094N2/dZ7xqVdrXhh9r1KODPJpFms8B5sGdJLPy664AgvXsreZUyCQQNItZRDlYug4xStLjNp/sz3HvBowQ==
+
 is-glob@^4.0.0, is-glob@^4.0.1, is-glob@^4.0.3, is-glob@~4.0.1:
   version "4.0.3"
   resolved "https://registry.npmjs.org/is-glob/-/is-glob-4.0.3.tgz"
@@ -5074,6 +5157,18 @@ listr2@^5.0.3:
     through "^2.3.8"
     wrap-ansi "^7.0.0"
 
+listr2@^7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/listr2/-/listr2-7.0.2.tgz#3aa3e1549dfaf3c57ab5eeaba754da3b87f33063"
+  integrity sha512-rJysbR9GKIalhTbVL2tYbF2hVyDnrf7pFUZBwjPaMIdadYHmeT+EVi/Bu3qd7ETQPahTotg2WRCatXwRBW554g==
+  dependencies:
+    cli-truncate "^3.1.0"
+    colorette "^2.0.20"
+    eventemitter3 "^5.0.1"
+    log-update "^5.0.1"
+    rfdc "^1.3.0"
+    wrap-ansi "^8.1.0"
+
 load-json-file@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/load-json-file/-/load-json-file-2.0.0.tgz"
@@ -5216,6 +5311,17 @@ log-update@^4.0.0:
     cli-cursor "^3.1.0"
     slice-ansi "^4.0.0"
     wrap-ansi "^6.2.0"
+
+log-update@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/log-update/-/log-update-5.0.1.tgz#9e928bf70cb183c1f0c9e91d9e6b7115d597ce09"
+  integrity sha512-5UtUDQ/6edw4ofyljDNcOVJQ4c7OjDro4h3y8e1GQL5iYElYclVHJ3zeWchylvMaKnDbDilC8irOVyexnA/Slw==
+  dependencies:
+    ansi-escapes "^5.0.0"
+    cli-cursor "^4.0.0"
+    slice-ansi "^5.0.0"
+    strip-ansi "^7.0.1"
+    wrap-ansi "^8.0.1"
 
 loglevel-colored-level-prefix@^1.0.0:
   version "1.0.0"
@@ -6150,6 +6256,11 @@ pathe@^1.1.1:
   resolved "https://registry.npmjs.org/pathe/-/pathe-1.1.2.tgz"
   integrity sha512-whLdWMYL2TwI08hn8/ZqAbrVemu0LNaNNJZX73O6qaIdCTfXutsLhMkjdENX0qhsQ9uIimo4/aQOmXkoon2nDQ==
 
+pe-library@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/pe-library/-/pe-library-1.0.0.tgz#360934ccdc25f19ac24d61c9a347caf23a9dc27a"
+  integrity sha512-yZ+4d3YHKUjO0BX03oXFfHRKLdYKDO2HmCt1RcApPxme/P5ASPbbKnuQkzFrmT482wi2kfO+sPgqasrz5QeU1w==
+
 pend@~1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/pend/-/pend-1.2.0.tgz"
@@ -6642,6 +6753,13 @@ require-relative@^0.8.7:
   resolved "https://registry.npmjs.org/require-relative/-/require-relative-0.8.7.tgz"
   integrity sha512-AKGr4qvHiryxRb19m3PsLRGuKVAbJLUD7E6eOaHkfKhwc+vSgVOCY5xNvm9EkolBKTOf0GrQAZKLimOCz81Khg==
 
+resedit@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/resedit/-/resedit-2.0.0.tgz#cd615f294c38e4b806cf031ede128d5e0c17d1d7"
+  integrity sha512-vrrJCabKxAW4MT1QivtAAb0poGp8KT2qhnSzfN9tFIxb2rQu1hRHNn1VgGSZR7nmxGaW5Yz0YeW1bjgvRfNoKA==
+  dependencies:
+    pe-library "^1.0.0"
+
 resolve-alpn@^1.0.0, resolve-alpn@^1.2.0:
   version "1.2.1"
   resolved "https://registry.npmjs.org/resolve-alpn/-/resolve-alpn-1.2.1.tgz"
@@ -6701,6 +6819,14 @@ restore-cursor@^3.1.0:
   version "3.1.0"
   resolved "https://registry.npmjs.org/restore-cursor/-/restore-cursor-3.1.0.tgz"
   integrity sha512-l+sSefzHpj5qimhFSE5a8nufZYAM3sBSVMAPtYkmC+4EH2anSGaEMXSD0izRQbu9nfyQ9y5JrVmp7E8oZrUjvA==
+  dependencies:
+    onetime "^5.1.0"
+    signal-exit "^3.0.2"
+
+restore-cursor@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/restore-cursor/-/restore-cursor-4.0.0.tgz#519560a4318975096def6e609d44100edaa4ccb9"
+  integrity sha512-I9fPXU9geO9bHOt9pHHOhOkYerIMsmVaWB0rA2AI9ERh/+x/i7MV5HKBNrg+ljO5eoPVgCcnFuRjJ9uH6I/3eg==
   dependencies:
     onetime "^5.1.0"
     signal-exit "^3.0.2"
@@ -7041,6 +7167,14 @@ slice-ansi@^4.0.0:
     astral-regex "^2.0.0"
     is-fullwidth-code-point "^3.0.0"
 
+slice-ansi@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/slice-ansi/-/slice-ansi-5.0.0.tgz#b73063c57aa96f9cd881654b15294d95d285c42a"
+  integrity sha512-FC+lgizVPfie0kkhqUScwRu1O/lF6NOgJmlCgK+/LYxDCTk8sGelYaHDhFcDN+Sn3Cv+3VSa4Byeo+IMCzpMgQ==
+  dependencies:
+    ansi-styles "^6.0.0"
+    is-fullwidth-code-point "^4.0.0"
+
 smart-buffer@^4.2.0:
   version "4.2.0"
   resolved "https://registry.npmjs.org/smart-buffer/-/smart-buffer-4.2.0.tgz"
@@ -7193,7 +7327,7 @@ streamx@^2.13.0, streamx@^2.15.0:
     is-fullwidth-code-point "^3.0.0"
     strip-ansi "^6.0.1"
 
-string-width@^5.0.1, string-width@^5.1.2:
+string-width@^5.0.0, string-width@^5.0.1, string-width@^5.1.2:
   version "5.1.2"
   resolved "https://registry.npmjs.org/string-width/-/string-width-5.1.2.tgz"
   integrity sha512-HnLOCR3vjcY8beoNLtcjZ5/nxn2afmME6lhrDrebokqMap+XbeW8n9TXpPDOqdGK5qcI3oT0GKTW6wC7EMiVqA==
@@ -7551,6 +7685,11 @@ type-fest@^0.21.3:
   version "0.21.3"
   resolved "https://registry.npmjs.org/type-fest/-/type-fest-0.21.3.tgz"
   integrity sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==
+
+type-fest@^1.0.2:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-1.4.0.tgz#e9fb813fe3bf1744ec359d55d1affefa76f14be1"
+  integrity sha512-yGSza74xk0UG8k+pLh5oeoYirvIiWo5t0/o3zHHAO2tRDiZcxWP7fywNlXhqb6/r6sWvwi+RsyQMWhVLe4BVuA==
 
 type-fest@^2.12.2:
   version "2.19.0"
@@ -8025,16 +8164,6 @@ wrap-ansi@^6.2.0:
     ansi-styles "^4.0.0"
     string-width "^4.1.0"
     strip-ansi "^6.0.0"
-
-wrap-ansi@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-7.0.0.tgz"
-  integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
-  dependencies:
-    ansi-styles "^4.0.0"
-    string-width "^4.1.0"
-    strip-ansi "^6.0.0"
-
 wrap-ansi@^8.1.0:
   version "8.1.0"
   resolved "https://registry.npmjs.org/wrap-ansi/-/wrap-ansi-8.1.0.tgz"
