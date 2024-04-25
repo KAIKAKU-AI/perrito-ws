@@ -7748,10 +7748,10 @@ wcwidth@^1.0.1:
   dependencies:
     defaults "^1.0.3"
 
-wdio-electron-service@^6.4.0:
-  version "6.4.0"
-  resolved "https://registry.npmjs.org/wdio-electron-service/-/wdio-electron-service-6.4.0.tgz"
-  integrity sha512-OnSXIU6AQ3u48UZe0Dq1IreayYN4B/UAuQenPjSFrLqiUBi9qMhwPBkKGfsEFG57Ek11cbYgy8b92heCfv9jgQ==
+wdio-electron-service@^6.4.1:
+  version "6.4.1"
+  resolved "https://registry.yarnpkg.com/wdio-electron-service/-/wdio-electron-service-6.4.1.tgz#b71946378886cf7eba81dbaaeb134904c70bc1db"
+  integrity sha512-mYF3ZXuQc9BJlWK89taFMJy5bTKEjjU/ISR//D48lMnSksUhIy7NMPhGf6rob7EaU5XCzgLvqXbpX2ZviNk2YQ==
   dependencies:
     "@vitest/spy" "^1.2.0"
     "@wdio/logger" "^8.16.17"
