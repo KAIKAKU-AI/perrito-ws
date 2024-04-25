@@ -105,7 +105,7 @@ const ServerPage = (props: ServerPageProps) => {
 				<Button
 					theme={ButtonThemes.DANGER}
 					onClick={() => {
-						// window.servers.stopServer(server.id);
+						window.servers.stopServer(server.id);
 
 						navigate("/servers");
 					}}>
