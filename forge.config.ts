@@ -29,7 +29,7 @@ const config: ForgeConfig = {
 				},
 				{
 					entry: "src/backend/daemons/PerritoDaemon.ts",
-					config: "vite.main.config.ts",
+					config: "vite.daemon.config.ts",
 				},
 			],
 			renderer: [
