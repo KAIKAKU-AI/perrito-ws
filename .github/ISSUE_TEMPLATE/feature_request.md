@@ -1,7 +1,7 @@
 ---
 name: Feature request
 about: Suggest an idea for Perrito WS
-title: ''
+title: "[FEAT] Feature Request Title"
 labels: enhancement
 assignees: ''
 
