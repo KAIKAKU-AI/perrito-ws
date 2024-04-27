@@ -25,7 +25,7 @@ If applicable, add screenshots to help explain your problem.
 
 **Desktop (please complete the following information):**
  - OS: [e.g. Windows]
- - Perrito version [e.g. 1.0.2]
+ - Perrito version: [e.g. 1.0.2]
 
 **Additional context**
 Add any other context about the problem here.
