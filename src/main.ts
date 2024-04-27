@@ -3,7 +3,7 @@ import { CONFIG_VERSION } from "@utils/default-config";
 import { presetsDirExists, resetPresetsDir } from "@utils/presets-manager";
 import { BrowserWindow, app, nativeTheme } from "electron";
 import path from "path";
-import { killDaemons } from "./backend/router";
+import DaemonProcess from "./backend/DaemonProcess";
 import { setupIpcMainHandlers } from "./ipc/ipcMainHandlers";
 import { setupIpcMainListeners } from "./ipc/ipcMainListeners";
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -27,6 +27,8 @@ if (perritoConfig?.CONFIG_VERSION !== CONFIG_VERSION) {
 	console.warn("Config file version mismatch. Resetting config file to default values.");
 	resetConfig();
 }
+
+let perritoDaemonProcess: DaemonProcess | null = null;
 
 const createWindow = () => {
 	try {
@@ -56,8 +58,13 @@ const createWindow = () => {
 		mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
 	}
 
-	setupIpcMainHandlers();
-	setupIpcMainListeners(mainWindow);
+	const daemonPath = path.join(__dirname, "PerritoDaemon.js");
+
+	perritoDaemonProcess = new DaemonProcess(daemonPath);
+	perritoDaemonProcess.start();
+
+	setupIpcMainHandlers(perritoDaemonProcess);
+	setupIpcMainListeners(mainWindow, perritoDaemonProcess);
 
 	// Open the DevTools.
 	mainWindow.webContents.openDevTools();
@@ -93,7 +100,9 @@ app.on("activate", () => {
 
 // on app close remove any child processes
 app.on("before-quit", () => {
-	killDaemons();
+	if (perritoDaemonProcess) {
+		perritoDaemonProcess.stop();
+	}
 });
 
 // In this file you can include the rest of your app's specific main process

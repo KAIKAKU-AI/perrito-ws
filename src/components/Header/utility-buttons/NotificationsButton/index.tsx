@@ -2,14 +2,12 @@ import HeaderUtilityButton from "@components/Header/HeaderUtilityButton";
 
 import BellIcon from "@assets/images/icons/bell.svg?react";
 
-interface indexProps {}
-
-const index = (props: indexProps) => {
+const index = () => {
 	return (
 		<HeaderUtilityButton
 			icon={<BellIcon />}
 			onClick={() => {
-				alert("Notifications clicked");
+				console.warn("Coming soon!");
 			}}
 			tooltip="Notification"
 		/>

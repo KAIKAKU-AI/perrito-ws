@@ -1,20 +1,3 @@
-// import { defineConfig } from 'vite'
-
-// export default defineConfig({
-//   build: {
-//     outDir: '.vite/build',
-//     rollupOptions: {
-//       input: './src/backend/daemons/PerritoDaemon.ts',
-//         output: {
-//           format: 'cjs',
-//           entryFileNames: '[name].js',
-//           chunkFileNames: '[name].js',
-//           assetFileNames: '[name].[ext]',
-//         }
-//     }
-//   }
-// })
-
 import type { ConfigEnv, UserConfig } from "vite";
 import { defineConfig, mergeConfig } from "vite";
 import { external, getBuildConfig, pluginHotRestart } from "./vite.base.config";

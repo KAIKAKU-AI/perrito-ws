@@ -51,7 +51,6 @@ const index = () => {
 						}))}
 						activeDropdownValue={selectedServer ? selectedServer : ""}
 						onChange={(e) => {
-							// window.location.href = `/dashboard/${e.target.value}`;
 							navigate(`/dashboard/${e.target.value}`);
 						}}
 					/>

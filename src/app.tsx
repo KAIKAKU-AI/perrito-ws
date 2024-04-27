@@ -7,12 +7,12 @@ import ServersPage from "@pages/ServersPage";
 import SettingsPage from "@pages/SettingsPage";
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
+import { createHashRouter, Navigate, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import "./normalize.css";
 import "./styles.css";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
 	{
 		path: "/",
 		element: <Navigate to="/dashboard" replace />,

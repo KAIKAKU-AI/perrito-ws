@@ -12,17 +12,25 @@ class PerritoDaemon {
 
 	constructor() {
 		this.servers = [];
-		process.on("message", this.handleMessage.bind(this));
+		process.parentPort.on("message", this.handleMessage.bind(this));
 		console.info("PerritoDaemon started");
 	}
 
-	private handleMessage(message: any) {
+	private handleMessage(e: any) {
+		const message = e.data;
+
 		switch (message.action) {
 			case "start":
 				this.startServer(message.id, message.name, message.host, message.port)
-					.then((data) => process.send({ correlationId: message.correlationId, data, error: null }))
+					.then((data) =>
+						process.parentPort.postMessage({
+							correlationId: message.correlationId,
+							data,
+							error: null,
+						}),
+					)
 					.catch((error) =>
-						process.send({
+						process.parentPort.postMessage({
 							correlationId: message.correlationId,
 							data: null,
 							error: error.message,
@@ -31,9 +39,15 @@ class PerritoDaemon {
 				break;
 			case "stop":
 				this.stopServer(message.id)
-					.then((data) => process.send({ correlationId: message.correlationId, data, error: null }))
+					.then((data) =>
+						process.parentPort.postMessage({
+							correlationId: message.correlationId,
+							data,
+							error: null,
+						}),
+					)
 					.catch((error) =>
-						process.send({
+						process.parentPort.postMessage({
 							correlationId: message.correlationId,
 							data: null,
 							error: error.message,
@@ -41,7 +55,21 @@ class PerritoDaemon {
 					);
 				break;
 			case "get-servers":
-				process.send({ correlationId: message.correlationId, data: this.servers });
+				process.parentPort.postMessage({
+					correlationId: message.correlationId,
+					data: this.servers?.map((server) => ({
+						id: server.id,
+						name: server.name,
+						host: server.host,
+						port: server.port,
+						clients: server.clients.map((client) => ({
+							id: client.id,
+							request: client.request,
+							readyState: client.socket.readyState,
+							messages: client.messages,
+						})),
+					})),
+				});
 				break;
 			case "send-message":
 				const serverId = message.serverId;
@@ -49,9 +77,15 @@ class PerritoDaemon {
 				const messageContent = message.message;
 
 				this.sendToClient(serverId, clientId, messageContent)
-					.then((data) => process.send({ correlationId: message.correlationId, data, error: null }))
+					.then((data) =>
+						process.parentPort.postMessage({
+							correlationId: message.correlationId,
+							data,
+							error: null,
+						}),
+					)
 					.catch((error) =>
-						process.send({
+						process.parentPort.postMessage({
 							correlationId: message.correlationId,
 							data: null,
 							error: error.message,
@@ -61,9 +95,15 @@ class PerritoDaemon {
 				break;
 			case "disconnect-client":
 				this.disconnectClient(message.serverId, message.clientId)
-					.then((data) => process.send({ correlationId: message.correlationId, data, error: null }))
+					.then((data) =>
+						process.parentPort.postMessage({
+							correlationId: message.correlationId,
+							data,
+							error: null,
+						}),
+					)
 					.catch((error) =>
-						process.send({
+						process.parentPort.postMessage({
 							correlationId: message.correlationId,
 							data: null,
 							error: error.message,
@@ -88,7 +128,7 @@ class PerritoDaemon {
 			})), // Omit the socket from the client data
 		}));
 
-		process.send({ action: "update-renderer", data: serversData });
+		process.parentPort.postMessage({ action: "update-renderer", data: serversData });
 	}
 
 	private async disconnectClient(serverId: string, clientId: string): Promise<DaemonResponse> {
@@ -151,11 +191,13 @@ class PerritoDaemon {
 	): Promise<DaemonResponse> {
 		return new Promise((resolve, reject) => {
 			if (this.servers.find((server) => server.id === id)) {
+				console.error(`Server with id ${id} already exists.`);
 				throw new Error(`Server with id ${id} already exists.`);
 			}
 
 			// Validate the id, name, host, and port
 			if (!id || !name || !host || !port) {
+				console.error("Invalid server configuration.");
 				throw new Error("Invalid server configuration.");
 			}
 
@@ -183,6 +225,7 @@ class PerritoDaemon {
 			server.once("listening", () => {
 				this.servers.push({ id, name, host, port, clients: [], server });
 				this.sendRendererUpdate();
+				console.info(`WebSocket Server with id ${id} started on ws://${host}:${port}`);
 				resolve({
 					name: "SUCCESS",
 					message: `Server started successfully on ws://${host}:${port} with id ${id}`,

@@ -7,13 +7,7 @@ import {
 	updatePreset,
 } from "@utils/presets-manager";
 import { app, ipcMain, nativeTheme, shell } from "electron";
-import {
-	disconnectClient,
-	getWebSocketServers,
-	sendMessageToClient,
-	startWebSocketServer,
-	stopWebSocketServer,
-} from "src/backend/router";
+import DaemonProcess from "src/backend/DaemonProcess";
 
 export enum Theme {
 	LIGHT = "light",
@@ -21,7 +15,7 @@ export enum Theme {
 	SYSTEM = "system",
 }
 
-export function setupIpcMainHandlers() {
+export function setupIpcMainHandlers(perritoDaemonProcess: DaemonProcess | null) {
 	// THEME API GETTERS
 	ipcMain.on("get-theme", (event) => {
 		event.returnValue = nativeTheme.shouldUseDarkColors;
@@ -99,7 +93,13 @@ export function setupIpcMainHandlers() {
 	// SERVER DAEMON API
 	ipcMain.handle("start-server", async (_, serverId, serverName, host, port) => {
 		try {
-			return startWebSocketServer(serverId, serverName, host, parseInt(port));
+			return perritoDaemonProcess?.sendMessage({
+				id: serverId,
+				action: "start",
+				name: serverName,
+				host,
+				port,
+			});
 		} catch (error) {
 			throw error;
 		}
@@ -107,7 +107,10 @@ export function setupIpcMainHandlers() {
 
 	ipcMain.handle("stop-server", async (_, id) => {
 		try {
-			return stopWebSocketServer(id);
+			return perritoDaemonProcess?.sendMessage({
+				id,
+				action: "stop",
+			});
 		} catch (error) {
 			throw error;
 		}
@@ -115,7 +118,9 @@ export function setupIpcMainHandlers() {
 
 	ipcMain.handle("get-servers", async (_) => {
 		try {
-			return getWebSocketServers();
+			return perritoDaemonProcess?.sendMessage({
+				action: "get-servers",
+			});
 		} catch (error) {
 			throw error;
 		}
@@ -123,7 +128,12 @@ export function setupIpcMainHandlers() {
 
 	ipcMain.handle("send-message-to-client", async (_, serverId, clientId, message) => {
 		try {
-			return sendMessageToClient(serverId, clientId, message);
+			return perritoDaemonProcess?.sendMessage({
+				action: "send-message",
+				serverId,
+				clientId,
+				message,
+			});
 		} catch (error) {
 			throw error;
 		}
@@ -131,7 +141,11 @@ export function setupIpcMainHandlers() {
 
 	ipcMain.handle("disconnect-client", async (_, serverId, clientId) => {
 		try {
-			return disconnectClient(serverId, clientId);
+			return perritoDaemonProcess?.sendMessage({
+				action: "disconnect-client",
+				serverId,
+				clientId,
+			});
 		} catch (error) {
 			throw error;
 		}

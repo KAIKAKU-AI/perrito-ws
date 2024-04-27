@@ -5,7 +5,7 @@ import SideBarController from "@components/SideBar/SideBarController";
 import SideBarButton from "@components/SideBar/inputs/SideBarButton";
 import { useServers } from "@contexts/ServerContext";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { PerritoServerType } from "src/backend/daemons/PerritoTypes";
 import "../styles.scss";
 import CreateServerPage from "./CreateServerPage";
@@ -21,6 +21,7 @@ declare global {
 const index = () => {
 	const [sidebarOpen, setSidebarOpen] = useState(true);
 	const { servers } = useServers();
+	const location = useLocation();
 
 	const params = useParams();
 	const selectedServerId = params.serverId;
@@ -34,7 +35,7 @@ const index = () => {
 						id="create"
 						title="Create"
 						redirect="/servers/create"
-						active={window.location.pathname === "/servers/create"}
+						active={location.pathname === "/servers/create"}
 						icon={<PlusIcon />}
 						keybindId="select-sidebar-option-1"
 					/>
@@ -57,9 +58,9 @@ const index = () => {
 					<div className="page__main">
 						<SideBarController isOpen={sidebarOpen} onClick={() => setSidebarOpen(!sidebarOpen)} />
 
-						{window.location.pathname === "/servers/create" && <CreateServerPage />}
+						{location.pathname === "/servers/create" && <CreateServerPage />}
 
-						{selectedServerId && window.location.pathname !== "/servers/create" && (
+						{selectedServerId && location.pathname !== "/servers/create" && (
 							<ServerPage serverId={selectedServerId} servers={servers} />
 						)}
 					</div>
