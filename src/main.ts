@@ -29,13 +29,16 @@ if (!presetsDirExists()) {
   console.warn("No presets directory found. Creating new presets directory");
   resetPresetsDir();
 }
-const perritoConfig = getConfig();
+const perritoConfig = getConfig() as {
+  CONFIG_VERSION: string;
+  THEME: "system" | "light" | "dark";
+  RUN_ON_STARTUP: boolean;
+};
 
 if (perritoConfig?.CONFIG_VERSION !== CONFIG_VERSION) {
   console.warn("Config file version mismatch. Resetting config file to default values.");
   resetConfig();
 }
-
 let perritoDaemonProcess: DaemonProcess | null = null;
 
 const createWindow = () => {
