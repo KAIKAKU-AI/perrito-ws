@@ -58,6 +58,7 @@ const createWindow = () => {
       preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,
     },
+    icon: path.join(__dirname, "perrito.ico"),
   });
 
   // Remove the menu bar
