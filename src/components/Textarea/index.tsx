@@ -4,7 +4,7 @@ import "./styles.scss";
 interface indexProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
 const index = (props: indexProps) => {
-	return <textarea className="textarea" {...props} />;
+  return <textarea className="textarea" {...props} />;
 };
 
 export default index;

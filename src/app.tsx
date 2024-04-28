@@ -13,62 +13,62 @@ import "./normalize.css";
 import "./styles.css";
 
 const router = createHashRouter([
-	{
-		path: "/",
-		element: <Navigate to="/dashboard" replace />,
-		errorElement: <ErrorPage />,
-	},
-	{
-		path: "/dashboard",
-		element: <DashboardPage />,
-		errorElement: <ErrorPage />,
-	},
-	{
-		path: "/dashboard/:serverId",
-		element: <DashboardPage />,
-		errorElement: <ErrorPage />,
-	},
-	{
-		path: "/dashboard/:serverId/:clientId",
-		element: <DashboardPage />,
-		errorElement: <ErrorPage />,
-	},
-	{
-		path: "/servers",
-		element: <Navigate to="/servers/create" replace />,
-		errorElement: <ErrorPage />,
-	},
-	{
-		path: "/servers/create",
-		element: <ServersPage />,
-		errorElement: <ErrorPage />,
-	},
-	{
-		path: "/servers/:serverId",
-		element: <ServersPage />,
-		errorElement: <ErrorPage />,
-	},
-	{
-		path: "/settings",
-		element: <Navigate to="/settings/general" replace />,
-	},
-	{
-		path: "/settings/:section",
-		element: <SettingsPage />,
-		errorElement: <ErrorPage />,
-	},
+  {
+    path: "/",
+    element: <Navigate to="/dashboard" replace />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/dashboard/:serverId",
+    element: <DashboardPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/dashboard/:serverId/:clientId",
+    element: <DashboardPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/servers",
+    element: <Navigate to="/servers/create" replace />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/servers/create",
+    element: <ServersPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/servers/:serverId",
+    element: <ServersPage />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/settings",
+    element: <Navigate to="/settings/general" replace />,
+  },
+  {
+    path: "/settings/:section",
+    element: <SettingsPage />,
+    errorElement: <ErrorPage />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-	<React.StrictMode>
-		<ConfigProvider>
-			<MessagePresetsProvider>
-				<ThemeProvider>
-					<ServerProvider>
-						<RouterProvider router={router} />
-					</ServerProvider>
-				</ThemeProvider>
-			</MessagePresetsProvider>
-		</ConfigProvider>
-	</React.StrictMode>,
+  <React.StrictMode>
+    <ConfigProvider>
+      <MessagePresetsProvider>
+        <ThemeProvider>
+          <ServerProvider>
+            <RouterProvider router={router} />
+          </ServerProvider>
+        </ThemeProvider>
+      </MessagePresetsProvider>
+    </ConfigProvider>
+  </React.StrictMode>,
 );

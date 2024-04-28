@@ -3,58 +3,60 @@ import { createContext, useCallback, useContext, useEffect, useState } from "rea
 import { PerritoServerType } from "src/backend/daemons/PerritoTypes";
 
 export const ServerContext = createContext({
-	servers: [] as PerritoServerType[],
-	fetchServers: () => {},
+  servers: [] as PerritoServerType[],
+  fetchServers: () => {},
 });
 
-export const ServerProvider = ({ children }: any) => {
-	const [servers, setServers] = useState<PerritoServerType[]>([]);
+import { ReactNode } from "react";
 
-	const fetchServers = useCallback(() => {
-		window.servers
-			.getServers()
-			.then((serversData: any) => {
-				setServers(serversData);
-			})
-			.catch((error: any) => {
-				console.error("Error getting servers:", error);
-			});
-	}, []);
+export const ServerProvider = ({ children }: { children: ReactNode }) => {
+  const [servers, setServers] = useState<PerritoServerType[]>([]);
 
-	useEffect(() => {
-		fetchServers(); // Call on initial mount
+  const fetchServers = useCallback(() => {
+    window.servers
+      .getServers()
+      .then((serversData: PerritoServerType[]) => {
+        setServers(serversData);
+      })
+      .catch((error: unknown) => {
+        console.error("Error getting servers:", error);
+      });
+  }, []);
 
-		const updateListener = (_event: any, data: { data: any }) => {
-			const serversData = data?.data;
-			if (serversData) {
-				setServers(serversData);
-			} else {
-				setServers([]);
-			}
-		};
+  useEffect(() => {
+    fetchServers(); // Call on initial mount
 
-		// Add listener
-		window.daemon.onUpdate(updateListener);
+    const updateListener = (_event: unknown, data: { data: unknown }) => {
+      const serversData = data?.data as PerritoServerType[];
+      if (serversData) {
+        setServers(serversData);
+      } else {
+        setServers([]);
+      }
+    };
 
-		// Remove listener on cleanup
-		return () => {
-			window.daemon.removeUpdateListener(updateListener);
-		};
-	}, [fetchServers]);
+    // Add listener
+    window.daemon.onUpdate(updateListener);
 
-	const value = {
-		servers,
-		fetchServers, // Make the manual fetch function available in context
-	};
+    // Remove listener on cleanup
+    return () => {
+      window.daemon.removeUpdateListener(updateListener);
+    };
+  }, [fetchServers]);
 
-	return <ServerContext.Provider value={value}>{children}</ServerContext.Provider>;
+  const value = {
+    servers,
+    fetchServers, // Make the manual fetch function available in context
+  };
+
+  return <ServerContext.Provider value={value}>{children}</ServerContext.Provider>;
 };
 
 // Custom hook to use the servers and the fetch function
 export const useServers = () => {
-	const context = useContext(ServerContext);
-	if (context === undefined) {
-		throw new Error("useServers must be used within a ServerProvider");
-	}
-	return context;
+  const context = useContext(ServerContext);
+  if (context === undefined) {
+    throw new Error("useServers must be used within a ServerProvider");
+  }
+  return context;
 };

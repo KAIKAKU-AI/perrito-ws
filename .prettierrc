@@ -3,6 +3,6 @@
   "printWidth": 100,
   "tabWidth": 2,
   "semi": true,
-  "useTabs": true,
+  "useTabs": false,
   "endOfLine": "auto"
 }

@@ -15,65 +15,65 @@ import KeyboardSettingsPage from "./KeyboardSettingsPage";
 import PresetsSettingsPage from "./PresetsSettingsPage";
 
 const index = () => {
-	const params = useParams();
-	const selectedSection = params.section;
+  const params = useParams();
+  const selectedSection = params.section;
 
-	return (
-		<>
-			<Header activePage="settings" />
-			<div id="page-content">
-				<SideBar isOpen>
-					<SideBarButton
-						id="general"
-						title="General"
-						redirect="/settings/general"
-						active={selectedSection === "general"}
-						icon={<CogIcon />}
-						keybindId="select-sidebar-option-1"
-					/>
-					<SideBarButton
-						id="appearance"
-						title="Appearance"
-						redirect="/settings/appearance"
-						active={selectedSection === "appearance"}
-						icon={<PaletteIcon />}
-						keybindId="select-sidebar-option-2"
-					/>
-					<SideBarButton
-						id="keyboard"
-						title="Keyboard"
-						redirect="/settings/keyboard"
-						active={selectedSection === "keyboard"}
-						icon={<KeyboardIcon />}
-						keybindId="select-sidebar-option-3"
-					/>
-					<SideBarButton
-						id="presets"
-						title="Presets"
-						redirect="/settings/presets"
-						active={selectedSection === "presets"}
-						icon={<PencilIcon />}
-						keybindId="select-sidebar-option-4"
-					/>
-					<SideBarButton
-						id="about"
-						title="About"
-						redirect="/settings/about"
-						active={selectedSection === "about"}
-						icon={<InfoIcon />}
-						keybindId="select-sidebar-option-5"
-					/>
-				</SideBar>
-				<div className="page-content__container">
-					{selectedSection === "general" && <GeneralSettingsPage />}
-					{selectedSection === "appearance" && <AppearanceSettingsPage />}
-					{selectedSection === "keyboard" && <KeyboardSettingsPage />}
-					{selectedSection === "presets" && <PresetsSettingsPage />}
-					{selectedSection === "about" && <AboutSettingsPage />}
-				</div>
-			</div>
-		</>
-	);
+  return (
+    <>
+      <Header activePage="settings" />
+      <div id="page-content">
+        <SideBar isOpen>
+          <SideBarButton
+            id="general"
+            title="General"
+            redirect="/settings/general"
+            active={selectedSection === "general"}
+            icon={<CogIcon />}
+            keybindId="select-sidebar-option-1"
+          />
+          <SideBarButton
+            id="appearance"
+            title="Appearance"
+            redirect="/settings/appearance"
+            active={selectedSection === "appearance"}
+            icon={<PaletteIcon />}
+            keybindId="select-sidebar-option-2"
+          />
+          <SideBarButton
+            id="keyboard"
+            title="Keyboard"
+            redirect="/settings/keyboard"
+            active={selectedSection === "keyboard"}
+            icon={<KeyboardIcon />}
+            keybindId="select-sidebar-option-3"
+          />
+          <SideBarButton
+            id="presets"
+            title="Presets"
+            redirect="/settings/presets"
+            active={selectedSection === "presets"}
+            icon={<PencilIcon />}
+            keybindId="select-sidebar-option-4"
+          />
+          <SideBarButton
+            id="about"
+            title="About"
+            redirect="/settings/about"
+            active={selectedSection === "about"}
+            icon={<InfoIcon />}
+            keybindId="select-sidebar-option-5"
+          />
+        </SideBar>
+        <div className="page-content__container">
+          {selectedSection === "general" && <GeneralSettingsPage />}
+          {selectedSection === "appearance" && <AppearanceSettingsPage />}
+          {selectedSection === "keyboard" && <KeyboardSettingsPage />}
+          {selectedSection === "presets" && <PresetsSettingsPage />}
+          {selectedSection === "about" && <AboutSettingsPage />}
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default index;
