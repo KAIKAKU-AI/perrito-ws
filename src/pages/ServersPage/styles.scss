@@ -1,4 +1,4 @@
-@import '../../styles/colors.scss';
+@import "../../styles/colors.scss";
 
 .create-server {
   &__footer {
@@ -12,7 +12,6 @@
     @media (prefers-color-scheme: dark) {
       border-top: 1px solid $color-secondary;
     }
-
   }
 
   &__response {
@@ -35,29 +34,6 @@
 
     &--warning {
       color: $color-warning;
-    }
-  }
-
-  &__button {
-    background-color: $color-primary;
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.25rem;
-    transition: background-color 0.2s;
-
-    &>span {
-      white-space: nowrap;
-    }
-
-    &:hover {
-      background-color: darken($color-primary, 10%);
     }
   }
 }

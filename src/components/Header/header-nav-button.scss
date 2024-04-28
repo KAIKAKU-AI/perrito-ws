@@ -29,7 +29,6 @@
       @media (prefers-color-scheme: dark) {
         background-color: darken($color-primary, 5%);
       }
-
     }
 
     &:active {
@@ -38,7 +37,6 @@
       @media (prefers-color-scheme: dark) {
         background-color: darken($color-primary, 10%);
       }
-
     }
 
     &:focus-visible {
@@ -52,7 +50,6 @@
       background-color: $color-secondary;
       color: $color-primary;
 
-
       @media (prefers-color-scheme: dark) {
         background-color: $color-primary;
         color: $color-secondary;
@@ -64,13 +61,10 @@
         @media (prefers-color-scheme: dark) {
           background-color: darken($color-primary, 10%);
         }
-
       }
 
       &:active {
         background-color: darken($color-secondary, 15%);
-
-
       }
     }
 
@@ -81,15 +75,11 @@
       height: 18px;
       align-items: center;
 
-
       @media (prefers-color-scheme: dark) {
-
         path {
           fill: $color-secondary;
         }
       }
-
     }
-
   }
 }

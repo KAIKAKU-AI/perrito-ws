@@ -1,4 +1,5 @@
 @import "../../styles/colors.scss";
+@import "./dropdown.scss";
 
 .base__setting {
   display: flex;
@@ -16,7 +17,7 @@
     border-top: 1px solid $color-primary;
   }
 
-  &>p {
+  & > p {
     font-size: 0.75rem;
     font-weight: 600;
     margin: 0;
@@ -75,31 +76,6 @@
       @media (prefers-color-scheme: dark) {
         color: #888;
       }
-    }
-  }
-
-  .dropdown {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    width: 10rem;
-    padding: 0.5rem;
-    border: 1px solid darken(white, 10%);
-    border-radius: 0.5rem;
-    cursor: pointer;
-    font-size: 0.75rem;
-
-    @media (prefers-color-scheme: dark) {
-      border: 1px solid $color-primary;
-      background-color: $color-dark-primary;
-    }
-
-    &>option {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: $color-primary;
     }
   }
 

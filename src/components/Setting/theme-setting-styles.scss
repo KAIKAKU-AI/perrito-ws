@@ -1,4 +1,4 @@
-@import '../../styles/colors.scss';
+@import "../../styles/colors.scss";
 
 .theme-select {
   &__container {
@@ -30,7 +30,6 @@
       @media (prefers-color-scheme: dark) {
         border: 2px solid $color-secondary;
       }
-
     }
 
     &-preview {
@@ -61,11 +60,11 @@
       width: 100%;
       box-sizing: border-box;
 
-      &>input {
+      & > input {
         margin-right: 0.5rem;
       }
 
-      &>label {
+      & > label {
         font-size: 0.75rem;
         font-weight: 600;
         margin: 0;
@@ -74,7 +73,6 @@
         @media (prefers-color-scheme: dark) {
           color: $color-secondary;
         }
-
       }
     }
   }

@@ -1,16 +1,16 @@
 import KeybindsTable from "@components/KeybindsTable";
 import "./styles.scss";
 
-interface KeyboardSettingsPageProps {}
+const KeyboardSettingsPage = () => {
+  return (
+    <div className="settings__main">
+      <div className="settings__header">
+        <h1>Keyboard</h1>
+      </div>
 
-const KeyboardSettingsPage = (props: KeyboardSettingsPageProps) => {
-	return (
-		<div className="settings__main">
-			<h1>Keyboard</h1>
-
-			<KeybindsTable />
-		</div>
-	);
+      <KeybindsTable />
+    </div>
+  );
 };
 
 export default KeyboardSettingsPage;
