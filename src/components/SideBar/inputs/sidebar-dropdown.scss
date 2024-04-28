@@ -1,8 +1,7 @@
-@import '../../../styles/colors.scss';
-@import '../../Setting/styles.scss';
+@import "../../../styles/colors.scss";
+@import "../../Setting/styles.scss";
 
 .sidebar {
-
   &-dropdown {
     position: relative;
     display: flex;
@@ -23,8 +22,7 @@
       color: $color-secondary;
     }
 
-
-    &>option {
+    & > option {
       font-size: 0.75rem;
       font-weight: 600;
       color: $color-primary;
@@ -46,9 +44,7 @@
           outline-style: dashed;
           outline-width: 2px;
         }
-
       }
     }
   }
-
 }

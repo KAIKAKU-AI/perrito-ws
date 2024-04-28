@@ -16,6 +16,7 @@ export default class DaemonProcess extends EventEmitter {
 	}
 
 	start() {
+		console.info("Starting daemon process");
 		this.child = utilityProcess.fork(this.daemonPath, [], {
 			stdio: "inherit",
 		});
@@ -32,6 +33,7 @@ export default class DaemonProcess extends EventEmitter {
 			} else {
 				this.pendingRequests[message.correlationId].resolve(message.data);
 			}
+
 			// Clean up after handling the response
 			delete this.pendingRequests[message.correlationId];
 		}
@@ -40,13 +42,12 @@ export default class DaemonProcess extends EventEmitter {
 	}
 
 	onExit(code: number) {
-		console.log(`Child process exited with code ${code}`);
+		console.info(`Child process exited with code ${code}`);
 		this.child = null; // Clean up reference
 
 		this.emit("exit", code);
 	}
 
-	// Optionally implement a method to send messages to the child
 	sendMessage(message: any) {
 		const correlationId = Date.now().toString() + Math.random().toString().substring(2);
 		const messageWithCorrelationId = { ...message, correlationId };
@@ -58,13 +59,11 @@ export default class DaemonProcess extends EventEmitter {
 		return new Promise((resolve, reject) => {
 			// Store the resolve and reject functions using the correlationId as the key
 			this.pendingRequests[correlationId] = { resolve, reject };
-
-			// Implement timeout or error handling as needed
 		});
 	}
 
-	// Optionally implement a method to stop the child process
 	stop() {
+		console.info("Stopping daemon process");
 		if (this.child) {
 			this.child.kill();
 			this.child = null;

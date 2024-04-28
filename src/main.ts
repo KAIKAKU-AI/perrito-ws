@@ -11,12 +11,13 @@ if (require("electron-squirrel-startup")) {
 	app.quit();
 }
 
-// Check if the config file exists, if not, create  it
+// Check if the config file exists, if not, create it
 if (!configExists()) {
 	console.warn("No previous config file found. Creating new config file with default values");
 	resetConfig();
 }
 
+// Check if the presets directory exists, if not, create it
 if (!presetsDirExists()) {
 	console.warn("No presets directory found. Creating new presets directory");
 	resetPresetsDir();
@@ -27,7 +28,7 @@ if (perritoConfig?.CONFIG_VERSION !== CONFIG_VERSION) {
 	console.warn("Config file version mismatch. Resetting config file to default values.");
 	resetConfig();
 }
-
+const x = "fart";
 let perritoDaemonProcess: DaemonProcess | null = null;
 
 const createWindow = () => {
@@ -49,6 +50,7 @@ const createWindow = () => {
 		},
 	});
 
+	// Remove the menu bar
 	mainWindow.setMenu(null);
 
 	// and load the index.html of the app.
@@ -60,19 +62,15 @@ const createWindow = () => {
 
 	const daemonPath = path.join(__dirname, "PerritoDaemon.js");
 
+	// Start the daemon process
 	perritoDaemonProcess = new DaemonProcess(daemonPath);
 	perritoDaemonProcess.start();
 
+	// Setup IPC handlers and listeners
 	setupIpcMainHandlers(perritoDaemonProcess);
 	setupIpcMainListeners(mainWindow, perritoDaemonProcess);
-
-	// Open the DevTools.
-	mainWindow.webContents.openDevTools();
 };
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.on("ready", () => {
 	createWindow();
 });
@@ -98,12 +96,9 @@ app.on("activate", () => {
 	}
 });
 
-// on app close remove any child processes
+// Quit the daemon process when the app is closed
 app.on("before-quit", () => {
 	if (perritoDaemonProcess) {
 		perritoDaemonProcess.stop();
 	}
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.

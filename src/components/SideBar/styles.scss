@@ -1,5 +1,5 @@
-@import '../../styles/colors.scss';
-@import '../../styles/fonts.scss';
+@import "../../styles/colors.scss";
+@import "../../styles/fonts.scss";
 
 $sidebar-width: 20rem;
 
@@ -9,7 +9,9 @@ $sidebar-width: 20rem;
   width: $sidebar-width;
   background-color: white;
   border-radius: 0 1rem 1rem 0;
-  transition: width 0.3s ease, margin-left 0.3s ease;
+  transition:
+    width 0.3s ease,
+    margin-left 0.3s ease;
   overflow: hidden;
 
   @media (prefers-color-scheme: dark) {

@@ -1,4 +1,4 @@
-@import '../../../styles/colors.scss';
+@import "../../../styles/colors.scss";
 
 .sidebar-button {
   display: flex;
@@ -16,14 +16,12 @@
   text-decoration: none;
   padding: 0.5rem 0.75rem;
 
-
   &.active {
     background-color: darken(white, 6%);
 
     @media (prefers-color-scheme: dark) {
       background-color: darken($color-dark-secondary, 6%);
     }
-
   }
 
   &__title {

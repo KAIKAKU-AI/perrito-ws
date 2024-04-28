@@ -1,4 +1,4 @@
-@import '../../styles/colors.scss';
+@import "../../styles/colors.scss";
 
 .instruction-page {
   display: flex;
@@ -19,7 +19,6 @@
       @media (prefers-color-scheme: dark) {
         filter: invert(1) hue-rotate(180deg);
       }
-
     }
   }
 
@@ -33,7 +32,6 @@
     @media (prefers-color-scheme: dark) {
       color: $color-secondary;
     }
-
   }
 
   &__description {
@@ -85,8 +83,6 @@
       color: darken($color-secondary, 10%);
       margin: 0;
       font-weight: 500;
-
-
     }
   }
 
@@ -119,7 +115,6 @@
     @media (prefers-color-scheme: dark) {
       color: $color-secondary;
     }
-
   }
 
   &__content {
@@ -142,7 +137,6 @@
         background-color: $color-dark-secondary;
         border: 2px solid $color-primary;
       }
-
     }
 
     &-item {
@@ -162,12 +156,11 @@
         font-size: 0.75rem;
         color: $color-primary;
         font-weight: 600;
-        font-family: 'Courier New', Courier, monospace;
+        font-family: "Courier New", Courier, monospace;
 
         @media (prefers-color-scheme: dark) {
           color: $color-secondary;
         }
-
       }
 
       &-icon {
@@ -178,7 +171,6 @@
         @media (prefers-color-scheme: dark) {
           filter: invert(1) hue-rotate(180deg);
         }
-
       }
     }
   }

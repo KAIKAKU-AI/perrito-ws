@@ -1,4 +1,4 @@
-@import '../../styles/colors.scss';
+@import "../../styles/colors.scss";
 
 .settings {
   &__main {
@@ -12,14 +12,12 @@
     @media (prefers-color-scheme: dark) {
       background-color: $color-dark-secondary;
     }
-
   }
 
   &__header {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
-
 
     h1 {
       font-size: 1.25rem;
@@ -31,5 +29,4 @@
       }
     }
   }
-
 }

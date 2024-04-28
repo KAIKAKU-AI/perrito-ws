@@ -9,7 +9,6 @@
     color: $color-primary;
     text-align: left;
 
-
     @media (prefers-color-scheme: dark) {
       background-color: $color-dark-primary;
       color: $color-secondary;
@@ -45,7 +44,4 @@
       }
     }
   }
-
-
-
 }

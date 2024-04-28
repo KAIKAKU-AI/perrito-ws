@@ -1,4 +1,4 @@
-@import '../../styles/colors.scss';
+@import "../../styles/colors.scss";
 
 .create-server {
   &__footer {
@@ -12,7 +12,6 @@
     @media (prefers-color-scheme: dark) {
       border-top: 1px solid $color-secondary;
     }
-
   }
 
   &__response {
@@ -37,5 +36,4 @@
       color: $color-warning;
     }
   }
-
 }

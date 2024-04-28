@@ -1,7 +1,6 @@
-@import '../../styles/colors.scss';
+@import "../../styles/colors.scss";
 
 .server-page {
-
   &__header {
     display: flex;
     flex-direction: row;
@@ -33,8 +32,6 @@
       color: darken($color-secondary, 10%);
       margin: 0;
       font-weight: 500;
-
-
     }
 
     &-icon-button {
@@ -52,7 +49,6 @@
         @media (prefers-color-scheme: dark) {
           filter: invert(1) hue-rotate(180deg);
         }
-
       }
 
       &-container {
@@ -69,7 +65,9 @@
         background-color: rgba(0, 0, 0, 0.6);
         right: 50%;
         transform: translateX(50%);
-        transition: opacity 0.3s, visibility 0.5s;
+        transition:
+          opacity 0.3s,
+          visibility 0.5s;
         opacity: 0;
         visibility: hidden;
 
@@ -78,7 +76,7 @@
           visibility: visible;
         }
 
-        &>span {
+        & > span {
           font-size: 0.75rem;
           color: white;
           font-weight: 500;

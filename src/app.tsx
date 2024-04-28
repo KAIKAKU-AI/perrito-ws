@@ -33,7 +33,6 @@ const router = createHashRouter([
 		element: <DashboardPage />,
 		errorElement: <ErrorPage />,
 	},
-	,
 	{
 		path: "/servers",
 		element: <Navigate to="/servers/create" replace />,
