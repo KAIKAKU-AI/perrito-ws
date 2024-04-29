@@ -1,7 +1,7 @@
 {
   "name": "perrito-ws",
   "productName": "Perrito",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A fast, straightforward way of setting up a WebSocket server, making real-time communication between clients and servers effortless.",
   "main": ".vite/build/main.js",
   "scripts": {
