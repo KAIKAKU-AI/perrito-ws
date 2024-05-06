@@ -3,7 +3,8 @@ export type ipcActionMessage =
   | ipcStopServer
   | ipcGetServers
   | ipcSendMessageToClient
-  | ipcDisconnectClient;
+  | ipcDisconnectClient
+  | ipcRestartServer;
 
 export interface ipcStartServer {
   action: "start";
@@ -33,4 +34,9 @@ export interface ipcDisconnectClient {
   action: "disconnect-client";
   serverId: string;
   clientId: string;
+}
+
+export interface ipcRestartServer {
+  action: "restart";
+  id: string;
 }

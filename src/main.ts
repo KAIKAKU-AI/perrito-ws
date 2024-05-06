@@ -71,6 +71,8 @@ const createWindow = () => {
     mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
   }
 
+  // mainWindow.webContents.openDevTools();
+
   const daemonPath = path.join(__dirname, "PerritoDaemon.js");
 
   // Start the daemon process
