@@ -88,7 +88,6 @@ class PerritoDaemon {
               error: error.message,
             }),
           );
-
         break;
       case "disconnect-client":
         this.disconnectClient(message.serverId, message.clientId)
@@ -107,6 +106,22 @@ class PerritoDaemon {
             }),
           );
         break;
+      case "restart":
+        this.restartServer(message.id)
+          .then((data) => {
+            process.parentPort.postMessage({
+              correlationId: message.correlationId,
+              data,
+              error: null,
+            });
+          })
+          .catch((error) => {
+            process.parentPort.postMessage({
+              correlationId: message.correlationId,
+              data: null,
+              error: error.message,
+            });
+          });
     }
   }
 
@@ -295,6 +310,27 @@ class PerritoDaemon {
           message: `Server with id ${id} stopped successfully`,
         });
       });
+    });
+  }
+
+  private restartServer(id: string): Promise<DaemonResponse> {
+    return new Promise((resolve, reject) => {
+      console.info(`Restarting server with id ${id}`);
+      const serverToRestart = this.servers.find((server) => server.id === id);
+
+      this.stopServer(id)
+        .then(() => {
+          this.startServer(id, serverToRestart.name, serverToRestart.host, serverToRestart.port)
+            .then(() => {
+              console.info(`Server with id ${id} restarted successfully`);
+              resolve({
+                name: "SUCCESS",
+                message: `Server with id ${id} restarted successfully`,
+              });
+            })
+            .catch((error) => reject(error));
+        })
+        .catch((error) => reject(error));
     });
   }
 }
