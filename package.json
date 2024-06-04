@@ -44,7 +44,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.34.1",
     "globals": "^15.3.0",
-    "prettier": "^3.2.5",
+    "prettier": "^3.3.0",
     "prettier-eslint-cli": "^8.0.1",
     "sass": "^1.77.4",
     "ts-node": "^10.9.2",
