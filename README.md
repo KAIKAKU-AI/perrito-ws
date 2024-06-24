@@ -24,7 +24,6 @@ Perrito WS (referred to as Perrito) is a WebSocket server and GUI combo enabling
 - 🛜 **Multiple Server Instances**: Run multiple WebSocket servers concurrently on different IP addresses and ports.
 - 🎨 **Customization**: Easily configure server defaults, message presets, and more!
 - 💬 **Real-time Interaction**: Immediate WebSocket client feedback and interaction through a user-friendly GUI.
-- 📦 **Cross-platform**: Compatible with Windows and macOS
 - ⌨️ **Keybinds**: Master Perrito's keybinds and set up WebSocket servers in seconds
 
 ## Installation
