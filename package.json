@@ -80,6 +80,6 @@
     "react-switch": "^7.0.0",
     "sort-by": "^1.2.0",
     "vite-plugin-static-copy": "^1.0.5",
-    "ws": "^8.16.0"
+    "ws": "^8.17.1"
   }
 }
