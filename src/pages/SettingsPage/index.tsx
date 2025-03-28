@@ -1,18 +1,18 @@
-import CogIcon from "@assets/images/icons/cog.svg?react";
-import InfoIcon from "@assets/images/icons/info.svg?react";
-import KeyboardIcon from "@assets/images/icons/keyboard.svg?react";
-import PaletteIcon from "@assets/images/icons/palette.svg?react";
-import PencilIcon from "@assets/images/icons/pencil.svg?react";
-import Header from "@components/Header";
-import SideBar from "@components/SideBar";
-import SideBarButton from "@components/SideBar/inputs/SideBarButton";
-import { useParams } from "react-router-dom";
-import "../styles.scss";
-import AboutSettingsPage from "./AboutSettingsPage";
-import AppearanceSettingsPage from "./AppearanceSettingsPage";
-import GeneralSettingsPage from "./GeneralSettingsPage";
-import KeyboardSettingsPage from "./KeyboardSettingsPage";
-import PresetsSettingsPage from "./PresetsSettingsPage";
+import CogIcon from '@assets/images/icons/cog.svg?react';
+import InfoIcon from '@assets/images/icons/info.svg?react';
+import KeyboardIcon from '@assets/images/icons/keyboard.svg?react';
+import PaletteIcon from '@assets/images/icons/palette.svg?react';
+import PencilIcon from '@assets/images/icons/pencil.svg?react';
+import Header from '@components/Header';
+import SideBar from '@components/SideBar';
+import SideBarButton from '@components/SideBar/inputs/SideBarButton';
+import { useParams } from 'react-router-dom';
+import '../styles.scss';
+import AboutSettingsPage from './AboutSettingsPage';
+import AppearanceSettingsPage from './AppearanceSettingsPage';
+import GeneralSettingsPage from './GeneralSettingsPage';
+import KeyboardSettingsPage from './KeyboardSettingsPage';
+import PresetsSettingsPage from './PresetsSettingsPage';
 
 const index = () => {
   const params = useParams();
@@ -27,7 +27,7 @@ const index = () => {
             id="general"
             title="General"
             redirect="/settings/general"
-            active={selectedSection === "general"}
+            active={selectedSection === 'general'}
             icon={<CogIcon />}
             keybindId="select-sidebar-option-1"
           />
@@ -35,7 +35,7 @@ const index = () => {
             id="appearance"
             title="Appearance"
             redirect="/settings/appearance"
-            active={selectedSection === "appearance"}
+            active={selectedSection === 'appearance'}
             icon={<PaletteIcon />}
             keybindId="select-sidebar-option-2"
           />
@@ -43,7 +43,7 @@ const index = () => {
             id="keyboard"
             title="Keyboard"
             redirect="/settings/keyboard"
-            active={selectedSection === "keyboard"}
+            active={selectedSection === 'keyboard'}
             icon={<KeyboardIcon />}
             keybindId="select-sidebar-option-3"
           />
@@ -51,7 +51,7 @@ const index = () => {
             id="presets"
             title="Presets"
             redirect="/settings/presets"
-            active={selectedSection === "presets"}
+            active={selectedSection === 'presets'}
             icon={<PencilIcon />}
             keybindId="select-sidebar-option-4"
           />
@@ -59,17 +59,17 @@ const index = () => {
             id="about"
             title="About"
             redirect="/settings/about"
-            active={selectedSection === "about"}
+            active={selectedSection === 'about'}
             icon={<InfoIcon />}
             keybindId="select-sidebar-option-5"
           />
         </SideBar>
         <div className="page-content__container">
-          {selectedSection === "general" && <GeneralSettingsPage />}
-          {selectedSection === "appearance" && <AppearanceSettingsPage />}
-          {selectedSection === "keyboard" && <KeyboardSettingsPage />}
-          {selectedSection === "presets" && <PresetsSettingsPage />}
-          {selectedSection === "about" && <AboutSettingsPage />}
+          {selectedSection === 'general' && <GeneralSettingsPage />}
+          {selectedSection === 'appearance' && <AppearanceSettingsPage />}
+          {selectedSection === 'keyboard' && <KeyboardSettingsPage />}
+          {selectedSection === 'presets' && <PresetsSettingsPage />}
+          {selectedSection === 'about' && <AboutSettingsPage />}
         </div>
       </div>
     </>

@@ -1,6 +1,6 @@
-import { MessagePreset } from "@utils/presets-manager";
-import { contextBridge, ipcRenderer } from "electron";
-import { DaemonResponse } from "src/backend/daemons/PerritoDaemon";
+import { MessagePreset } from '@utils/presets-manager';
+import { contextBridge, ipcRenderer } from 'electron';
+import { DaemonResponse } from 'src/backend/daemons/PerritoDaemon';
 
 export interface globalWindow {
   app: {
@@ -47,40 +47,40 @@ export interface globalWindow {
 }
 
 export function setupIpcRendererHandlers() {
-  contextBridge.exposeInMainWorld("theme", {
-    getTheme: () => ipcRenderer.sendSync("get-theme"),
-    getThemeLiteral: () => ipcRenderer.sendSync("get-theme-literal"),
-    setTheme: (theme: string) => ipcRenderer.send("set-theme", theme),
+  contextBridge.exposeInMainWorld('theme', {
+    getTheme: () => ipcRenderer.sendSync('get-theme'),
+    getThemeLiteral: () => ipcRenderer.sendSync('get-theme-literal'),
+    setTheme: (theme: string) => ipcRenderer.send('set-theme', theme),
   });
 
-  contextBridge.exposeInMainWorld("shell", {
-    openExternalUrl: (url: string) => ipcRenderer.send("open-external-url", url),
+  contextBridge.exposeInMainWorld('shell', {
+    openExternalUrl: (url: string) => ipcRenderer.send('open-external-url', url),
   });
 
-  contextBridge.exposeInMainWorld("app", {
-    getVersion: () => ipcRenderer.sendSync("get-app-version"),
-    getArch: () => ipcRenderer.sendSync("get-app-arch"),
-    getPlatform: () => ipcRenderer.sendSync("get-app-platform"),
-    getChromeVersion: () => ipcRenderer.sendSync("get-chrome-version"),
-    getElectronVersion: () => ipcRenderer.sendSync("get-electron-version"),
+  contextBridge.exposeInMainWorld('app', {
+    getVersion: () => ipcRenderer.sendSync('get-app-version'),
+    getArch: () => ipcRenderer.sendSync('get-app-arch'),
+    getPlatform: () => ipcRenderer.sendSync('get-app-platform'),
+    getChromeVersion: () => ipcRenderer.sendSync('get-chrome-version'),
+    getElectronVersion: () => ipcRenderer.sendSync('get-electron-version'),
   });
 
-  contextBridge.exposeInMainWorld("config", {
-    getConfig: () => ipcRenderer.invoke("get-config"),
-    setConfig: (newConfig: Record<string, unknown>) => ipcRenderer.invoke("set-config", newConfig),
-    updateConfig: (key: string, value: unknown) => ipcRenderer.invoke("update-config", key, value),
+  contextBridge.exposeInMainWorld('config', {
+    getConfig: () => ipcRenderer.invoke('get-config'),
+    setConfig: (newConfig: Record<string, unknown>) => ipcRenderer.invoke('set-config', newConfig),
+    updateConfig: (key: string, value: unknown) => ipcRenderer.invoke('update-config', key, value),
   });
 
-  contextBridge.exposeInMainWorld("presets", {
-    getMessagePreset: (id: string) => ipcRenderer.invoke("get-message-preset", id),
-    listMessagePresets: () => ipcRenderer.invoke("list-message-presets"),
-    saveMessagePreset: (preset: MessagePreset) => ipcRenderer.invoke("save-message-preset", preset),
-    deleteMessagePreset: (id: string) => ipcRenderer.invoke("delete-message-preset", id),
+  contextBridge.exposeInMainWorld('presets', {
+    getMessagePreset: (id: string) => ipcRenderer.invoke('get-message-preset', id),
+    listMessagePresets: () => ipcRenderer.invoke('list-message-presets'),
+    saveMessagePreset: (preset: MessagePreset) => ipcRenderer.invoke('save-message-preset', preset),
+    deleteMessagePreset: (id: string) => ipcRenderer.invoke('delete-message-preset', id),
     updateMessagePreset: (id: string, preset: MessagePreset) =>
-      ipcRenderer.invoke("update-message-preset", id, preset),
+      ipcRenderer.invoke('update-message-preset', id, preset),
   });
 
-  contextBridge.exposeInMainWorld("servers", {
+  contextBridge.exposeInMainWorld('servers', {
     startServer: (id: string, name: string, host: string, port: string) =>
       ipcRenderer.invoke("start-server", id, name, host, port),
     stopServer: (id: string) => ipcRenderer.invoke("stop-server", id),
@@ -88,10 +88,10 @@ export function setupIpcRendererHandlers() {
     restartServer: (id: string) => ipcRenderer.invoke("restart-server", id),
   });
 
-  contextBridge.exposeInMainWorld("clients", {
+  contextBridge.exposeInMainWorld('clients', {
     sendMessageToClient: (serverId: string, clientId: string, message: string) =>
-      ipcRenderer.invoke("send-message-to-client", serverId, clientId, message),
+      ipcRenderer.invoke('send-message-to-client', serverId, clientId, message),
     disconnectClient: (serverId: string, clientId: string) =>
-      ipcRenderer.invoke("disconnect-client", serverId, clientId),
+      ipcRenderer.invoke('disconnect-client', serverId, clientId),
   });
 }

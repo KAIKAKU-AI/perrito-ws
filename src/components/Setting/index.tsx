@@ -1,21 +1,21 @@
-import Button, { ButtonThemes } from "@components/Button";
-import { useState } from "react";
-import DropdownSetting from "./DropdownSetting";
-import SwitchSetting from "./SwitchSetting";
-import TextSetting from "./TextSetting";
-import ThemeSetting from "./ThemeSetting";
-import "./styles.scss";
+import Button, { ButtonThemes } from '@components/Button';
+import { ChangeEvent, HTMLProps, useState } from 'react';
+import DropdownSetting from './DropdownSetting';
+import SwitchSetting from './SwitchSetting';
+import TextSetting from './TextSetting';
+import ThemeSetting from './ThemeSetting';
+import './styles.scss';
 
 interface SettingProps {
   type: SettingType;
   title: string;
   description?: string;
-  showSave?: "onchange" | boolean;
+  showSave?: 'onchange' | boolean;
   onSave?: () => void;
   onSwitchChange?: () => void;
-  onDropdownChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  onTextChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onThemeChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onDropdownChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
+  onTextChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onThemeChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   switchChecked?: boolean;
   dropdownOptions?: { value: string; label: string }[];
   activeDropdownValue?: string;
@@ -23,7 +23,7 @@ interface SettingProps {
   themeOptions?: { name: string; value: string; preview: string }[];
   activeTheme?: string;
   infoValue?: string;
-  textOptions?: React.HTMLProps<HTMLInputElement>;
+  textOptions?: HTMLProps<HTMLInputElement>;
   extraClasses?: string[];
 }
 
@@ -39,12 +39,11 @@ const index = (props: SettingProps) => {
   const [showSaveButton, setShowSaveButton] = useState(props.showSave === true);
 
   const handleOnChange =
-    (onChangeFunction?: (e: React.ChangeEvent<unknown>) => void) =>
-    (e: React.ChangeEvent<unknown>) => {
+    (onChangeFunction?: (e: ChangeEvent<unknown>) => void) => (e: ChangeEvent<unknown>) => {
       if (onChangeFunction) {
         onChangeFunction(e);
       }
-      if (props.showSave === "onchange") {
+      if (props.showSave === 'onchange') {
         setShowSaveButton(true);
       }
     };
@@ -52,14 +51,15 @@ const index = (props: SettingProps) => {
   const renderSaveButton = () =>
     showSaveButton ? (
       <Button
-        style={{ marginLeft: "auto", marginBottom: "1rem" }}
+        style={{ marginLeft: 'auto', marginBottom: '1rem' }}
         onClick={() => {
           props.showSave != true ? setShowSaveButton(false) : null;
           if (props.onSave) {
             props.onSave();
           }
         }}
-        theme={ButtonThemes.SUCCESS}>
+        theme={ButtonThemes.SUCCESS}
+      >
         <span>Save</span>
       </Button>
     ) : null;

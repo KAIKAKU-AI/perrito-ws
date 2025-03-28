@@ -1,9 +1,10 @@
-import "./theme-setting-styles.scss";
+import { ChangeEvent } from 'react';
+import './theme-setting-styles.scss';
 
 interface ThemeSettingProps {
   title: string;
   description?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   activeTheme?: string;
   themeOptions?: { name: string; value: string; preview: string }[];
 }
@@ -24,7 +25,8 @@ const ThemeSetting = (props: ThemeSettingProps) => {
             onClick={() => {
               const input = document.getElementById(theme.value) as HTMLInputElement;
               input?.click();
-            }}>
+            }}
+          >
             <div className="theme-select__item-preview-container">
               <img
                 className="theme-select__item-preview-image"

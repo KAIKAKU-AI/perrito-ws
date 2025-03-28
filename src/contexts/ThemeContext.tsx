@@ -1,4 +1,4 @@
-import { FunctionComponent, ReactNode, createContext, useContext, useState } from "react";
+import { FunctionComponent, ReactNode, createContext, useContext, useState } from 'react';
 
 interface ThemeContextProps {
   isDarkMode: boolean;
@@ -7,7 +7,9 @@ interface ThemeContextProps {
 
 const defaultState = {
   isDarkMode: false,
-  toggleTheme: () => {},
+  toggleTheme: (): void => {
+    return undefined;
+  },
 };
 
 const ThemeContext = createContext<ThemeContextProps>(defaultState);

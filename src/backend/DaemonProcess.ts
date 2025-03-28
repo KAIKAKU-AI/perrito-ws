@@ -1,6 +1,6 @@
-import { UtilityProcess, utilityProcess } from "electron";
-import { EventEmitter } from "events";
-import { ipcActionMessage } from "src/ipc/IpcMessageTypes";
+import { UtilityProcess, utilityProcess } from 'electron';
+import { EventEmitter } from 'events';
+import { ipcActionMessage } from 'src/ipc/IpcMessageTypes';
 interface PendingRequests {
   [key: string]: { resolve: (value?: unknown) => void; reject: (reason?: unknown) => void };
 }
@@ -17,13 +17,13 @@ export default class DaemonProcess extends EventEmitter {
   }
 
   start() {
-    console.info("Starting daemon process");
+    console.info('Starting daemon process');
     this.child = utilityProcess.fork(this.daemonPath, [], {
-      stdio: "inherit",
+      stdio: 'inherit',
     });
 
-    this.child.on("message", this.onMessage.bind(this));
-    this.child.on("exit", this.onExit.bind(this));
+    this.child.on('message', this.onMessage.bind(this));
+    this.child.on('exit', this.onExit.bind(this));
   }
 
   onMessage(message: { correlationId: string; error: unknown; data: unknown }) {
@@ -39,14 +39,14 @@ export default class DaemonProcess extends EventEmitter {
       delete this.pendingRequests[message.correlationId];
     }
 
-    this.emit("message", message);
+    this.emit('message', message);
   }
 
   onExit(code: number) {
     console.info(`Child process exited with code ${code}`);
     this.child = null; // Clean up reference
 
-    this.emit("exit", code);
+    this.emit('exit', code);
   }
 
   sendMessage(message: ipcActionMessage) {
@@ -66,7 +66,7 @@ export default class DaemonProcess extends EventEmitter {
   }
 
   stop() {
-    console.info("Stopping daemon process");
+    console.info('Stopping daemon process');
     if (this.child) {
       this.child.kill();
       this.child = null;

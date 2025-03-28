@@ -1,21 +1,22 @@
-import { KeybindType, useConfig } from "@contexts/ConfigContext";
-import { useHotkeys } from "react-hotkeys-hook";
-import "./styles.scss";
+import { KeybindType, useConfig } from '@contexts/ConfigContext';
+import { Dispatch, ReactNode, SetStateAction } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
+import './styles.scss';
 
 interface indexProps {
   title?: string;
   isOpen?: boolean;
-  setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
-  children?: React.ReactNode;
+  setOpen?: Dispatch<SetStateAction<boolean>>;
+  children?: ReactNode;
 }
 
 const index = (props: indexProps) => {
   const { disableKeybinds } = useConfig();
 
   const { config } = useConfig();
-  const keybindId = "hide-show-sidebar";
+  const keybindId = 'hide-show-sidebar';
 
-  const keybind = config?.KEYBINDS?.find(
+  const keybind = (config?.KEYBINDS as KeybindType[])?.find(
     (keybind: KeybindType) => keybind.id === keybindId,
   ) as KeybindType;
 
@@ -26,7 +27,7 @@ const index = (props: indexProps) => {
   });
 
   return (
-    <div className={`sidebar sidebar--${props.isOpen ? "open" : "closed"}`}>
+    <div className={`sidebar sidebar--${props.isOpen ? 'open' : 'closed'}`}>
       <div className={`sidebar-container`}>
         <div className="sidebar-content">
           {props.title && (

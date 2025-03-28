@@ -1,5 +1,5 @@
-import SideBarControllerButton from "./SideBarControllerButton";
-import "./styles.scss";
+import SideBarControllerButton from './SideBarControllerButton';
+import './styles.scss';
 
 interface SideBarControllerProps {
   isOpen: boolean;
@@ -11,8 +11,8 @@ const SideBarController = (props: SideBarControllerProps) => {
     <div className="sidebar-controller">
       <SideBarControllerButton
         onClick={props.onClick}
-        defaultArrowDirection={props.isOpen ? "center" : "right"}
-        hoverArrowDirection={props.isOpen ? "left" : "right"}
+        defaultArrowDirection={props.isOpen ? 'center' : 'right'}
+        hoverArrowDirection={props.isOpen ? 'left' : 'right'}
       />
     </div>
   );

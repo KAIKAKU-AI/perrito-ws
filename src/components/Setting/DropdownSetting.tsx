@@ -1,11 +1,12 @@
-import Dropdown from "./Dropdown";
+import { ChangeEvent } from 'react';
+import Dropdown from './Dropdown';
 
 interface DropdownSettingProps {
   title: string;
   description?: string;
   dropdownOptions?: { value: string; label: string }[];
   activeDropdownValue?: string;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const DropdownSetting = (props: DropdownSettingProps) => {

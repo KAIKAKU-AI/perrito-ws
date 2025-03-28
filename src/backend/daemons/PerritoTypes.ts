@@ -1,7 +1,7 @@
-import { WebSocket, WebSocketServer } from "ws";
+import { WebSocket, WebSocketServer } from 'ws';
 
 export type WebSocketMessage = {
-  direction: "inbound" | "outbound";
+  direction: 'inbound' | 'outbound';
   timestamp: number;
   data: string;
 };

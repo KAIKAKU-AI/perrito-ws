@@ -1,7 +1,7 @@
-import Button, { ButtonThemes } from "@components/Button";
-import { KeybindType, useConfig } from "@contexts/ConfigContext";
-import { useEffect, useState } from "react";
-import "./styles.scss";
+import Button, { ButtonThemes } from '@components/Button';
+import { KeybindType, useConfig } from '@contexts/ConfigContext';
+import { useEffect, useState } from 'react';
+import './styles.scss';
 
 const KeybindsTable = () => {
   const { config, updateConfig, setDisableKeybinds } = useConfig();
@@ -15,7 +15,7 @@ const KeybindsTable = () => {
     setEditingIndex(index);
     // Function to determine if the pressed key is a modifier key
     const isModifierKey = (key: string) => {
-      return ["Control", "Shift", "Alt", "Meta"].includes(key);
+      return ['Control', 'Shift', 'Alt', 'Meta'].includes(key);
     };
 
     const handleKeyPress = (event: KeyboardEvent) => {
@@ -23,11 +23,11 @@ const KeybindsTable = () => {
       if (isModifierKey(event.key)) return;
 
       // Construct the new keybind string
-      let newKeybind = "";
-      if (event.ctrlKey) newKeybind += "Ctrl+";
-      if (event.shiftKey) newKeybind += "Shift+";
-      if (event.altKey) newKeybind += "Alt+";
-      if (event.metaKey) newKeybind += "Meta+";
+      let newKeybind = '';
+      if (event.ctrlKey) newKeybind += 'Ctrl+';
+      if (event.shiftKey) newKeybind += 'Shift+';
+      if (event.altKey) newKeybind += 'Alt+';
+      if (event.metaKey) newKeybind += 'Meta+';
       newKeybind += event.key.toUpperCase();
 
       // Update the keybinds state
@@ -40,19 +40,19 @@ const KeybindsTable = () => {
       // Update the config
       const updatedConfig = { ...config };
       updatedConfig.KEYBINDS = updatedKeybinds;
-      updateConfig("KEYBINDS", updatedKeybinds);
+      updateConfig('KEYBINDS', updatedKeybinds);
 
       // Remove the event listener to prevent multiple captures
-      document.removeEventListener("keydown", handleKeyPress);
+      document.removeEventListener('keydown', handleKeyPress);
     };
 
-    document.addEventListener("keydown", handleKeyPress);
+    document.addEventListener('keydown', handleKeyPress);
   };
 
   useEffect(() => {
     if (config === undefined) return;
 
-    if (config.KEYBINDS === undefined) updateConfig("KEYBINDS", {});
+    if (config.KEYBINDS === undefined) updateConfig('KEYBINDS', {});
   }, [config]);
 
   return (
@@ -71,19 +71,21 @@ const KeybindsTable = () => {
             <td>{item.keybind}</td>
             <td>
               {editingIndex === index ? (
-                "Listening..."
+                'Listening...'
               ) : (
                 <Button
                   onClick={() => handleKeybindChangeStart(index)}
                   theme={ButtonThemes.PRIMARY}
                   style={{
-                    paddingTop: "0.3rem",
-                    paddingBottom: "0.3rem",
-                  }}>
+                    paddingTop: '0.3rem',
+                    paddingBottom: '0.3rem',
+                  }}
+                >
                   <span
                     style={{
-                      fontSize: "0.65rem",
-                    }}>
+                      fontSize: '0.65rem',
+                    }}
+                  >
                     Edit
                   </span>
                 </Button>

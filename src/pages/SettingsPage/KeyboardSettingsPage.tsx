@@ -1,5 +1,5 @@
-import KeybindsTable from "@components/KeybindsTable";
-import "./styles.scss";
+import KeybindsTable from '@components/KeybindsTable';
+import './styles.scss';
 
 const KeyboardSettingsPage = () => {
   return (

@@ -1,5 +1,5 @@
-import PerritoConfused from "@assets/images/perrito/perrito-confused.svg";
-import "./styles.scss";
+import PerritoConfused from '@assets/images/perrito/perrito-confused.svg';
+import './styles.scss';
 
 interface InstructionPageProps {
   title?: string;

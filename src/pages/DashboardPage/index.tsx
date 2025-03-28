@@ -1,15 +1,15 @@
-import Header from "@components/Header";
-import SideBar from "@components/SideBar";
-import SideBarController from "@components/SideBar/SideBarController";
-import SideBarButton, { CircleColor } from "@components/SideBar/inputs/SideBarButton";
-import SideBarDropdown from "@components/SideBar/inputs/SideBarDropdown";
-import { useServers } from "@contexts/ServerContext";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { PerritoClientType } from "src/backend/daemons/PerritoTypes";
-import "../styles.scss";
-import ClientPage from "./ClientPage";
-import InstructionPage from "./InstructionPage";
+import Header from '@components/Header';
+import SideBar from '@components/SideBar';
+import SideBarController from '@components/SideBar/SideBarController';
+import SideBarButton, { CircleColor } from '@components/SideBar/inputs/SideBarButton';
+import SideBarDropdown from '@components/SideBar/inputs/SideBarDropdown';
+import { useServers } from '@contexts/ServerContext';
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { PerritoClientType } from 'src/backend/daemons/PerritoTypes';
+import '../styles.scss';
+import ClientPage from './ClientPage';
+import InstructionPage from './InstructionPage';
 
 const index = () => {
   const params = useParams();
@@ -37,12 +37,12 @@ const index = () => {
         <SideBar title="Clients" isOpen={sidebarOpen} setOpen={setSidebarOpen}>
           <SideBarDropdown
             title="Select server"
-            defaultOption={{ value: "", label: "Select server" }}
+            defaultOption={{ value: '', label: 'Select server' }}
             dropdownOptions={servers.map((server) => ({
               value: server.id,
               label: server.name,
             }))}
-            activeDropdownValue={selectedServer ? selectedServer : ""}
+            activeDropdownValue={selectedServer ? selectedServer : ''}
             onChange={(e) => {
               navigate(`/dashboard/${e.target.value}`);
             }}

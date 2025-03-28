@@ -1,5 +1,13 @@
-import { defaultConfig } from "@utils/default-config";
-import React, { ReactNode, createContext, useContext, useEffect, useState } from "react";
+import { defaultConfig } from '@utils/default-config';
+import React, {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 export interface ConfigType {
   [key: string]: unknown;
@@ -16,7 +24,7 @@ interface ConfigContextType {
   config: ConfigType | undefined;
   updateConfig: (key: string, value: unknown) => Promise<void>;
   setCompleteConfig: (newConfig: ConfigType) => Promise<void>;
-  setDisableKeybinds: React.Dispatch<React.SetStateAction<boolean>>;
+  setDisableKeybinds: Dispatch<SetStateAction<boolean>>;
   disableKeybinds: boolean;
 }
 
@@ -37,10 +45,10 @@ export const ConfigProvider: React.FC<Props> = ({ children }) => {
     // Assume `window.config.getConfig()` fetches configuration settings.
     const loadConfig = async () => {
       try {
-        const initialConfig: ConfigType = await window.config.getConfig();
+        const initialConfig: ConfigType = (await window.config.getConfig()) as ConfigType;
         setConfig(initialConfig);
-      } catch (error) {
-        console.error("Failed to load configuration settings - factory reset.");
+      } catch (_) {
+        console.error('Failed to load configuration settings - factory reset.');
         await window.config.setConfig(defaultConfig);
       }
     };
@@ -48,12 +56,10 @@ export const ConfigProvider: React.FC<Props> = ({ children }) => {
     loadConfig();
   }, []);
 
-  useEffect(() => {}, [disableKeybinds]);
-
   // Method to update individual config settings.
   const updateConfig = async (key: string, value: unknown) => {
     await window.config.updateConfig(key, value);
-    const updatedConfig: ConfigType = await window.config.getConfig();
+    const updatedConfig: ConfigType = (await window.config.getConfig()) as ConfigType;
     setConfig(updatedConfig);
   };
 
@@ -66,7 +72,8 @@ export const ConfigProvider: React.FC<Props> = ({ children }) => {
   // Providing the context value with the configuration object and methods to manipulate it.
   return (
     <ConfigContext.Provider
-      value={{ config, updateConfig, setCompleteConfig, setDisableKeybinds, disableKeybinds }}>
+      value={{ config, updateConfig, setCompleteConfig, setDisableKeybinds, disableKeybinds }}
+    >
       {children}
     </ConfigContext.Provider>
   );
@@ -76,7 +83,7 @@ export const ConfigProvider: React.FC<Props> = ({ children }) => {
 export const useConfig = (): ConfigContextType => {
   const context = useContext(ConfigContext);
   if (!context) {
-    throw new Error("useConfig must be used within a ConfigProvider");
+    throw new Error('useConfig must be used within a ConfigProvider');
   }
   return context;
 };

@@ -1,5 +1,5 @@
-import { MessagePreset } from "@utils/presets-manager";
-import React, { ReactNode, createContext, useContext, useEffect, useState } from "react";
+import { MessagePreset } from '@utils/presets-manager';
+import React, { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 
 // Context type specifying what the context will provide.
 interface MessagePresetsContextType {
@@ -27,8 +27,8 @@ export const MessagePresetsProvider: React.FC<Props> = ({ children }) => {
       try {
         const initialPresets = await window.presets.listMessagePresets();
         setPresets(initialPresets);
-      } catch (error) {
-        console.error("Failed to load presets.");
+      } catch (_) {
+        console.error('Failed to load presets.');
         setPresets([]);
       }
     };
@@ -69,7 +69,8 @@ export const MessagePresetsProvider: React.FC<Props> = ({ children }) => {
         savePreset,
         deletePreset,
         getPreset,
-      }}>
+      }}
+    >
       {children}
     </MessagePresetsContext.Provider>
   );
@@ -79,7 +80,7 @@ export const MessagePresetsProvider: React.FC<Props> = ({ children }) => {
 export const useMessagePresets = (): MessagePresetsContextType => {
   const context = useContext(MessagePresetsContext);
   if (!context) {
-    throw new Error("useMessagePresets must be used within a MessagePresetsProvider");
+    throw new Error('useMessagePresets must be used within a MessagePresetsProvider');
   }
   return context;
 };

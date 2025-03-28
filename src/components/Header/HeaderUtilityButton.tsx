@@ -1,7 +1,8 @@
-import "./header-utility-button.scss";
+import { ReactNode } from 'react';
+import './header-utility-button.scss';
 
 interface HeaderUtilityButtonProps {
-  icon: React.ReactNode;
+  icon: ReactNode;
   tooltip?: string;
   onClick?: () => void;
   active?: boolean;
@@ -9,7 +10,7 @@ interface HeaderUtilityButtonProps {
 
 const HeaderUtilityButton = (props: HeaderUtilityButtonProps) => {
   return (
-    <button onClick={props.onClick} title={props.tooltip} className={"header-utility__button"}>
+    <button onClick={props.onClick} title={props.tooltip} className={'header-utility__button'}>
       {props.icon}
     </button>
   );

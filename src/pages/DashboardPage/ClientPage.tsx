@@ -1,13 +1,13 @@
-import ArrowDown from "@assets/images/icons/arrow-down.svg";
-import { useServers } from "@contexts/ServerContext";
-import { useEffect, useState } from "react";
-import { PerritoClientType } from "src/backend/daemons/PerritoTypes";
+import ArrowDown from '@assets/images/icons/arrow-down.svg';
+import { useServers } from '@contexts/ServerContext';
+import { ChangeEvent, useEffect, useState } from 'react';
+import { PerritoClientType } from 'src/backend/daemons/PerritoTypes';
 
-import Button, { ButtonThemes } from "@components/Button";
-import Dropdown from "@components/Setting/Dropdown";
-import Textarea from "@components/Textarea";
-import { useMessagePresets } from "@contexts/PresetsContext";
-import "./styles.scss";
+import Button, { ButtonThemes } from '@components/Button';
+import Dropdown from '@components/Setting/Dropdown';
+import Textarea from '@components/Textarea';
+import { useMessagePresets } from '@contexts/PresetsContext';
+import './styles.scss';
 
 interface ClientPageProps {
   serverId: string;
@@ -16,7 +16,7 @@ interface ClientPageProps {
 
 interface SendMessageResponse {
   message?: string;
-  level: "success" | "error" | "warning";
+  level: 'success' | 'error' | 'warning';
 }
 
 const ClientPage = (props: ClientPageProps) => {
@@ -24,10 +24,10 @@ const ClientPage = (props: ClientPageProps) => {
   const { presets } = useMessagePresets();
 
   const [client, setClient] = useState<PerritoClientType | null>(null);
-  const [sendMessageContent, setSendMessageContent] = useState<string>("");
+  const [sendMessageContent, setSendMessageContent] = useState<string>('');
   const [sendMessageResponse, setSendMessageResponse] = useState<SendMessageResponse>({
     message: undefined,
-    level: "success",
+    level: 'success',
   });
 
   useEffect(() => {
@@ -43,11 +43,11 @@ const ClientPage = (props: ClientPageProps) => {
 
     window.clients.sendMessageToClient(props.serverId, props.clientId, sendMessageContent).then(
       () => {
-        setSendMessageResponse({ message: "Message sent", level: "success" });
+        setSendMessageResponse({ message: 'Message sent', level: 'success' });
       },
       (error: Error) => {
-        console.error("Error sending message:", error);
-        setSendMessageResponse({ message: error.message, level: "error" });
+        console.error('Error sending message:', error);
+        setSendMessageResponse({ message: error.message, level: 'error' });
       },
     );
   };
@@ -57,7 +57,7 @@ const ClientPage = (props: ClientPageProps) => {
     return date.toLocaleTimeString();
   };
 
-  const onPresetChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const onPresetChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const selectedPreset = presets.find((preset) => preset.id === e.target.value);
     if (selectedPreset) {
       setSendMessageContent(selectedPreset.content);
@@ -82,14 +82,15 @@ const ClientPage = (props: ClientPageProps) => {
             onClick={() => {
               window.clients.disconnectClient(props.serverId, props.clientId).then(
                 () => {
-                  setSendMessageResponse({ message: "Client disconnected", level: "success" });
+                  setSendMessageResponse({ message: 'Client disconnected', level: 'success' });
                 },
                 (error: Error) => {
-                  console.error("Error disconnecting client:", error);
-                  setSendMessageResponse({ message: error.message, level: "error" });
+                  console.error('Error disconnecting client:', error);
+                  setSendMessageResponse({ message: error.message, level: 'error' });
                 },
               );
-            }}>
+            }}
+          >
             <span>Disconnect</span>
           </Button>
         </div>
@@ -102,14 +103,14 @@ const ClientPage = (props: ClientPageProps) => {
           value={sendMessageContent}
           onChange={(e) => setSendMessageContent(e.target.value)}
           placeholder="Type a message to send to the client"
-          style={{ marginBottom: "1rem" }}
+          style={{ marginBottom: '1rem' }}
           onKeyDown={(e) => {
-            if (e.key === "Tab") {
+            if (e.key === 'Tab') {
               e.preventDefault(); // Prevent the default tab key behavior
               const start = (e.target as HTMLTextAreaElement).selectionStart;
               const end = (e.target as HTMLTextAreaElement).selectionEnd;
               const newValue =
-                sendMessageContent.substring(0, start) + "\t" + sendMessageContent.substring(end);
+                sendMessageContent.substring(0, start) + '\t' + sendMessageContent.substring(end);
               setSendMessageContent(newValue);
 
               // Move cursor to right after the inserted tab
@@ -124,21 +125,23 @@ const ClientPage = (props: ClientPageProps) => {
 
         <div
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-          }}>
+            display: 'flex',
+            justifyContent: 'space-between',
+          }}
+        >
           <p
-            className={`client-page__response client-page__response--${sendMessageResponse.level}`}>
+            className={`client-page__response client-page__response--${sendMessageResponse.level}`}
+          >
             {sendMessageResponse.message}
           </p>
 
-          <div style={{ display: "flex", gap: "1rem", alignItems: "baseline" }}>
+          <div style={{ display: 'flex', gap: '1rem', alignItems: 'baseline' }}>
             <Dropdown
               dropdownOptions={[
-                { label: "Apply message preset", value: "default" },
+                { label: 'Apply message preset', value: 'default' },
                 ...presets.map((preset) => ({ value: preset.id, label: preset.name })),
               ]}
-              activeDropdownValue={"default"}
+              activeDropdownValue={'default'}
               onChange={onPresetChange}
             />
 
@@ -154,23 +157,25 @@ const ClientPage = (props: ClientPageProps) => {
             <div key={index} className="client-page__message-item">
               <img
                 style={{
-                  transform: message.direction === "outbound" ? "rotate(180deg)" : "none",
+                  transform: message.direction === 'outbound' ? 'rotate(180deg)' : 'none',
                 }}
                 src={ArrowDown}
                 className="client-page__message-item-icon"
               />
               <span
                 style={{
-                  wordBreak: "break-word",
-                  paddingRight: "1rem",
-                }}>
+                  wordBreak: 'break-word',
+                  paddingRight: '1rem',
+                }}
+              >
                 {message.data}
               </span>
 
               <span
                 style={{
-                  marginLeft: "auto",
-                }}>
+                  marginLeft: 'auto',
+                }}
+              >
                 {timestampAsTime(message.timestamp)}
               </span>
             </div>

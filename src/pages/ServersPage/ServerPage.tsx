@@ -1,13 +1,13 @@
-import EditIcon from "@assets/images/icons/edit.svg";
-import LinkIcon from "@assets/images/icons/link.svg";
-import RefreshIcon from "@assets/images/icons/refresh.svg";
-import Button, { ButtonThemes } from "@components/Button";
-import Setting, { SettingType } from "@components/Setting";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { PulseLoader } from "react-spinners";
-import { PerritoServerType } from "src/backend/daemons/PerritoTypes";
-import "./server-page.scss";
+import EditIcon from '@assets/images/icons/edit.svg';
+import LinkIcon from '@assets/images/icons/link.svg';
+import RefreshIcon from '@assets/images/icons/refresh.svg';
+import Button, { ButtonThemes } from '@components/Button';
+import Setting, { SettingType } from '@components/Setting';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { PulseLoader } from 'react-spinners';
+import { PerritoServerType } from 'src/backend/daemons/PerritoTypes';
+import './server-page.scss';
 
 interface ServerPageProps {
   serverId: string;
@@ -72,17 +72,16 @@ const ServerPage = (props: ServerPageProps) => {
           <button
             title="Copy server link"
             className="server-page__header-icon-button"
-            onClick={handleCopyClick}>
+            onClick={handleCopyClick}
+          >
             <img src={LinkIcon} />
             <div
-              className={`server-page__header-icon-button-confirmation ${showCopyConfirmation ? " show" : ""}`}>
+              className={`server-page__header-icon-button-confirmation ${showCopyConfirmation ? ' show' : ''}`}
+            >
               <span>Copied!</span>
             </div>
           </button>
-          <button
-            title="Edit server"
-            className="server-page__header-icon-button"
-            onClick={() => {}}>
+          <button title="Edit server" className="server-page__header-icon-button">
             <img src={EditIcon} />
           </button>
         </div>
@@ -102,16 +101,18 @@ const ServerPage = (props: ServerPageProps) => {
 
       <div
         style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          marginTop: "1rem",
-          gap: "1rem",
-        }}>
+          display: 'flex',
+          justifyContent: 'flex-end',
+          marginTop: '1rem',
+          gap: '1rem',
+        }}
+      >
         <Button
           theme={ButtonThemes.PRIMARY}
           onClick={() => {
             navigate(`/dashboard/${server.id}`);
-          }}>
+          }}
+        >
           <span>Jump to clients</span>
         </Button>
 
@@ -120,8 +121,9 @@ const ServerPage = (props: ServerPageProps) => {
           onClick={() => {
             window.servers.stopServer(server.id);
 
-            navigate("/servers");
-          }}>
+            navigate('/servers');
+          }}
+        >
           <span>Delete</span>
         </Button>
       </div>

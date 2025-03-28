@@ -1,6 +1,6 @@
-import HelpButton from "./utility-buttons/HelpButton";
-import NotificationsButton from "./utility-buttons/NotificationsButton";
-import ThemeSwitchButton from "./utility-buttons/ThemeSwitchButton";
+import HelpButton from './utility-buttons/HelpButton';
+import NotificationsButton from './utility-buttons/NotificationsButton';
+import ThemeSwitchButton from './utility-buttons/ThemeSwitchButton';
 
 const HeaderUtilities = () => {
   return (

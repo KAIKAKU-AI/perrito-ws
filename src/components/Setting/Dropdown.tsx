@@ -1,14 +1,15 @@
-import "./dropdown.scss";
+import { ChangeEvent } from 'react';
+import './dropdown.scss';
 
 interface DropdownProps {
   dropdownOptions?: { value: string; label: string }[];
   activeDropdownValue?: string;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const Dropdown = (props: DropdownProps) => {
   return (
-    <select className="dropdown" value={props.activeDropdownValue ?? ""} onChange={props.onChange}>
+    <select className="dropdown" value={props.activeDropdownValue ?? ''} onChange={props.onChange}>
       {props.dropdownOptions?.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}

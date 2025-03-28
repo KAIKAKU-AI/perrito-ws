@@ -1,5 +1,5 @@
-import Setting, { SettingType } from "@components/Setting";
-import "./styles.scss";
+import Setting, { SettingType } from '@components/Setting';
+import './styles.scss';
 
 const AboutSettingsPage = () => {
   return (

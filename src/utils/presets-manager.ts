@@ -1,8 +1,8 @@
-import { app } from "electron";
-import fs from "fs";
-import path from "path";
+import { app } from 'electron';
+import fs from 'fs';
+import path from 'path';
 
-const presetsDirPath = path.join(app.getPath("userData"), "presets");
+const presetsDirPath = path.join(app.getPath('userData'), 'presets');
 
 export interface MessagePreset {
   id: string;
@@ -26,7 +26,7 @@ export const resetPresetsDir = () => {
       recursive: true,
     });
   } catch (error) {
-    if (error.code !== "ENOENT") {
+    if (error.code !== 'ENOENT') {
       console.error(error);
     }
   }
@@ -42,7 +42,7 @@ export const getPreset = (id: string): MessagePreset | undefined => {
     return undefined;
   }
 
-  const data = fs.readFileSync(filePath, "utf8");
+  const data = fs.readFileSync(filePath, 'utf8');
   return JSON.parse(data);
 };
 
@@ -52,7 +52,7 @@ export const listPresets = (): MessagePreset[] => {
   const files = fs.readdirSync(presetsDirPath);
 
   return files.map((file) => {
-    const data = fs.readFileSync(path.join(presetsDirPath, file), "utf8");
+    const data = fs.readFileSync(path.join(presetsDirPath, file), 'utf8');
     return JSON.parse(data);
   });
 };
@@ -62,21 +62,21 @@ export const savePreset = (preset: MessagePreset) => {
     const filePath = path.join(presetsDirPath, `${preset.id}.json`);
     fs.writeFileSync(filePath, JSON.stringify(preset, null, 2));
   } catch (error) {
-    return { success: false, message: "Error saving preset - " + error.message || "Unknown error" };
+    return { success: false, message: 'Error saving preset - ' + error.message || 'Unknown error' };
   }
 
-  return { success: true, message: "Preset saved successfully" };
+  return { success: true, message: 'Preset saved successfully' };
 };
 
 export const deletePreset = (id: string) => {
   try {
     const filePath = path.join(presetsDirPath, `${id}.json`);
     fs.rmSync(filePath);
-    return { success: true, message: "Preset deleted successfully" };
+    return { success: true, message: 'Preset deleted successfully' };
   } catch (error) {
     return {
       success: false,
-      message: "Error deleting preset - " + error.message || "Unknown error",
+      message: 'Error deleting preset - ' + error.message || 'Unknown error',
     };
   }
 };
@@ -85,11 +85,11 @@ export const updatePreset = (id: string, newPreset: MessagePreset) => {
   try {
     deletePreset(id);
     savePreset(newPreset);
-    return { success: true, message: "Preset updated successfully" };
+    return { success: true, message: 'Preset updated successfully' };
   } catch (error) {
     return {
       success: false,
-      message: "Error updating preset - " + error.message || "Unknown error",
+      message: 'Error updating preset - ' + error.message || 'Unknown error',
     };
   }
 };

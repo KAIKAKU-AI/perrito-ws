@@ -1,7 +1,7 @@
-import { IncomingMessage } from "http";
-import { ipcActionMessage } from "src/ipc/IpcMessageTypes";
-import { WebSocket, WebSocketServer } from "ws";
-import { PerritoClientType, PerritoServerType } from "./PerritoTypes";
+import { IncomingMessage } from 'http';
+import { ipcActionMessage } from 'src/ipc/IpcMessageTypes';
+import { WebSocket, WebSocketServer } from 'ws';
+import { PerritoClientType, PerritoServerType } from './PerritoTypes';
 
 export interface DaemonResponse {
   name: string;
@@ -13,15 +13,15 @@ class PerritoDaemon {
 
   constructor() {
     this.servers = [];
-    process.parentPort.on("message", this.handleMessage.bind(this));
-    console.info("PerritoDaemon started");
+    process.parentPort.on('message', this.handleMessage.bind(this));
+    console.info('PerritoDaemon started');
   }
 
   private handleMessage(e: { data: ipcActionMessage & { correlationId: string } }) {
     const message = e.data;
 
     switch (message.action) {
-      case "start":
+      case 'start':
         this.startServer(message.id, message.name, message.host, message.port)
           .then((data) =>
             process.parentPort.postMessage({
@@ -38,7 +38,7 @@ class PerritoDaemon {
             }),
           );
         break;
-      case "stop":
+      case 'stop':
         this.stopServer(message.id)
           .then((data) =>
             process.parentPort.postMessage({
@@ -55,7 +55,7 @@ class PerritoDaemon {
             }),
           );
         break;
-      case "get-servers":
+      case 'get-servers':
         process.parentPort.postMessage({
           correlationId: message.correlationId,
           data: this.servers?.map((server) => ({
@@ -72,7 +72,7 @@ class PerritoDaemon {
           })),
         });
         break;
-      case "send-message":
+      case 'send-message':
         this.sendToClient(message.serverId, message.clientId, message.message)
           .then((data) =>
             process.parentPort.postMessage({
@@ -89,7 +89,7 @@ class PerritoDaemon {
             }),
           );
         break;
-      case "disconnect-client":
+      case 'disconnect-client':
         this.disconnectClient(message.serverId, message.clientId)
           .then((data) =>
             process.parentPort.postMessage({
@@ -140,7 +140,7 @@ class PerritoDaemon {
       })), // Omit the socket from the client data
     }));
 
-    process.parentPort.postMessage({ action: "update-renderer", data: serversData });
+    process.parentPort.postMessage({ action: 'update-renderer', data: serversData });
   }
 
   private async disconnectClient(serverId: string, clientId: string): Promise<DaemonResponse> {
@@ -159,7 +159,7 @@ class PerritoDaemon {
       this.sendRendererUpdate();
 
       resolve({
-        name: "SUCCESS",
+        name: 'SUCCESS',
         message: `Client with id ${clientId} disconnected from server with id ${serverId}`,
       });
     });
@@ -185,11 +185,11 @@ class PerritoDaemon {
         return reject(new Error(`Client with id ${clientId} is not connected`));
       }
 
-      client.messages.push({ timestamp: Date.now(), data: message, direction: "outbound" });
+      client.messages.push({ timestamp: Date.now(), data: message, direction: 'outbound' });
       client.socket.send(message);
       this.sendRendererUpdate();
       resolve({
-        name: "SUCCESS",
+        name: 'SUCCESS',
         message: `Message sent to client with id ${clientId} on server with id ${serverId}`,
       });
     });
@@ -209,50 +209,50 @@ class PerritoDaemon {
 
       // Validate the id, name, host, and port
       if (!id || !name || !host || !port) {
-        console.error("Invalid server configuration.");
-        throw new Error("Invalid server configuration.");
+        console.error('Invalid server configuration.');
+        throw new Error('Invalid server configuration.');
       }
 
       const isIdValid = /^[a-z0-9-]+$/.test(id);
-      if (!isIdValid) throw new Error("Invalid server id.");
+      if (!isIdValid) throw new Error('Invalid server id.');
 
       const isNameValid = /^[a-zA-Z0-9\s]+$/.test(name);
-      if (!isNameValid) throw new Error("Invalid server name.");
+      if (!isNameValid) throw new Error('Invalid server name.');
 
       const isHostValid = /^[a-zA-Z0-9.-]+$/.test(host);
-      if (!isHostValid) throw new Error("Invalid server host.");
+      if (!isHostValid) throw new Error('Invalid server host.');
 
       if (port < 0 || port > 65535) {
-        throw new Error("Invalid server port.");
+        throw new Error('Invalid server port.');
       }
 
       const server = new WebSocketServer({ host, port });
 
-      server.on("error", (error) => {
+      server.on('error', (error) => {
         console.error(`Error on server ${id}:`, error);
         reject(error); // Reject the promise if there's an error starting the server
       });
 
       // Resolve the promise once the server starts listening
-      server.once("listening", () => {
+      server.once('listening', () => {
         this.servers.push({ id, name, host, port, clients: [], server });
         this.sendRendererUpdate();
         console.info(`WebSocket Server with id ${id} started on ws://${host}:${port}`);
         resolve({
-          name: "SUCCESS",
+          name: 'SUCCESS',
           message: `Server started successfully on ws://${host}:${port} with id ${id}`,
         } as DaemonResponse);
       });
 
       // Connection handling remains unchanged
-      server.on("connection", (ws: WebSocket, req: IncomingMessage) => {
+      server.on('connection', (ws: WebSocket, req: IncomingMessage) => {
         // const clientData = { id: `Client_${this.servers[id].clients.length + 1}`, socket: ws, request: req }
         const server = this.servers.find((server) => server.id === id);
         const clientData = {
           id: `Client_${server.clients.length + 1}`,
           request: {
             headers: req.headers,
-            path: req.url || "/",
+            path: req.url || '/',
             host: server.host,
             port: server.port,
           },
@@ -263,14 +263,14 @@ class PerritoDaemon {
 
         server.clients.push(clientData);
 
-        ws.on("message", (message) => {
+        ws.on('message', (message) => {
           const timestamp = Date.now();
 
-          clientData.messages.push({ timestamp, data: message.toString(), direction: "inbound" });
+          clientData.messages.push({ timestamp, data: message.toString(), direction: 'inbound' });
           this.sendRendererUpdate();
         });
 
-        ws.on("close", () => {
+        ws.on('close', () => {
           clientData.readyState = ws.readyState;
           this.sendRendererUpdate();
         });
@@ -278,7 +278,7 @@ class PerritoDaemon {
         this.sendRendererUpdate();
       });
 
-      server.on("close", () => {
+      server.on('close', () => {
         console.info(`WebSocket Server with id ${id} closed`);
         this.servers = this.servers.filter((server) => server.id !== id);
       });
@@ -306,7 +306,7 @@ class PerritoDaemon {
         console.info(`Stopped WebSocket Server with id ${id}`);
         this.sendRendererUpdate();
         resolve({
-          name: "SUCCESS",
+          name: 'SUCCESS',
           message: `Server with id ${id} stopped successfully`,
         });
       });

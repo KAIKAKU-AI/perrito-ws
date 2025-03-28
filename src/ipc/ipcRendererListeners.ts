@@ -1,12 +1,12 @@
-import { contextBridge, ipcRenderer } from "electron";
+import { contextBridge, ipcRenderer } from 'electron';
 
 export function setupIpcRendererListeners() {
-  contextBridge.exposeInMainWorld("daemon", {
+  contextBridge.exposeInMainWorld('daemon', {
     onUpdate: (callback: (...args: unknown[]) => void) => {
-      ipcRenderer.on("update-renderer", callback);
+      ipcRenderer.on('update-renderer', callback);
     },
     removeUpdateListener: (callback: (...args: unknown[]) => void) => {
-      ipcRenderer.removeListener("update-renderer", callback);
+      ipcRenderer.removeListener('update-renderer', callback);
     },
   });
 }

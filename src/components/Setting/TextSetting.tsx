@@ -1,9 +1,11 @@
+import { ChangeEvent, HTMLProps } from 'react';
+
 interface TextSettingProps {
   title: string;
   description?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   value?: string;
-  options?: React.HTMLProps<HTMLInputElement>;
+  options?: HTMLProps<HTMLInputElement>;
   extraClasses?: string[];
 }
 
@@ -16,7 +18,7 @@ const TextSetting = (props: TextSettingProps) => {
       </div>
 
       <input
-        className={`text ${props.extraClasses ? props.extraClasses.join(" ") : ""}`}
+        className={`text ${props.extraClasses ? props.extraClasses.join(' ') : ''}`}
         type="text"
         value={props.value}
         onChange={props.onChange}

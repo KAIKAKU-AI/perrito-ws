@@ -1,11 +1,12 @@
-import "./sidebar-dropdown.scss";
+import { ChangeEvent } from 'react';
+import './sidebar-dropdown.scss';
 
 interface SideBarDropdownProps {
   title: string;
   defaultOption: { value: string; label: string };
   dropdownOptions?: { value: string; label: string }[];
   activeDropdownValue?: string;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const SideBarDropdown = (props: SideBarDropdownProps) => {
@@ -13,8 +14,9 @@ const SideBarDropdown = (props: SideBarDropdownProps) => {
     // dropdown in sidebar
     <select
       className="sidebar-dropdown"
-      value={props.activeDropdownValue ?? ""}
-      onChange={props.onChange}>
+      value={props.activeDropdownValue ?? ''}
+      onChange={props.onChange}
+    >
       <option value={props.defaultOption.value}>{props.defaultOption.label}</option>
       {props.dropdownOptions?.map((option) => (
         <option key={option.value} value={option.value}>

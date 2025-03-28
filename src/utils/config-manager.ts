@@ -1,12 +1,12 @@
-import { app } from "electron";
-import fs from "fs";
-import path from "path";
-import { defaultConfig } from "./default-config";
+import { app } from 'electron';
+import fs from 'fs';
+import path from 'path';
+import { defaultConfig } from './default-config';
 
-const appConfigPath = path.join(app.getPath("userData"), "perrito_config.json");
+const appConfigPath = path.join(app.getPath('userData'), 'perrito_config.json');
 
 const readConfig = (): Record<string, unknown> => {
-  const data = fs.readFileSync(appConfigPath, "utf8");
+  const data = fs.readFileSync(appConfigPath, 'utf8');
   return JSON.parse(data);
 };
 

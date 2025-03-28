@@ -1,9 +1,9 @@
-import PerritoSad from "@assets/images/perrito/perrito-sad.svg?react";
-import Header from "@components/Header";
-import { useConfig } from "@contexts/ConfigContext";
-import { useLocation, useRouteError } from "react-router-dom";
-import "../styles.scss";
-import "./error-page.scss";
+import PerritoSad from '@assets/images/perrito/perrito-sad.svg?react';
+import Header from '@components/Header';
+import { useConfig } from '@contexts/ConfigContext';
+import { useLocation, useRouteError } from 'react-router-dom';
+import '../styles.scss';
+import './error-page.scss';
 
 const index = () => {
   const error = useRouteError() as {
@@ -30,7 +30,7 @@ const index = () => {
             <h1>
               {error.status}
               {error.status && <>&nbsp;&nbsp;</>}
-              {error.statusText ?? "An error occurred!"}
+              {error.statusText ?? 'An error occurred!'}
             </h1>
             <p>{error.message}</p>
             <code>Location: {location.pathname}</code>

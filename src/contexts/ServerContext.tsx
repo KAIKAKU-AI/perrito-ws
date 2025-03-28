@@ -1,13 +1,15 @@
 // ServerContext.js
-import { createContext, useCallback, useContext, useEffect, useState } from "react";
-import { PerritoServerType } from "src/backend/daemons/PerritoTypes";
+import { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { PerritoServerType } from 'src/backend/daemons/PerritoTypes';
 
 export const ServerContext = createContext({
   servers: [] as PerritoServerType[],
-  fetchServers: () => {},
+  fetchServers: (): void => {
+    return undefined;
+  },
 });
 
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 export const ServerProvider = ({ children }: { children: ReactNode }) => {
   const [servers, setServers] = useState<PerritoServerType[]>([]);
@@ -19,7 +21,7 @@ export const ServerProvider = ({ children }: { children: ReactNode }) => {
         setServers(serversData);
       })
       .catch((error: unknown) => {
-        console.error("Error getting servers:", error);
+        console.error('Error getting servers:', error);
       });
   }, []);
 
@@ -56,7 +58,7 @@ export const ServerProvider = ({ children }: { children: ReactNode }) => {
 export const useServers = () => {
   const context = useContext(ServerContext);
   if (context === undefined) {
-    throw new Error("useServers must be used within a ServerProvider");
+    throw new Error('useServers must be used within a ServerProvider');
   }
   return context;
 };
